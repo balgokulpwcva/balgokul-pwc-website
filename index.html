@@ -1150,34 +1150,7 @@
     </script>
 
     <style>
-        /* Additional mobile styles */
-        @media (max-width: 768px) {
-            .nav-menu {
-                flex-direction: column;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-            }
-            
-            .nav-menu.mobile-active {
-                max-height: 400px;
-            }
-            
-            .mobile-menu-toggle {
-                display: block;
-                background: none;
-                border: none;
-                font-size: 1.5rem;
-                cursor: pointer;
-                color: #333;
-            }
-        }
-        
-        @media (min-width: 769px) {
-            .mobile-menu-toggle {
-                display: none;
-            }
-        }
+        /* Remove the duplicate mobile styles that were at the bottom */
     </style>
 </body>
 </html>

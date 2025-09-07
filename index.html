@@ -4,47 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bal Gokul - Prince William County, Virginia</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --primary-color: #ff6b35;
+            --secondary-color: #f7931e;
+            --accent-color: #d84315;
+            --light-bg: #fff8e1;
+            --card-bg: #fff3e0;
         }
 
         body {
             font-family: 'Georgia', serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            background: linear-gradient(135deg, var(--light-bg) 0%, #ffecb3 100%);
             min-height: 100vh;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        header {
-            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+        /* Custom Header */
+        .custom-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             color: white;
             padding: 1rem 0;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap;
-        }
-
-        .logo {
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 15px;
-            cursor: pointer;
         }
 
         .logo-icon {
@@ -56,7 +49,7 @@
             align-items: center;
             justify-content: center;
             font-size: 30px;
-            color: #ff6b35;
+            color: var(--primary-color);
             font-weight: bold;
         }
 
@@ -69,67 +62,70 @@
         .logo-text p {
             font-size: 1.1rem;
             opacity: 0.9;
+            margin: 0;
         }
 
-        /* Navigation */
-        nav {
-            background: rgba(255, 255, 255, 0.95);
+        /* Custom Navbar */
+        .custom-navbar {
+            background: rgba(255, 255, 255, 0.95) !important;
             backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
         }
 
-        .nav-menu {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            list-style: none;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #333;
+        .navbar-nav .nav-link {
+            color: #333 !important;
             font-weight: 600;
-            padding: 10px 15px;
+            padding: 10px 20px !important;
             border-radius: 25px;
+            margin: 0 5px;
             transition: all 0.3s ease;
-            cursor: pointer;
         }
 
-        .nav-menu a:hover, .nav-menu a.active {
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            color: white;
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link.active {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)) !important;
+            color: white !important;
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(255, 107, 53, 0.4);
         }
 
+        .navbar-toggler {
+            border: none;
+            padding: 8px 12px;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2833, 37, 41, 0.75%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
         /* Page Content */
-        .page {
+        .page-content {
             display: none;
             animation: fadeInUp 0.6s ease-out;
         }
 
-        .page.active {
+        .page-content.active {
             display: block;
         }
 
         /* Hero Section */
-        .hero {
+        .hero-section {
             background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(247, 147, 30, 0.1) 100%);
             padding: 4rem 0;
             text-align: center;
             border-radius: 20px;
-            margin: 2rem auto;
+            margin: 2rem 0;
             backdrop-filter: blur(10px);
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .hero-section::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -151,24 +147,22 @@
             z-index: 2;
         }
 
-        .hero h2 {
+        .hero-section h2 {
             font-size: 2.5rem;
-            color: #d84315;
+            color: var(--accent-color);
             margin-bottom: 1rem;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
         }
 
-        .hero p {
+        .hero-section p {
             font-size: 1.3rem;
             color: #666;
-            max-width: 800px;
-            margin: 0 auto 2rem;
             line-height: 1.8;
         }
 
         /* Featured Event */
         .featured-event {
-            background: linear-gradient(135deg, #d84315 0%, #ff6b35 100%);
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
             color: white;
             padding: 3rem;
             border-radius: 20px;
@@ -200,107 +194,24 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        .featured-event .event-details {
+        .event-details {
             font-size: 1.3rem;
             margin: 1rem 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 2rem;
         }
 
-        .event-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            background: white;
-            color: #d84315;
-            padding: 15px 40px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            margin-top: 1rem;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(0,0,0,0.3);
-        }
-
-        /* Sections */
-        .section {
-            background: white;
-            margin: 2rem 0;
-            padding: 3rem 0;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-        }
-
-        .section h2 {
-            color: #d84315;
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .section h2::after {
-            content: '';
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        /* Graphics and Icons */
-        .page-graphic {
-            text-align: center;
-            font-size: 4rem;
-            margin: 2rem 0;
-            opacity: 0.8;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .info-card {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
-            padding: 2rem;
+        /* Custom Cards */
+        .custom-card {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #ffecb3 100%);
+            border: none;
+            border-left: 5px solid var(--primary-color);
             border-radius: 15px;
-            border-left: 5px solid #ff6b35;
             transition: all 0.3s ease;
+            height: 100%;
             position: relative;
             overflow: hidden;
         }
 
-        .info-card::before {
+        .custom-card::before {
             content: attr(data-icon);
             position: absolute;
             top: 20px;
@@ -309,52 +220,78 @@
             opacity: 0.3;
         }
 
-        .info-card:hover {
+        .custom-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 15px 40px rgba(0,0,0,0.1);
         }
 
-        .info-card h3 {
-            color: #d84315;
-            margin-bottom: 1rem;
+        .custom-card .card-title {
+            color: var(--accent-color);
             font-size: 1.4rem;
+            margin-bottom: 1rem;
         }
 
-        .info-card ul {
+        .custom-card ul {
             list-style: none;
             padding-left: 0;
         }
 
-        .info-card ul li {
+        .custom-card ul li {
             padding: 5px 0;
             position: relative;
             padding-left: 25px;
         }
 
-        .info-card ul li::before {
+        .custom-card ul li::before {
             content: '•';
-            color: #ff6b35;
+            color: var(--primary-color);
             font-weight: bold;
             position: absolute;
             left: 0;
             font-size: 1.2rem;
         }
 
-        /* Contact specific styles */
-        .contact-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
+        .section-header h2 {
+            color: var(--accent-color);
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* Page Graphics */
+        .page-graphic {
+            text-align: center;
+            font-size: 4rem;
+            margin: 2rem 0;
+            opacity: 0.8;
+        }
+
+        /* Contact Cards */
         .contact-card {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
-            padding: 2rem;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #ffecb3 100%);
+            border: 2px solid var(--primary-color);
             border-radius: 15px;
             text-align: center;
-            border: 2px solid #ff6b35;
             transition: all 0.3s ease;
+            height: 100%;
         }
 
         .contact-card:hover {
@@ -362,50 +299,39 @@
             box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
         }
 
-        .contact-card .icon {
+        .contact-card .contact-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
+            color: var(--primary-color);
         }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
+        /* Social Links */
         .social-link {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            padding: 1rem 2rem;
             border-radius: 50px;
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 2rem;
         }
 
         .social-link:hover {
+            color: white;
             transform: translateY(-3px);
             box-shadow: 0 10px 25px rgba(255, 107, 53, 0.4);
         }
 
-        /* Events specific styles */
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
+        /* Event Cards */
         .event-card {
             background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
-            padding: 2rem;
+            border: 2px solid var(--primary-color);
             border-radius: 15px;
-            border: 2px solid #ff6b35;
             transition: all 0.3s ease;
+            height: 100%;
             position: relative;
             overflow: hidden;
         }
@@ -424,76 +350,67 @@
             box-shadow: 0 15px 40px rgba(255, 107, 53, 0.2);
         }
 
-        .event-card h3 {
-            color: #d84315;
-            margin-bottom: 1rem;
+        .event-card .card-title {
+            color: var(--accent-color);
             font-size: 1.5rem;
         }
 
-        /* Calendar styles */
-        .calendar-container {
-            background: white;
-            border-radius: 15px;
-            padding: 2rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .month-item {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffecb3 100%);
+        /* Calendar */
+        .calendar-item {
+            background: linear-gradient(135deg, var(--card-bg) 0%, #ffecb3 100%);
             margin: 1rem 0;
             padding: 1.5rem;
             border-radius: 10px;
-            border-left: 5px solid #ff6b35;
+            border-left: 5px solid var(--primary-color);
         }
 
-        .month-item h4 {
-            color: #d84315;
+        .calendar-item h5 {
+            color: var(--accent-color);
             margin-bottom: 0.5rem;
         }
 
-        /* Footer */
-        footer {
-            background: #333;
+        /* CTA Button */
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
+            display: inline-block;
+            margin-top: 1rem;
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
-                gap: 1rem;
-            }
+        .cta-button:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 107, 53, 0.4);
+        }
 
-            .logo-text h1 {
-                font-size: 2rem;
-            }
+        /* Contact Info */
+        .contact-info {
+            background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            text-align: center;
+            margin: 2rem 0;
+        }
 
-            .hero h2 {
-                font-size: 2rem;
-            }
+        .contact-detail-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
 
-            .nav-menu {
-                gap: 0.5rem;
-            }
-
-            .nav-menu a {
-                padding: 8px 12px;
-                font-size: 0.9rem;
-            }
-
-            .featured-event .event-details {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-            }
+        .contact-detail-item h5 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #fff8e1;
         }
 
         /* Animations */
@@ -507,16 +424,58 @@
                 transform: translateY(0);
             }
         }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .logo-text h1 {
+                font-size: 2rem;
+            }
+
+            .hero-section h2 {
+                font-size: 2rem;
+            }
+
+            .featured-event h3 {
+                font-size: 2rem;
+            }
+
+            .page-graphic {
+                font-size: 3rem;
+            }
+
+            .navbar-nav {
+                background: white;
+                border-radius: 15px;
+                margin-top: 1rem;
+                padding: 1rem;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .navbar-nav .nav-link {
+                margin: 5px 0;
+                text-align: center;
+            }
+        }
+
+        /* Footer */
+        .custom-footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
     </style>
 </head>
 <body>
-    <header>
+    <!-- Header -->
+    <header class="custom-header">
         <div class="container">
-            <div class="header-content">
-                <div class="logo" onclick="showPage('home')">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="logo-section" onclick="showPage('home')" style="cursor: pointer;">
                     <div class="logo-icon">🕉️</div>
                     <div class="logo-text">
-                        <h1>Bal Gokul</h1>
+                        <h1 class="mb-0">Bal Gokul</h1>
                         <p>Prince William County, Virginia</p>
                     </div>
                 </div>
@@ -524,550 +483,759 @@
         </div>
     </header>
 
-    <nav>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg custom-navbar sticky-top">
         <div class="container">
-            <ul class="nav-menu">
-                <li><a onclick="showPage('home')" class="nav-link active">Home</a></li>
-                <li><a onclick="showPage('information')" class="nav-link">Information</a></li>
-                <li><a onclick="showPage('registration')" class="nav-link">Registration</a></li>
-                <li><a onclick="showPage('curriculum')" class="nav-link">Curriculum</a></li>
-                <li><a onclick="showPage('events')" class="nav-link">Events</a></li>
-                <li><a onclick="showPage('calendar')" class="nav-link">Calendar</a></li>
-                <li><a onclick="showPage('projects')" class="nav-link">Projects & Services</a></li>
-                <li><a onclick="showPage('contact')" class="nav-link">Contact</a></li>
-            </ul>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" onclick="showPage('home')" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showPage('information')" href="#information">Information</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showPage('registration')" href="#registration">Registration</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showPage('curriculum')" href="#curriculum">Curriculum</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showPage('events')" href="#events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showPage('calendar')" href="#calendar">Calendar</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showPage('projects')" href="#projects">Projects & Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" onclick="showPage('contact')" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <div class="container">
         <!-- HOME PAGE -->
-        <div id="home" class="page active">
-            <section class="hero">
+        <div id="home" class="page-content active">
+            <div class="hero-section">
                 <div class="hero-content">
                     <h2>Nurturing Young Minds Through Hindu Dharma & Culture</h2>
-                    <p>Welcome to Bal Gokul, where children from Grade 1 to Grade 12 learn about Hindu traditions, values, and culture in a warm, educational environment. Join our Sunday classes and become part of our growing community.</p>
+                    <p class="lead">Welcome to Bal Gokul, where children from Grade 1 to Grade 12 learn about Hindu traditions, values, and culture in a warm, educational environment. Join our Sunday classes and become part of our growing community.</p>
                 </div>
-            </section>
+            </div>
 
             <div class="featured-event">
                 <div class="featured-event-content">
                     <h3>🎉 Bal Gokul Orientation & Family Picnic</h3>
-                    <div class="event-details">
-                        <div class="event-detail-item">📅 September 21, 2025</div>
-                        <div class="event-detail-item">🕐 2:00 PM - 5:00 PM</div>
-                        <div class="event-detail-item">📍 Silver Lake Park, Haymarket, VA</div>
+                    <div class="row event-details">
+                        <div class="col-md-4">📅 September 21, 2025</div>
+                        <div class="col-md-4">🕐 2:00 PM - 5:00 PM</div>
+                        <div class="col-md-4">📍 Silver Lake Park, Haymarket, VA</div>
                     </div>
-                    <p style="font-size: 1.2rem; margin: 1rem 0;">Join us for a special orientation event and family picnic! Meet our teachers, learn about our program, and connect with other families. Food, games, and cultural activities for the whole family!</p>
+                    <p class="mt-3 fs-5">Join us for a special orientation event and family picnic! Meet our teachers, learn about our program, and connect with other families. Food, games, and cultural activities for the whole family!</p>
                     <a href="#" onclick="showPage('events')" class="cta-button">Learn More About This Event</a>
                 </div>
             </div>
 
-            <section class="section">
+            <div class="py-5">
                 <div class="page-graphic">🧘‍♀️📚🎨</div>
-                <h2>Why Choose Bal Gokul?</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="🎯">
-                        <h3>Comprehensive Learning</h3>
-                        <p>From Hindu philosophy to yoga, from ancient epics to modern applications - we provide a well-rounded cultural education that builds character and confidence.</p>
+                <div class="section-header">
+                    <h2>Why Choose Bal Gokul?</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🎯">
+                            <div class="card-body">
+                                <h5 class="card-title">Comprehensive Learning</h5>
+                                <p class="card-text">From Hindu philosophy to yoga, from ancient epics to modern applications - we provide a well-rounded cultural education that builds character and confidence.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="👨‍👩‍👧‍👦">
-                        <h3>Community Building</h3>
-                        <p>Connect with like-minded families and build lasting friendships while your children learn together in a supportive, nurturing environment.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="👨‍👩‍👧‍👦">
+                            <div class="card-body">
+                                <h5 class="card-title">Community Building</h5>
+                                <p class="card-text">Connect with like-minded families and build lasting friendships while your children learn together in a supportive, nurturing environment.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="📅">
-                        <h3>Convenient Schedule</h3>
-                        <p>Sunday classes from 10:00 AM to 11:30 AM at Alvey Elementary School - perfect for busy families who want to prioritize cultural education.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="📅">
+                            <div class="card-body">
+                                <h5 class="card-title">Convenient Schedule</h5>
+                                <p class="card-text">Sunday classes from 10:00 AM to 11:30 AM at Alvey Elementary School - perfect for busy families who want to prioritize cultural education.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- INFORMATION PAGE -->
-        <div id="information" class="page">
+        <div id="information" class="page-content">
             <div class="page-graphic">🏛️📖🕉️</div>
-            <section class="section">
-                <h2>About Bal Gokul</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="🎯">
-                        <h3>Our Mission</h3>
-                        <p>Bal Gokul is dedicated to providing comprehensive Hindu cultural education to children in Prince William County. We create a nurturing environment where young minds can explore their heritage, develop strong moral values, and build lasting friendships within our community.</p>
+            <div class="py-5">
+                <div class="section-header">
+                    <h2>About Bal Gokul</h2>
+                </div>
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="🎯">
+                            <div class="card-body">
+                                <h5 class="card-title">Our Mission</h5>
+                                <p class="card-text">Bal Gokul is dedicated to providing comprehensive Hindu cultural education to children in Prince William County. We create a nurturing environment where young minds can explore their heritage, develop strong moral values, and build lasting friendships within our community.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="📚">
-                        <h3>What We Offer</h3>
-                        <ul>
-                            <li>Hindu Dharma teachings and philosophy</li>
-                            <li>Yoga and mindfulness practices</li>
-                            <li>Epic stories from Ramayana & Mahabharata</li>
-                            <li>Sanskrit chants and mantras</li>
-                            <li>Traditional arts and crafts</li>
-                            <li>Festival celebrations and cultural events</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="📚">
+                            <div class="card-body">
+                                <h5 class="card-title">What We Offer</h5>
+                                <ul>
+                                    <li>Hindu Dharma teachings and philosophy</li>
+                                    <li>Yoga and mindfulness practices</li>
+                                    <li>Epic stories from Ramayana & Mahabharata</li>
+                                    <li>Sanskrit chants and mantras</li>
+                                    <li>Traditional arts and crafts</li>
+                                    <li>Festival celebrations and cultural events</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="👶">
-                        <h3>Age Groups</h3>
-                        <p>We welcome children from <strong>Grade 1 to Grade 12</strong> and organize age-appropriate activities and lessons. Our experienced teachers adapt the curriculum to ensure every child can participate and learn at their own pace.</p>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="👶">
+                            <div class="card-body">
+                                <h5 class="card-title">Age Groups</h5>
+                                <p class="card-text">We welcome children from <strong>Grade 1 to Grade 12</strong> and organize age-appropriate activities and lessons. Our experienced teachers adapt the curriculum to ensure every child can participate and learn at their own pace.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🏫">
-                        <h3>Our Approach</h3>
-                        <p>We blend traditional teachings with modern educational methods, making learning interactive, fun, and meaningful. Every lesson is designed to be age-appropriate while maintaining the depth and richness of Hindu culture.</p>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="🏫">
+                            <div class="card-body">
+                                <h5 class="card-title">Our Approach</h5>
+                                <p class="card-text">We blend traditional teachings with modern educational methods, making learning interactive, fun, and meaningful. Every lesson is designed to be age-appropriate while maintaining the depth and richness of Hindu culture.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="section">
-                <h2>Class Schedule & Location</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="📅">
-                        <h3>When</h3>
-                        <p style="font-size: 1.2rem; font-weight: bold;">Every Sunday<br>10:00 AM - 11:30 AM</p>
-                    </div>
-                    <div class="info-card" data-icon="📍">
-                        <h3>Where</h3>
-                        <p style="font-size: 1.2rem; font-weight: bold;">Alvey Elementary School<br>Prince William County, VA</p>
-                    </div>
-                    <div class="info-card" data-icon="👥">
-                        <h3>Who</h3>
-                        <p style="font-size: 1.2rem; font-weight: bold;">Children in Grades 1-12<br>All families welcome</p>
+                <div class="contact-info">
+                    <h3 class="mb-4">Class Schedule & Location</h3>
+                    <div class="row g-4">
+                        <div class="col-md-4">
+                            <div class="contact-detail-item">
+                                <h5>📅 When</h5>
+                                <p class="mb-0 fs-5 fw-bold">Every Sunday<br>10:00 AM - 11:30 AM</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-detail-item">
+                                <h5>📍 Where</h5>
+                                <p class="mb-0 fs-5 fw-bold">Alvey Elementary School<br>Prince William County, VA</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="contact-detail-item">
+                                <h5>👥 Who</h5>
+                                <p class="mb-0 fs-5 fw-bold">Children in Grades 1-12<br>All families welcome</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- REGISTRATION PAGE -->
-        <div id="registration" class="page">
+        <div id="registration" class="page-content">
             <div class="page-graphic">📝✏️📋</div>
-            <section class="section">
-                <h2>Registration</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="📝">
-                        <h3>How to Register</h3>
-                        <p>Registration for new students is open year-round. We welcome families at any time during the school year and will help your child integrate smoothly into our program.</p>
-                        <ul>
-                            <li>Contact us via email or phone</li>
-                            <li>Visit us on any Sunday to observe a class</li>
-                            <li>Complete registration form and fee payment</li>
-                            <li>Receive welcome packet and class materials</li>
-                        </ul>
+            <div class="py-5">
+                <div class="section-header">
+                    <h2>Registration</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="📝">
+                            <div class="card-body">
+                                <h5 class="card-title">How to Register</h5>
+                                <p class="card-text">Registration for new students is open year-round. We welcome families at any time during the school year and will help your child integrate smoothly into our program.</p>
+                                <ul>
+                                    <li>Contact us via email or phone</li>
+                                    <li>Visit us on any Sunday to observe a class</li>
+                                    <li>Complete registration form and fee payment</li>
+                                    <li>Receive welcome packet and class materials</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🌟">
-                        <h3>What to Expect</h3>
-                        <p>Your child will join a warm, inclusive community where learning about Hindu culture is both educational and enjoyable.</p>
-                        <ul>
-                            <li>Age-appropriate curriculum</li>
-                            <li>Small class sizes for personalized attention</li>
-                            <li>Regular parent communication</li>
-                            <li>Participation in special events and festivals</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="🌟">
+                            <div class="card-body">
+                                <h5 class="card-title">What to Expect</h5>
+                                <p class="card-text">Your child will join a warm, inclusive community where learning about Hindu culture is both educational and enjoyable.</p>
+                                <ul>
+                                    <li>Age-appropriate curriculum</li>
+                                    <li>Small class sizes for personalized attention</li>
+                                    <li>Regular parent communication</li>
+                                    <li>Participation in special events and festivals</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="💰">
-                        <h3>Registration Fee</h3>
-                        <p>Our affordable registration fee covers all class materials, activity supplies, and special event participation.</p>
-                        <ul>
-                            <li>Annual registration fee applies</li>
-                            <li>Family discounts available</li>
-                            <li>Scholarships available for families in need</li>
-                            <li>No hidden costs - everything included</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="💰">
+                            <div class="card-body">
+                                <h5 class="card-title">Registration Fee</h5>
+                                <p class="card-text">Our affordable registration fee covers all class materials, activity supplies, and special event participation.</p>
+                                <ul>
+                                    <li>Annual registration fee applies</li>
+                                    <li>Family discounts available</li>
+                                    <li>Scholarships available for families in need</li>
+                                    <li>No hidden costs - everything included</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="👋">
-                        <h3>Getting Started</h3>
-                        <p>Ready to join our community? We make the registration process simple and welcoming.</p>
-                        <ul>
-                            <li>Attend our orientation event on Sept 21</li>
-                            <li>Visit during regular Sunday classes</li>
-                            <li>Call or email us with questions</li>
-                            <li>Start any Sunday throughout the year</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="👋">
+                            <div class="card-body">
+                                <h5 class="card-title">Getting Started</h5>
+                                <p class="card-text">Ready to join our community? We make the registration process simple and welcoming.</p>
+                                <ul>
+                                    <li>Attend our orientation event on Sept 21</li>
+                                    <li>Visit during regular Sunday classes</li>
+                                    <li>Call or email us with questions</li>
+                                    <li>Start any Sunday throughout the year</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- CURRICULUM PAGE -->
-        <div id="curriculum" class="page">
+        <div id="curriculum" class="page-content">
             <div class="page-graphic">📚🧘‍♀️🎭</div>
-            <section class="section">
-                <h2>Our Curriculum</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="🕉️">
-                        <h3>Hindu Dharma & Philosophy</h3>
-                        <p>Age-appropriate teachings of Hindu values, ethics, and philosophical concepts that help children develop strong moral foundations and spiritual awareness.</p>
+            <div class="py-5">
+                <div class="section-header">
+                    <h2>Our Curriculum</h2>
+                </div>
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🕉️">
+                            <div class="card-body">
+                                <h5 class="card-title">Hindu Dharma & Philosophy</h5>
+                                <p class="card-text">Age-appropriate teachings of Hindu values, ethics, and philosophical concepts that help children develop strong moral foundations and spiritual awareness.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🧘">
-                        <h3>Yoga & Mindfulness</h3>
-                        <p>Physical yoga practices, breathing exercises, and meditation techniques that promote mental clarity, physical wellness, and emotional balance.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🧘">
+                            <div class="card-body">
+                                <h5 class="card-title">Yoga & Mindfulness</h5>
+                                <p class="card-text">Physical yoga practices, breathing exercises, and meditation techniques that promote mental clarity, physical wellness, and emotional balance.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="📖">
-                        <h3>Hindu Epics & Stories</h3>
-                        <p>Engaging storytelling sessions featuring tales from the Ramayana, Mahabharata, and Puranas that teach valuable life lessons through captivating narratives.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="📖">
+                            <div class="card-body">
+                                <h5 class="card-title">Hindu Epics & Stories</h5>
+                                <p class="card-text">Engaging storytelling sessions featuring tales from the Ramayana, Mahabharata, and Puranas that teach valuable life lessons through captivating narratives.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🎵">
-                        <h3>Chants & Mantras</h3>
-                        <p>Learning sacred Sanskrit prayers, mantras, and devotional songs that connect children to their spiritual heritage and improve concentration.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🎵">
+                            <div class="card-body">
+                                <h5 class="card-title">Chants & Mantras</h5>
+                                <p class="card-text">Learning sacred Sanskrit prayers, mantras, and devotional songs that connect children to their spiritual heritage and improve concentration.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🎨">
-                        <h3>Arts & Crafts</h3>
-                        <p>Creative projects including rangoli, painting, sculpture, and traditional crafts that celebrate Hindu festivals and cultural themes.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🎨">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts & Crafts</h5>
+                                <p class="card-text">Creative projects including rangoli, painting, sculpture, and traditional crafts that celebrate Hindu festivals and cultural themes.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🎉">
-                        <h3>Festival Celebrations</h3>
-                        <p>Hands-on learning about major Hindu festivals including their significance, traditions, rituals, and cultural importance in modern life.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🎉">
+                            <div class="card-body">
+                                <h5 class="card-title">Festival Celebrations</h5>
+                                <p class="card-text">Hands-on learning about major Hindu festivals including their significance, traditions, rituals, and cultural importance in modern life.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="section">
-                <h2>Grade-Level Learning</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="🌱">
-                        <h3>Elementary (Grades 1-5)</h3>
-                        <p>Foundation building through stories, songs, basic yoga poses, and simple crafts. Focus on developing love for Hindu culture through fun activities.</p>
+                <div class="section-header">
+                    <h2>Grade-Level Learning</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🌱">
+                            <div class="card-body">
+                                <h5 class="card-title">Elementary (Grades 1-5)</h5>
+                                <p class="card-text">Foundation building through stories, songs, basic yoga poses, and simple crafts. Focus on developing love for Hindu culture through fun activities.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🌿">
-                        <h3>Middle School (Grades 6-8)</h3>
-                        <p>Deeper exploration of Hindu philosophy, more complex stories and their meanings, advanced yoga practices, and leadership opportunities.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🌿">
+                            <div class="card-body">
+                                <h5 class="card-title">Middle School (Grades 6-8)</h5>
+                                <p class="card-text">Deeper exploration of Hindu philosophy, more complex stories and their meanings, advanced yoga practices, and leadership opportunities.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🌳">
-                        <h3>High School (Grades 9-12)</h3>
-                        <p>Scholarly discussions of Hindu texts, mentoring younger students, organizing events, and connecting ancient wisdom to modern life challenges.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🌳">
+                            <div class="card-body">
+                                <h5 class="card-title">High School (Grades 9-12)</h5>
+                                <p class="card-text">Scholarly discussions of Hindu texts, mentoring younger students, organizing events, and connecting ancient wisdom to modern life challenges.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- EVENTS PAGE -->
-        <div id="events" class="page">
+        <div id="events" class="page-content">
             <div class="page-graphic">🎊🎭🎪</div>
-            <section class="section">
-                <h2>Upcoming Special Event</h2>
-                <div class="featured-event">
+            <div class="py-5">
+                <div class="section-header">
+                    <h2>Upcoming Special Event</h2>
+                </div>
+                <div class="featured-event mb-5">
                     <div class="featured-event-content">
                         <h3>🎉 Bal Gokul Orientation & Family Picnic</h3>
-                        <div class="event-details">
-                            <div class="event-detail-item">📅 September 21, 2025</div>
-                            <div class="event-detail-item">🕐 2:00 PM - 5:00 PM</div>
-                            <div class="event-detail-item">📍 Silver Lake Park, Haymarket, VA</div>
+                        <div class="row event-details">
+                            <div class="col-md-4">📅 September 21, 2025</div>
+                            <div class="col-md-4">🕐 2:00 PM - 5:00 PM</div>
+                            <div class="col-md-4">📍 Silver Lake Park, Haymarket, VA</div>
                         </div>
-                        <p style="font-size: 1.1rem; margin: 1rem 0;">Perfect opportunity for new families to learn about our program! Meet teachers, see demonstrations of our activities, enjoy traditional Indian food, and let children participate in fun cultural games and activities.</p>
+                        <p class="mt-3 fs-5">Perfect opportunity for new families to learn about our program! Meet teachers, see demonstrations of our activities, enjoy traditional Indian food, and let children participate in fun cultural games and activities.</p>
                     </div>
                 </div>
-            </section>
 
-            <section class="section">
-                <h2>Annual Events</h2>
-                <div class="events-grid">
-                    <div class="event-card" data-icon="🪔">
-                        <h3>Diwali Celebration</h3>
-                        <p>Our biggest celebration of the year! Join us for a spectacular Diwali event featuring traditional performances, delicious food, rangoli competitions, and community bonding. Children showcase their talents through dance, music, and storytelling.</p>
-                        <ul>
-                            <li>Cultural performances by students</li>
-                            <li>Traditional Indian dinner</li>
-                            <li>Rangoli and craft competitions</li>
-                            <li>Community prayer and lighting ceremony</li>
-                        </ul>
+                <div class="section-header">
+                    <h2>Annual Events</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-4">
+                        <div class="card event-card" data-icon="🪔">
+                            <div class="card-body">
+                                <h5 class="card-title">Diwali Celebration</h5>
+                                <p class="card-text">Our biggest celebration of the year! Join us for a spectacular Diwali event featuring traditional performances, delicious food, rangoli competitions, and community bonding. Children showcase their talents through dance, music, and storytelling.</p>
+                                <ul>
+                                    <li>Cultural performances by students</li>
+                                    <li>Traditional Indian dinner</li>
+                                    <li>Rangoli and craft competitions</li>
+                                    <li>Community prayer and lighting ceremony</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="event-card" data-icon="🎓">
-                        <h3>End of School Year Event</h3>
-                        <p>Celebrate the culmination of our academic year with presentations by students, recognition ceremonies, and a showcase of projects completed throughout the year. Parents and families are invited to see what their children have accomplished.</p>
-                        <ul>
-                            <li>Student project presentations</li>
-                            <li>Award ceremonies</li>
-                            <li>Performance showcases</li>
-                            <li>Family appreciation dinner</li>
-                        </ul>
+                    <div class="col-lg-4">
+                        <div class="card event-card" data-icon="🎓">
+                            <div class="card-body">
+                                <h5 class="card-title">End of School Year Event</h5>
+                                <p class="card-text">Celebrate the culmination of our academic year with presentations by students, recognition ceremonies, and a showcase of projects completed throughout the year. Parents and families are invited to see what their children have accomplished.</p>
+                                <ul>
+                                    <li>Student project presentations</li>
+                                    <li>Award ceremonies</li>
+                                    <li>Performance showcases</li>
+                                    <li>Family appreciation dinner</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="event-card" data-icon="🌳">
-                        <h3>Annual Summer Picnic</h3>
-                        <p>Our beloved summer tradition brings the entire Bal Gokul community together for outdoor fun, games, food, and fellowship. A perfect opportunity for families to connect and children to play together outside the classroom setting.</p>
-                        <ul>
-                            <li>Outdoor games and sports</li>
-                            <li>Potluck picnic lunch</li>
-                            <li>Family bonding activities</li>
-                            <li>Nature appreciation walks</li>
-                        </ul>
+                    <div class="col-lg-4">
+                        <div class="card event-card" data-icon="🌳">
+                            <div class="card-body">
+                                <h5 class="card-title">Annual Summer Picnic</h5>
+                                <p class="card-text">Our beloved summer tradition brings the entire Bal Gokul community together for outdoor fun, games, food, and fellowship. A perfect opportunity for families to connect and children to play together outside the classroom setting.</p>
+                                <ul>
+                                    <li>Outdoor games and sports</li>
+                                    <li>Potluck picnic lunch</li>
+                                    <li>Family bonding activities</li>
+                                    <li>Nature appreciation walks</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- CALENDAR PAGE -->
-        <div id="calendar" class="page">
+        <div id="calendar" class="page-content">
             <div class="page-graphic">📅🗓️⏰</div>
-            <section class="section">
-                <h2>Academic Calendar 2025</h2>
-                <div class="calendar-container">
-                    <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;"><strong>Regular Classes:</strong> Every Sunday, 10:00 AM - 11:30 AM at Alvey Elementary School</p>
+            <div class="py-5">
+                <div class="section-header">
+                    <h2>Academic Calendar 2025</h2>
+                </div>
+                <div class="card border-0 bg-white rounded-4 shadow-sm p-4">
+                    <p class="text-center fs-5 mb-4"><strong>Regular Classes:</strong> Every Sunday, 10:00 AM - 11:30 AM at Alvey Elementary School</p>
                     
-                    <div class="month-item">
-                        <h4>📅 September 2025</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>📅 September 2025</h5>
+                        <ul class="mb-0">
                             <li><strong>September 21:</strong> Bal Gokul Orientation & Family Picnic at Silver Lake Park (2-5 PM)</li>
                             <li>New student orientation and registration continues</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>🪔 October 2025</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>🪔 October 2025</h5>
+                        <ul class="mb-0">
                             <li>Diwali celebration preparation begins</li>
                             <li>Rangoli art workshops</li>
                             <li><strong>Late October:</strong> Grand Diwali celebration</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>🦃 November 2025</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>🦃 November 2025</h5>
+                        <ul class="mb-0">
                             <li><strong>Thanksgiving week:</strong> No classes (November 24)</li>
                             <li>Gratitude and thanksgiving discussions</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>❄️ December 2025</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>❄️ December 2025</h5>
+                        <ul class="mb-0">
                             <li><strong>December 22 - January 5:</strong> Winter break - No classes</li>
                             <li>Family time and reflection period</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>✨ January 2026</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>✨ January 2026</h5>
+                        <ul class="mb-0">
                             <li><strong>January 12:</strong> Spring semester begins</li>
                             <li>New year resolutions and goal setting</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>🕉️ February 2026</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>🕉️ February 2026</h5>
+                        <ul class="mb-0">
                             <li>Maha Shivaratri celebration and overnight vigil (age-appropriate)</li>
                             <li>Lord Shiva stories and teachings</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>🌈 March 2026</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>🌈 March 2026</h5>
+                        <ul class="mb-0">
                             <li>Holi festival celebration - Festival of Colors</li>
                             <li>Spring activities and nature appreciation</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>🏹 April 2026</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>🏹 April 2026</h5>
+                        <ul class="mb-0">
                             <li>Ram Navami observance and celebration</li>
                             <li>Ramayana story sessions intensify</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>🎓 May 2026</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>🎓 May 2026</h5>
+                        <ul class="mb-0">
                             <li>End of school year event and presentations</li>
                             <li>Student recognition ceremonies</li>
                             <li>Family appreciation dinner</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>☀️ June 2026</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>☀️ June 2026</h5>
+                        <ul class="mb-0">
                             <li>Annual summer picnic</li>
                             <li>Summer activities planning</li>
                         </ul>
                     </div>
 
-                    <div class="month-item">
-                        <h4>🏖️ July-August 2026</h4>
-                        <ul>
+                    <div class="calendar-item">
+                        <h5>🏖️ July-August 2026</h5>
+                        <ul class="mb-0">
                             <li>Summer break - Regular classes resume in September</li>
                             <li>Optional summer reading and activities</li>
                         </ul>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- PROJECTS & SERVICES PAGE -->
-        <div id="projects" class="page">
+        <div id="projects" class="page-content">
             <div class="page-graphic">🛠️🎨🌍</div>
-            <section class="section">
-                <h2>Projects & Services</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="📊">
-                        <h3>Student Projects</h3>
-                        <p>Throughout the year, students work on meaningful projects that deepen their understanding of Hindu culture and traditions.</p>
-                        <ul>
-                            <li>Family heritage presentations</li>
-                            <li>Temple architecture models</li>
-                            <li>Sanskrit calligraphy projects</li>
-                            <li>Festival research presentations</li>
-                            <li>Community service initiatives</li>
-                        </ul>
+            <div class="py-5">
+                <div class="section-header">
+                    <h2>Projects & Services</h2>
+                </div>
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="📊">
+                            <div class="card-body">
+                                <h5 class="card-title">Student Projects</h5>
+                                <p class="card-text">Throughout the year, students work on meaningful projects that deepen their understanding of Hindu culture and traditions.</p>
+                                <ul>
+                                    <li>Family heritage presentations</li>
+                                    <li>Temple architecture models</li>
+                                    <li>Sanskrit calligraphy projects</li>
+                                    <li>Festival research presentations</li>
+                                    <li>Community service initiatives</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🤝">
-                        <h3>Community Services</h3>
-                        <p>Bal Gokul extends beyond the classroom to serve our broader community through various outreach programs and charitable activities.</p>
-                        <ul>
-                            <li>Food drives for local shelters</li>
-                            <li>Environmental awareness campaigns</li>
-                            <li>Elder care facility visits</li>
-                            <li>Cultural education for public schools</li>
-                            <li>Interfaith community dialogue participation</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="🤝">
+                            <div class="card-body">
+                                <h5 class="card-title">Community Services</h5>
+                                <p class="card-text">Bal Gokul extends beyond the classroom to serve our broader community through various outreach programs and charitable activities.</p>
+                                <ul>
+                                    <li>Food drives for local shelters</li>
+                                    <li>Environmental awareness campaigns</li>
+                                    <li>Elder care facility visits</li>
+                                    <li>Cultural education for public schools</li>
+                                    <li>Interfaith community dialogue participation</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="👨‍👩‍👧‍👦">
-                        <h3>Parent Resources</h3>
-                        <p>We support parents in continuing Hindu cultural education at home with resources and guidance.</p>
-                        <ul>
-                            <li>Home practice guides</li>
-                            <li>Family activity suggestions</li>
-                            <li>Recommended reading lists</li>
-                            <li>Festival celebration guides</li>
-                            <li>Parent education workshops</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="👨‍👩‍👧‍👦">
+                            <div class="card-body">
+                                <h5 class="card-title">Parent Resources</h5>
+                                <p class="card-text">We support parents in continuing Hindu cultural education at home with resources and guidance.</p>
+                                <ul>
+                                    <li>Home practice guides</li>
+                                    <li>Family activity suggestions</li>
+                                    <li>Recommended reading lists</li>
+                                    <li>Festival celebration guides</li>
+                                    <li>Parent education workshops</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🎭">
-                        <h3>Cultural Programs</h3>
-                        <p>Special programs that showcase and preserve Hindu cultural traditions for the broader community.</p>
-                        <ul>
-                            <li>Classical Indian dance workshops</li>
-                            <li>Music and singing classes</li>
-                            <li>Drama and storytelling performances</li>
-                            <li>Art exhibitions and craft fairs</li>
-                            <li>Guest speaker series</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="🎭">
+                            <div class="card-body">
+                                <h5 class="card-title">Cultural Programs</h5>
+                                <p class="card-text">Special programs that showcase and preserve Hindu cultural traditions for the broader community.</p>
+                                <ul>
+                                    <li>Classical Indian dance workshops</li>
+                                    <li>Music and singing classes</li>
+                                    <li>Drama and storytelling performances</li>
+                                    <li>Art exhibitions and craft fairs</li>
+                                    <li>Guest speaker series</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="section">
-                <h2>Student Showcase</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="🏆">
-                        <h3>Annual Achievements</h3>
-                        <p>Our students consistently excel in various competitions and showcases throughout the year.</p>
-                        <ul>
-                            <li>Sanskrit recitation competitions</li>
-                            <li>Traditional art and craft exhibitions</li>
-                            <li>Cultural knowledge quiz bowls</li>
-                            <li>Community service recognition</li>
-                        </ul>
+                <div class="section-header">
+                    <h2>Student Showcase</h2>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="🏆">
+                            <div class="card-body">
+                                <h5 class="card-title">Annual Achievements</h5>
+                                <p class="card-text">Our students consistently excel in various competitions and showcases throughout the year.</p>
+                                <ul>
+                                    <li>Sanskrit recitation competitions</li>
+                                    <li>Traditional art and craft exhibitions</li>
+                                    <li>Cultural knowledge quiz bowls</li>
+                                    <li>Community service recognition</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="📚">
-                        <h3>Learning Outcomes</h3>
-                        <p>By the end of each academic year, students demonstrate measurable progress in cultural knowledge and personal growth.</p>
-                        <ul>
-                            <li>Improved knowledge of Hindu traditions</li>
-                            <li>Enhanced cultural identity and pride</li>
-                            <li>Better focus and mindfulness skills</li>
-                            <li>Stronger community connections</li>
-                        </ul>
+                    <div class="col-lg-6">
+                        <div class="card custom-card" data-icon="📚">
+                            <div class="card-body">
+                                <h5 class="card-title">Learning Outcomes</h5>
+                                <p class="card-text">By the end of each academic year, students demonstrate measurable progress in cultural knowledge and personal growth.</p>
+                                <ul>
+                                    <li>Improved knowledge of Hindu traditions</li>
+                                    <li>Enhanced cultural identity and pride</li>
+                                    <li>Better focus and mindfulness skills</li>
+                                    <li>Stronger community connections</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
 
         <!-- CONTACT PAGE -->
-        <div id="contact" class="page">
+        <div id="contact" class="page-content">
             <div class="page-graphic">📞💌🌐</div>
-            <section class="section">
-                <h2>Contact Us</h2>
+            <div class="py-5">
+                <div class="section-header">
+                    <h2>Contact Us</h2>
+                </div>
                 
-                <div class="contact-methods">
-                    <div class="contact-card">
-                        <div class="icon">📧</div>
-                        <h3>Email</h3>
-                        <p><strong>info@balgokul-pwc.org</strong></p>
-                        <p>We respond within 24 hours</p>
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-4">
+                        <div class="card contact-card">
+                            <div class="card-body text-center">
+                                <div class="contact-icon">📧</div>
+                                <h5 class="card-title">Email</h5>
+                                <p class="card-text"><strong>info@balgokul-pwc.org</strong></p>
+                                <p class="card-text">We respond within 24 hours</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="contact-card">
-                        <div class="icon">📱</div>
-                        <h3>Phone</h3>
-                        <p><strong>(571) 555-GOKUL</strong></p>
-                        <p>Call for immediate assistance</p>
+                    <div class="col-lg-4">
+                        <div class="card contact-card">
+                            <div class="card-body text-center">
+                                <div class="contact-icon">📱</div>
+                                <h5 class="card-title">Phone</h5>
+                                <p class="card-text"><strong>(571) 555-GOKUL</strong></p>
+                                <p class="card-text">Call for immediate assistance</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="contact-card">
-                        <div class="icon">📍</div>
-                        <h3>Location</h3>
-                        <p><strong>Alvey Elementary School</strong></p>
-                        <p>Prince William County, VA</p>
-                        <p>Sundays 10:00 AM - 11:30 AM</p>
+                    <div class="col-lg-4">
+                        <div class="card contact-card">
+                            <div class="card-body text-center">
+                                <div class="contact-icon">📍</div>
+                                <h5 class="card-title">Location</h5>
+                                <p class="card-text"><strong>Alvey Elementary School</strong></p>
+                                <p class="card-text">Prince William County, VA<br>Sundays 10:00 AM - 11:30 AM</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="social-links">
-                    <a href="https://instagram.com/balgokul_pwc" class="social-link" target="_blank">
-                        <span style="font-size: 1.5rem;">📷</span>
-                        <span>Follow us on Instagram<br>@balgokul_pwc</span>
-                    </a>
-                    <a href="https://facebook.com/BalGokulPWC" class="social-link" target="_blank">
-                        <span style="font-size: 1.5rem;">📘</span>
-                        <span>Like us on Facebook<br>BalGokulPWC</span>
-                    </a>
+                <div class="text-center mb-5">
+                    <h3 class="mb-4">Follow Us on Social Media</h3>
+                    <div class="d-flex justify-content-center gap-3 flex-wrap">
+                        <a href="https://instagram.com/balgokul_pwc" class="social-link" target="_blank">
+                            <i class="bi bi-instagram fs-4"></i>
+                            <span>Follow us on Instagram<br><small>@balgokul_pwc</small></span>
+                        </a>
+                        <a href="https://facebook.com/BalGokulPWC" class="social-link" target="_blank">
+                            <i class="bi bi-facebook fs-4"></i>
+                            <span>Like us on Facebook<br><small>BalGokulPWC</small></span>
+                        </a>
+                    </div>
                 </div>
-            </section>
 
-            <section class="section">
-                <h2>Volunteer Opportunities</h2>
-                <div class="info-grid">
-                    <div class="info-card" data-icon="👨‍🏫">
-                        <h3>Teaching Assistants</h3>
-                        <p>Help our experienced teachers with classroom activities, student supervision, and learning support.</p>
+                <div class="section-header">
+                    <h2>Volunteer Opportunities</h2>
+                </div>
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="👨‍🏫">
+                            <div class="card-body">
+                                <h5 class="card-title">Teaching Assistants</h5>
+                                <p class="card-text">Help our experienced teachers with classroom activities, student supervision, and learning support.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🎪">
-                        <h3>Event Planning</h3>
-                        <p>Join our event planning committee to organize festivals, picnics, and special celebrations.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🎪">
+                            <div class="card-body">
+                                <h5 class="card-title">Event Planning</h5>
+                                <p class="card-text">Join our event planning committee to organize festivals, picnics, and special celebrations.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🎨">
-                        <h3>Arts & Crafts Coordinators</h3>
-                        <p>Lead creative projects and help students express their cultural learning through art.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🎨">
+                            <div class="card-body">
+                                <h5 class="card-title">Arts & Crafts Coordinators</h5>
+                                <p class="card-text">Lead creative projects and help students express their cultural learning through art.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="💻">
-                        <h3>Technology Support</h3>
-                        <p>Assist with audio-visual equipment, website maintenance, and digital communication.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="💻">
+                            <div class="card-body">
+                                <h5 class="card-title">Technology Support</h5>
+                                <p class="card-text">Assist with audio-visual equipment, website maintenance, and digital communication.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="🍽️">
-                        <h3>Refreshment Coordination</h3>
-                        <p>Organize snacks and refreshments for regular classes and special events.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="🍽️">
+                            <div class="card-body">
+                                <h5 class="card-title">Refreshment Coordination</h5>
+                                <p class="card-text">Organize snacks and refreshments for regular classes and special events.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card" data-icon="📋">
-                        <h3>Administrative Support</h3>
-                        <p>Help with registration, attendance, communication, and general administrative tasks.</p>
+                    <div class="col-lg-4">
+                        <div class="card custom-card" data-icon="📋">
+                            <div class="card-body">
+                                <h5 class="card-title">Administrative Support</h5>
+                                <p class="card-text">Help with registration, attendance, communication, and general administrative tasks.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </section>
 
-            <section class="section">
-                <h2>Visit Us</h2>
-                <div class="info-card" data-icon="👋">
-                    <h3>Come See Us in Action</h3>
-                    <p>We welcome prospective families to visit us during our regular Sunday classes. You can observe our teaching methods, meet our teachers and current families, and see firsthand how we create a nurturing learning environment for children.</p>
-                    <ul>
-                        <li>No appointment necessary - just drop in on any Sunday</li>
-                        <li>Classes run from 10:00 AM to 11:30 AM</li>
-                        <li>Arrive a few minutes early to meet with our coordinators</li>
-                        <li>Special orientation session available on September 21st</li>
-                    </ul>
+                <div class="section-header">
+                    <h2>Visit Us</h2>
                 </div>
-            </section>
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card custom-card" data-icon="👋">
+                            <div class="card-body">
+                                <h5 class="card-title">Come See Us in Action</h5>
+                                <p class="card-text">We welcome prospective families to visit us during our regular Sunday classes. You can observe our teaching methods, meet our teachers and current families, and see firsthand how we create a nurturing learning environment for children.</p>
+                                <ul>
+                                    <li>No appointment necessary - just drop in on any Sunday</li>
+                                    <li>Classes run from 10:00 AM to 11:30 AM</li>
+                                    <li>Arrive a few minutes early to meet with our coordinators</li>
+                                    <li>Special orientation session available on September 21st</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
-    <footer>
+    <!-- Footer -->
+    <footer class="custom-footer">
         <div class="container">
             <p>&copy; 2025 Bal Gokul - Prince William County, Virginia. Nurturing young minds through Hindu Dharma and culture.</p>
             <p>Building bridges between tradition and modern life | Every child is a blessing</p>
         </div>
     </footer>
 
+    <!-- Bootstrap 5 JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
     <script>
+        // Page navigation function
         function showPage(pageId) {
             // Hide all pages
-            const pages = document.querySelectorAll('.page');
+            const pages = document.querySelectorAll('.page-content');
             pages.forEach(page => {
                 page.classList.remove('active');
             });
@@ -1085,26 +1253,33 @@
             }
 
             // Add active class to corresponding nav link
-            const activeNavLink = document.querySelector(`[onclick="showPage('${pageId}')"]`);
-            if (activeNavLink) {
-                activeNavLink.classList.add('active');
+            const activeNavLinks = document.querySelectorAll(`[onclick*="showPage('${pageId}')"]`);
+            activeNavLinks.forEach(link => {
+                link.classList.add('active');
+            });
+
+            // Close mobile menu if open (Bootstrap handles this automatically)
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse);
+                bsCollapse.hide();
             }
 
             // Scroll to top when changing pages
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Add scroll effect to navigation
+        // Enhanced scroll effect for navbar
         window.addEventListener('scroll', function() {
-            const nav = document.querySelector('nav');
+            const navbar = document.querySelector('.custom-navbar');
             if (window.scrollY > 100) {
-                nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
             } else {
-                nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
             }
         });
 
-        // Add entrance animations for cards
+        // Intersection Observer for animations
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
@@ -1119,38 +1294,24 @@
             });
         }, observerOptions);
 
-        // Observe all cards for animation
+        // Initialize animations when DOM is loaded
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.info-card, .event-card, .contact-card');
+            const cards = document.querySelectorAll('.custom-card, .event-card, .contact-card');
             cards.forEach(card => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(30px)';
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(card);
             });
-        });
 
-        // Mobile menu handling
-        function toggleMobileMenu() {
-            const navMenu = document.querySelector('.nav-menu');
-            navMenu.classList.toggle('mobile-active');
-        }
-
-        // Add click handlers for better mobile experience
-        document.addEventListener('DOMContentLoaded', function() {
+            // Add click event listeners to nav links
             const navLinks = document.querySelectorAll('.nav-link');
             navLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    // Close mobile menu if open
-                    const navMenu = document.querySelector('.nav-menu');
-                    navMenu.classList.remove('mobile-active');
+                link.addEventListener('click', function(e) {
+                    e.preventDefault(); // Prevent default anchor behavior
                 });
             });
         });
     </script>
-
-    <style>
-        /* Remove the duplicate mobile styles that were at the bottom */
-    </style>
 </body>
 </html>

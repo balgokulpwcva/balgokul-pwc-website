@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balgokul Schedule 2025-2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .info-bar {
+            background: #f8f9fa;
+            padding: 15px 30px;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 30px;
+        }
+
+        .month-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .month-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .month-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+
+        .month-dates {
+            padding: 20px;
+        }
+
+        .date-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f3f4;
+            transition: background-color 0.2s ease;
+        }
+
+        .date-item:last-child {
+            border-bottom: none;
+        }
+
+        .date-item:hover {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .date-number {
+            background: #667eea;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .date-info {
+            flex: 1;
+        }
+
+        .date-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .date-type {
+            font-size: 0.9em;
+            color: #6c757d;
+        }
+
+        .special-event .date-number {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            animation: pulse 2s infinite;
+        }
+
+        .holiday .date-number {
+            background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%);
+        }
+
+        .first-last .date-number {
+            background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .legend {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .legend h3 {
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        .legend-items {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .legend-regular { background: #667eea; }
+        .legend-special { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); }
+        .legend-holiday { background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%); }
+        .legend-milestone { background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏫 Balgokul Schedule</h1>
+            <p>Haymarket/Gainesville • 2025-2026</p>
+        </div>
+        
+        <div class="info-bar">
+            📍 Classes held at Alvey Elementary School | ⏰ 10:00 AM - 11:30 AM
+        </div>
+
+        <div class="calendar-grid">
+            <!-- September 2025 -->
+            <div class="month-card">
+                <div class="month-header">September 2025</div>
+                <div class="month-dates">
+                    <div class="date-item special-event">
+                        <div class="date-number">21</div>
+                        <div class="date-info">
+                            <div class="date-title">Orientation & Picnic Day 🎪</div>
+                            <div class="date-type">2:00 PM - 5:00 PM at Silver Lake Park</div>
+                            <div class="date-type">Haymarket, Virginia</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- October 2025 -->
+            <div class="month-card">
+                <div class="month-header">October 2025</div>
+                <div class="month-dates">
+                    <div class="date-item first-last">
+                        <div class="date-number">5</div>
+                        <div class="date-info">
+                            <div class="date-title">Classes Begin! 🎉</div>
+                            <div class="date-type">First Day</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">12</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">19</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">26</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- November 2025 -->
+            <div class="month-card">
+                <div class="month-header">November 2025</div>
+                <div class="month-dates">
+                    <div class="date-item special-event">
+                        <div class="date-number">1</div>
+                        <div class="date-info">
+                            <div class="date-title">Diwali Party 🪔</div>
+                            <div class="date-type">Special Event</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">9</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">16</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">23</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item holiday">
+                        <div class="date-number">30</div>
+                        <div class="date-info">
+                            <div class="date-title">Thanksgiving Holiday 🦃</div>
+                            <div class="date-type">No Class</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- December 2025 -->
+            <div class="month-card">
+                <div class="month-header">December 2025</div>
+                <div class="month-dates">
+                    <div class="date-item">
+                        <div class="date-number">7</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">14</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item holiday">
+                        <div class="date-number">21</div>
+                        <div class="date-info">
+                            <div class="date-title">Winter Break ❄️</div>
+                            <div class="date-type">No Class</div>
+                        </div>
+                    </div>
+                    <div class="date-item holiday">
+                        <div class="date-number">28</div>
+                        <div class="date-info">
+                            <div class="date-title">Winter Break ❄️</div>
+                            <div class="date-type">No Class</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- January 2026 -->
+            <div class="month-card">
+                <div class="month-header">January 2026</div>
+                <div class="month-dates">
+                    <div class="date-item first-last">
+                        <div class="date-number">11</div>
+                        <div class="date-info">
+                            <div class="date-title">Back from Winter Break! ✨</div>
+                            <div class="date-type">First Class After Break</div>
+                        </div>
+                    </div>
+                    <div class="date-item holiday">
+                        <div class="date-number">18</div>
+                        <div class="date-info">
+                            <div class="date-title">MLK Holiday Weekend</div>
+                            <div class="date-type">No Class</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">25</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- February 2026 -->
+            <div class="month-card">
+                <div class="month-header">February 2026</div>
+                <div class="month-dates">
+                    <div class="date-item">
+                        <div class="date-number">1</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">8</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item holiday">
+                        <div class="date-number">15</div>
+                        <div class="date-info">
+                            <div class="date-title">Presidents Day Weekend</div>
+                            <div class="date-type">No Class</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">22</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- March 2026 -->
+            <div class="month-card">
+                <div class="month-header">March 2026</div>
+                <div class="month-dates">
+                    <div class="date-item">
+                        <div class="date-number">1</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">8</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">15</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">22</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item holiday">
+                        <div class="date-number">29</div>
+                        <div class="date-info">
+                            <div class="date-title">Spring Break 🌸</div>
+                            <div class="date-type">No Class</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- April 2026 -->
+            <div class="month-card">
+                <div class="month-header">April 2026</div>
+                <div class="month-dates">
+                    <div class="date-item holiday">
+                        <div class="date-number">5</div>
+                        <div class="date-info">
+                            <div class="date-title">Spring Break 🌸</div>
+                            <div class="date-type">No Class</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">12</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">19</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">26</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- May 2026 -->
+            <div class="month-card">
+                <div class="month-header">May 2026</div>
+                <div class="month-dates">
+                    <div class="date-item">
+                        <div class="date-number">3</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item">
+                        <div class="date-number">10</div>
+                        <div class="date-info">
+                            <div class="date-title">Regular Class</div>
+                            <div class="date-type">Weekly Session</div>
+                        </div>
+                    </div>
+                    <div class="date-item first-last">
+                        <div class="date-number">17</div>
+                        <div class="date-info">
+                            <div class="date-title">Last Class 🎓</div>
+                            <div class="date-type">Final Session</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3>📋 Schedule Legend</h3>
+            <div class="legend-items">
+                <div class="legend-item">
+                    <div class="legend-color legend-regular"></div>
+                    <span>Regular Classes</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-special"></div>
+                    <span>Special Events</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-holiday"></div>
+                    <span>Holidays/Breaks</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-milestone"></div>
+                    <span>Important Dates</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

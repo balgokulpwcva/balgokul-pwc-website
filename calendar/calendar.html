@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Balgokul Calendar 2025-2026 Academic Year</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1500px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #ff9a56 0%, #ff6b6b 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1em;
+            opacity: 0.8;
+        }
+
+        .info-bar {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+            font-weight: 600;
+            color: #495057;
+            font-size: 1.1em;
+        }
+
+        .quick-stats {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255,255,255,0.2);
+            padding: 15px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.2em;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+            gap: 30px;
+            padding: 30px;
+        }
+
+        .month-calendar {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .month-calendar:hover {
+            transform: translateY(-5px);
+        }
+
+        .month-header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .weekdays {
+            background: #f8f9fa;
+        }
+
+        .weekdays th {
+            padding: 15px 8px;
+            text-align: center;
+            font-weight: 600;
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            font-size: 0.9em;
+        }
+
+        .calendar-date {
+            width: 14.28%;
+            height: 65px;
+            padding: 6px;
+            text-align: center;
+            vertical-align: top;
+            border: 1px solid #f1f3f4;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .calendar-date:hover {
+            background-color: #f8f9fa;
+        }
+
+        .date-number {
+            font-weight: 600;
+            font-size: 1.1em;
+            margin-bottom: 2px;
+        }
+
+        .date-label {
+            font-size: 0.6em;
+            line-height: 1.1;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .other-month {
+            color: #ccc;
+            background-color: #fafaba;
+        }
+
+        .other-month:hover {
+            background-color: #f5f5f5;
+        }
+
+        /* Enhanced class date styles */
+        .regular-class {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .regular-class .date-number {
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .regular-class .date-label {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .special-event {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            animation: pulse 2s infinite;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .special-event .date-number {
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .special-event .date-label {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .holiday {
+            background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .holiday .date-number {
+            color: white;
+            font-size: 1.2em;
+        }
+
+        .holiday .date-label {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .first-last {
+            background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%);
+            color: white;
+            border: 3px solid #fff;
+            box-shadow: 0 0 20px rgba(72, 219, 251, 0.6);
+        }
+
+        .first-last .date-number {
+            color: white;
+            font-size: 1.3em;
+            font-weight: 700;
+        }
+
+        .first-last .date-label {
+            color: rgba(255,255,255,0.9);
+            font-weight: 700;
+        }
+
+        .hindu-festival {
+            background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .hindu-festival .date-number {
+            color: white;
+        }
+
+        .hindu-festival .date-label {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .us-holiday {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .us-holiday .date-number {
+            color: white;
+        }
+
+        .us-holiday .date-label {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        .multi-festival {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            color: white;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .multi-festival .date-number {
+            color: white;
+        }
+
+        .multi-festival .date-label {
+            color: rgba(255,255,255,0.9);
+            font-weight: 600;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0.7); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(255, 107, 107, 0); }
+            100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(255, 107, 107, 0); }
+        }
+
+        /* Event details section */
+        .month-events {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-top: 1px solid #dee2e6;
+            padding: 25px;
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .month-events h4 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .event-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .category-section {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .category-title {
+            font-weight: 700;
+            font-size: 1em;
+            margin-bottom: 8px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .balgokul-title { color: #667eea; }
+        .hindu-title { color: #fd79a8; }
+        .us-title { color: #74b9ff; }
+        .other-title { color: #a29bfe; }
+
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .event-item {
+            background: #f8f9fa;
+            border-radius: 6px;
+            padding: 8px;
+            border-left: 3px solid #ddd;
+            transition: all 0.2s ease;
+            font-size: 0.85em;
+        }
+
+        .event-item:hover {
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .balgokul-event { border-left-color: #667eea; }
+        .hindu-event { border-left-color: #fd79a8; }
+        .us-event { border-left-color: #74b9ff; }
+        .other-event { border-left-color: #a29bfe; }
+
+        .event-date {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9em;
+            margin-bottom: 2px;
+        }
+
+        .event-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 2px;
+        }
+
+        .event-details {
+            color: #6c757d;
+            font-size: 0.8em;
+            line-height: 1.3;
+        }
+
+        .legend {
+            background: #f8f9fa;
+            padding: 30px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .legend h3 {
+            margin-bottom: 25px;
+            color: #2c3e50;
+            text-align: center;
+            font-size: 1.5em;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .legend-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+
+        .legend-balgokul { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .legend-special { background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%); }
+        .legend-holiday { background: linear-gradient(135deg, #feca57 0%, #ff9ff3 100%); }
+        .legend-milestone { background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%); }
+        .legend-hindu { background: linear-gradient(135deg, #fd79a8 0%, #fdcb6e 100%); }
+        .legend-us { background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%); }
+        .legend-multi { background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%); }
+
+        .legend-text {
+            flex: 1;
+        }
+
+        .legend-text strong {
+            display: block;
+            margin-bottom: 3px;
+            color: #2c3e50;
+            font-size: 0.95em;
+        }
+
+        .legend-text small {
+            color: #6c757d;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏫 Complete Balgokul Calendar</h1>
+            <p>Haymarket/Gainesville • Academic Year 2025-2026</p>
+            <div class="subtitle">September 2025 - August 2026 | With All Festivals & Holidays</div>
+        </div>
+        
+        <div class="info-bar">
+            📍 Classes held at Alvey Elementary School | ⏰ 10:00 AM - 11:30 AM | 📅 Every Saturday
+        </div>
+
+        <div class="quick-stats">
+            <div class="stat-item">
+                <div class="stat-number">28</div>
+                <div class="stat-label">Balgokul Classes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">12</div>
+                <div class="stat-label">Academic Months</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">45+</div>
+                <div class="stat-label">Religious Festivals</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">US/PWC Holidays</div>
+            </div>
+        </div>
+
+        <div class="calendar-grid">
+            <!-- September 2025 -->
+            <div class="month-calendar">
+                <div class="month-header">September 2025</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">31</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">1</div><div class="date-label">Labor Day</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">14</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">15</div><div class="date-label">Ganesh Chaturthi</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date multi-festival"><div class="date-number">21</div><div class="date-label">Navratri Begins</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">29</div><div class="date-label">Durga Ashtami</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">3</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">4</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 September 2025 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">September 2025</div>
+                                    <div class="event-title">📋 Pre-Academic Year</div>
+                                    <div class="event-details">Balgokul classes begin in October</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Hindu Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Sep 15</div>
+                                    <div class="event-title">🐘 Ganesh Chaturthi</div>
+                                    <div class="event-details">Lord Ganesha's birthday</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Sep 21-29</div>
+                                    <div class="event-title">💃 Navratri</div>
+                                    <div class="event-details">Nine nights of Goddess Durga</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Sep 29</div>
+                                    <div class="event-title">⚔️ Durga Ashtami</div>
+                                    <div class="event-details">8th day of Navratri</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Sep 1</div>
+                                    <div class="event-title">⚒️ Labor Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- October 2025 -->
+            <div class="month-calendar">
+                <div class="month-header">October 2025</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">28</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">29</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">1</div><div class="date-label">Dussehra</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date first-last"><div class="date-number">5</div><div class="date-label">CLASSES BEGIN!</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">12</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">13</div><div class="date-label">Columbus Day</div></td>
+                            <td class="calendar-date"><div class="date-number">14</div></td>
+                            <td class="calendar-date"><div class="date-number">15</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">19</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">20</div><div class="date-label">Diwali</div></td>
+                            <td class="calendar-date hindu-festival"><div class="date-number">21</div><div class="date-label">Govardhan</div></td>
+                            <td class="calendar-date hindu-festival"><div class="date-number">22</div><div class="date-label">Bhai Dooj</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">26</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">31</div><div class="date-label">Halloween</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 October 2025 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Oct 5</div>
+                                    <div class="event-title">🎉 Classes Begin!</div>
+                                    <div class="event-details">First day of 2025-2026 year</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Oct 12, 19, 26</div>
+                                    <div class="event-title">📚 Regular Classes</div>
+                                    <div class="event-details">Weekly sessions 10-11:30 AM</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Religious Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Oct 1</div>
+                                    <div class="event-title">🏹 Dussehra</div>
+                                    <div class="event-details">Victory of good over evil</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Oct 20</div>
+                                    <div class="event-title">🪔 Diwali</div>
+                                    <div class="event-details">Festival of Lights</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Oct 21-22</div>
+                                    <div class="event-title">🏔️ Govardhan & Bhai Dooj</div>
+                                    <div class="event-details">Krishna festival & sibling bond</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Oct 13</div>
+                                    <div class="event-title">🏛️ Columbus Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Oct 31</div>
+                                    <div class="event-title">🎃 Halloween</div>
+                                    <div class="event-details">Trick-or-treat</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="month-calendar">
+                <div class="month-header">November 2025</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">26</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">27</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">28</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">29</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">31</div></td>
+                            <td class="calendar-date special-event"><div class="date-number">1</div><div class="date-label">DIWALI PARTY!</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">9</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">11</div><div class="date-label">Veterans Day</div></td>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                            <td class="calendar-date"><div class="date-number">14</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">15</div><div class="date-label">Guru Nanak</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">16</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">23</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">27</div><div class="date-label">Thanksgiving</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date holiday"><div class="date-number">30</div><div class="date-label">NO CLASS</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">3</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">4</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">5</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">6</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 November 2025 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Nov 1</div>
+                                    <div class="event-title">🪔 Diwali Party!</div>
+                                    <div class="event-details">Special celebration event</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Nov 9, 16, 23</div>
+                                    <div class="event-title">📚 Regular Classes</div>
+                                    <div class="event-details">Weekly sessions</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Nov 30</div>
+                                    <div class="event-title">🦃 No Class - Thanksgiving</div>
+                                    <div class="event-details">Holiday break</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Religious Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Nov 5</div>
+                                    <div class="event-title">🌙 Chhath Puja</div>
+                                    <div class="event-details">Sun God worship</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Nov 15</div>
+                                    <div class="event-title">🙏 Guru Nanak Jayanti</div>
+                                    <div class="event-details">Sikh Guru's birthday</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US/PWC Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Nov 11</div>
+                                    <div class="event-title">🎖️ Veterans Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Nov 27</div>
+                                    <div class="event-title">🦃 Thanksgiving</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- December 2025 -->
+            <div class="month-calendar">
+                <div class="month-header">December 2025</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date"><div class="date-number">1</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">7</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">14</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">15</div><div class="date-label">Parshvanath</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date holiday"><div class="date-number">21</div><div class="date-label">WINTER BREAK</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">25</div><div class="date-label">Christmas</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date holiday"><div class="date-number">28</div><div class="date-label">WINTER BREAK</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">31</div><div class="date-label">New Year's Eve</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">3</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 December 2025 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Dec 7, 14</div>
+                                    <div class="event-title">📚 Regular Classes</div>
+                                    <div class="event-details">Last classes before break</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Dec 21 & 28</div>
+                                    <div class="event-title">❄️ Winter Break</div>
+                                    <div class="event-details">No classes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Religious Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Dec 15</div>
+                                    <div class="event-title">🙏 Parshvanath Jayanti</div>
+                                    <div class="event-details">Jain Tirthankara birthday</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US/PWC Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Dec 22-Jan 2</div>
+                                    <div class="event-title">🏫 PWC Winter Break</div>
+                                    <div class="event-details">Schools closed</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Dec 25</div>
+                                    <div class="event-title">🎄 Christmas Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- January 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">January 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">28</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">29</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">31</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">1</div><div class="date-label">New Year</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">6</div><div class="date-label">Guru Gobind</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date first-last"><div class="date-number">11</div><div class="date-label">BACK FROM BREAK!</div></td>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">13</div><div class="date-label">Lohri</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">14</div><div class="date-label">Makar Sankranti</div></td>
+                            <td class="calendar-date"><div class="date-number">15</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date holiday"><div class="date-number">18</div><div class="date-label">MLK HOLIDAY</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">20</div><div class="date-label">MLK Day</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">25</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date"><div class="date-number">31</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 January 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Jan 11</div>
+                                    <div class="event-title">✨ Back from Break!</div>
+                                    <div class="event-details">First class after winter break</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Jan 18</div>
+                                    <div class="event-title">🏛️ No Class - MLK Day</div>
+                                    <div class="event-details">Holiday weekend</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Jan 25</div>
+                                    <div class="event-title">📚 Regular Class</div>
+                                    <div class="event-details">Weekly session</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Hindu/Sikh Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Jan 6</div>
+                                    <div class="event-title">🗡️ Guru Gobind Singh</div>
+                                    <div class="event-details">10th Sikh Guru birthday</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Jan 13</div>
+                                    <div class="event-title">🔥 Lohri</div>
+                                    <div class="event-details">Punjabi harvest festival</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Jan 14</div>
+                                    <div class="event-title">🌞 Makar Sankranti</div>
+                                    <div class="event-details">Sun transition, kite flying</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US/PWC Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jan 1</div>
+                                    <div class="event-title">🎊 New Year's Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jan 20</div>
+                                    <div class="event-title">🏛️ MLK Jr. Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- February 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">February 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">1</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">2</div><div class="date-label">Vasant Panchami</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">8</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">14</div><div class="date-label">Valentine's</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date holiday"><div class="date-number">15</div><div class="date-label">PRESIDENTS DAY</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">16</div><div class="date-label">Presidents Day</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">22</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">25</div><div class="date-label">Maha Shivratri</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 February 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Feb 1, 8, 22</div>
+                                    <div class="event-title">📚 Regular Classes</div>
+                                    <div class="event-details">Weekly sessions</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Feb 15</div>
+                                    <div class="event-title">🇺🇸 No Class - Presidents Day</div>
+                                    <div class="event-details">Holiday weekend</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Hindu Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Feb 2</div>
+                                    <div class="event-title">🌸 Vasant Panchami</div>
+                                    <div class="event-details">Spring festival, Saraswati</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Feb 25</div>
+                                    <div class="event-title">🔱 Maha Shivratri</div>
+                                    <div class="event-details">Great night of Shiva</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Feb 14</div>
+                                    <div class="event-title">💝 Valentine's Day</div>
+                                    <div class="event-details">Day of love</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Feb 16</div>
+                                    <div class="event-title">🏛️ Presidents Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- March 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">March 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">1</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                                             <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">8</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">13</div><div class="date-label">Holika Dahan</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">14</div><div class="date-label">Holi</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">15</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">20</div><div class="date-label">Eid al-Fitr</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">22</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date holiday"><div class="date-number">29</div><div class="date-label">SPRING BREAK</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">30</div><div class="date-label">Hindu New Year</div></td>
+                            <td class="calendar-date"><div class="date-number">31</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">3</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">4</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 March 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Mar 1, 8, 15, 22</div>
+                                    <div class="event-title">📚 Regular Classes</div>
+                                    <div class="event-details">Before spring break</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Mar 29</div>
+                                    <div class="event-title">🌸 Spring Break Begins</div>
+                                    <div class="event-details">No classes</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Religious Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Mar 13-14</div>
+                                    <div class="event-title">🎨 Holika Dahan & Holi</div>
+                                    <div class="event-details">Festival of Colors</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Mar 20</div>
+                                    <div class="event-title">🌙 Eid al-Fitr</div>
+                                    <div class="event-details">End of Ramadan</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Mar 30</div>
+                                    <div class="event-title">🎊 Hindu New Year</div>
+                                    <div class="event-details">Chaitra Shukla Pratipada</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US/PWC Events</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Mar 20</div>
+                                    <div class="event-title">🌱 Spring Equinox</div>
+                                    <div class="event-details">First day of spring</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Mar 30 - Apr 6</div>
+                                    <div class="event-title">🌸 PWC Spring Break</div>
+                                    <div class="event-details">Schools closed</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- April 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">April 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">29</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">31</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">1</div><div class="date-label">April Fools</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date holiday"><div class="date-number">5</div><div class="date-label">SPRING BREAK</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">12</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">13</div><div class="date-label">Ram Navami</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">14</div><div class="date-label">Vaisakhi</div></td>
+                            <td class="calendar-date"><div class="date-number">15</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">19</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">22</div><div class="date-label">Earth Day</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">26</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 April 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Apr 5</div>
+                                    <div class="event-title">🌸 Spring Break Continues</div>
+                                    <div class="event-details">No classes</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Apr 12</div>
+                                    <div class="event-title">📚 Back from Spring Break!</div>
+                                    <div class="event-details">Classes resume</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, Apr 19, 26</div>
+                                    <div class="event-title">📚 Regular Classes</div>
+                                    <div class="event-details">Weekly sessions</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Hindu/Sikh Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Apr 13</div>
+                                    <div class="event-title">🏹 Ram Navami</div>
+                                    <div class="event-details">Lord Rama's birthday</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Apr 14</div>
+                                    <div class="event-title">🌾 Vaisakhi/Baisakhi</div>
+                                    <div class="event-details">Sikh New Year, harvest</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 Spring Events</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Apr 1</div>
+                                    <div class="event-title">🃏 April Fools' Day</div>
+                                    <div class="event-details">Day of pranks</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Apr 22</div>
+                                    <div class="event-title">🌍 Earth Day</div>
+                                    <div class="event-details">Environmental awareness</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- May 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">May 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">26</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">27</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">28</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">29</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date"><div class="date-number">1</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">3</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date regular-class"><div class="date-number">10</div><div class="date-label">Class</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">11</div><div class="date-label">Mother's Day</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">12</div><div class="date-label">Buddha Purnima</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                            <td class="calendar-date"><div class="date-number">14</div></td>
+                            <td class="calendar-date"><div class="date-number">15</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date first-last"><div class="date-number">17</div><div class="date-label">LAST CLASS!</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">25</div><div class="date-label">Memorial Day</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">26</div><div class="date-label">Memorial Day</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">27</div><div class="date-label">Eid al-Adha</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">31</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">3</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">4</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">5</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">6</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 May 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, May 3, 10</div>
+                                    <div class="event-title">📚 Regular Classes</div>
+                                    <div class="event-details">Final sessions of the year</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Sat, May 17</div>
+                                    <div class="event-title">🎓 Last Class of the Year!</div>
+                                    <div class="event-details">Celebrate successful completion of 2025-2026!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Buddhist/Religious</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">May 12</div>
+                                    <div class="event-title">🧘 Buddha Purnima/Vesak</div>
+                                    <div class="event-details">Buddha's birth & enlightenment</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">May 27</div>
+                                    <div class="event-title">🐑 Eid al-Adha</div>
+                                    <div class="event-details">Festival of Sacrifice</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US/PWC Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">May 11</div>
+                                    <div class="event-title">👩 Mother's Day</div>
+                                    <div class="event-details">Honoring mothers</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">May 26</div>
+                                    <div class="event-title">🇺🇸 Memorial Day</div>
+                                    <div class="event-details">Federal holiday</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">May 27</div>
+                                    <div class="event-title">🏫 PWC Eid Holiday</div>
+                                    <div class="event-details">Schools observe</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- June 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">June 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">31</div></td>
+                            <td class="calendar-date"><div class="date-number">1</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">12</div><div class="date-label">PWC Last Day</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">14</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">15</div><div class="date-label">Father's Day</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">19</div><div class="date-label">Juneteenth</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date us-holiday"><div class="date-number">21</div><div class="date-label">Summer Solstice</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">3</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">4</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 June 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">June 2026</div>
+                                    <div class="event-title">☀️ Summer Break</div>
+                                    <div class="event-details">Academic year complete - enjoy summer!</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US/PWC Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jun 12</div>
+                                    <div class="event-title">🏫 PWC Last Day of School</div>
+                                    <div class="event-details">Prince William County schools end</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jun 15</div>
+                                    <div class="event-title">👨 Father's Day</div>
+                                    <div class="event-details">Honoring fathers</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jun 19</div>
+                                    <div class="event-title">🎉 Juneteenth</div>
+                                    <div class="event-details">Federal holiday - emancipation</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jun 21</div>
+                                    <div class="event-title">☀️ Summer Solstice</div>
+                                    <div class="event-details">Longest day of the year</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- July 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">July 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">28</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">29</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date"><div class="date-number">1</div></td>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">3</div><div class="date-label">Independence</div></td>
+                            </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                            <td class="calendar-date"><div class="date-number">14</div></td>
+                            <td class="calendar-date"><div class="date-number">15</div></td>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date"><div class="date-number">18</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date"><div class="date-number">20</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date"><div class="date-number">27</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date"><div class="date-number">31</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 July 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">July 2026</div>
+                                    <div class="event-title">☀️ Summer Break</div>
+                                    <div class="event-details">No classes - summer vacation</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US Holidays</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jul 3</div>
+                                    <div class="event-title">🎆 Independence Day Observed</div>
+                                    <div class="event-details">Federal holiday (Saturday 4th)</div>
+                                </div>
+                                <div class="event-item us-event">
+                                    <div class="event-date">Jul 4</div>
+                                    <div class="event-title">🇺🇸 Independence Day</div>
+                                    <div class="event-details">America's birthday - fireworks!</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- August 2026 -->
+            <div class="month-calendar">
+                <div class="month-header">August 2026</div>
+                <table class="calendar-table">
+                    <thead class="weekdays">
+                        <tr>
+                            <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="calendar-date other-month"><div class="date-number">26</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">27</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">28</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">29</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">30</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">31</div></td>
+                            <td class="calendar-date"><div class="date-number">1</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">2</div></td>
+                            <td class="calendar-date"><div class="date-number">3</div></td>
+                            <td class="calendar-date"><div class="date-number">4</div></td>
+                            <td class="calendar-date"><div class="date-number">5</div></td>
+                            <td class="calendar-date"><div class="date-number">6</div></td>
+                            <td class="calendar-date"><div class="date-number">7</div></td>
+                            <td class="calendar-date"><div class="date-number">8</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">9</div></td>
+                            <td class="calendar-date"><div class="date-number">10</div></td>
+                            <td class="calendar-date"><div class="date-number">11</div></td>
+                            <td class="calendar-date"><div class="date-number">12</div></td>
+                            <td class="calendar-date"><div class="date-number">13</div></td>
+                            <td class="calendar-date"><div class="date-number">14</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">15</div><div class="date-label">Independence Day</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">16</div></td>
+                            <td class="calendar-date"><div class="date-number">17</div></td>
+                            <td class="calendar-date us-holiday"><div class="date-number">18</div><div class="date-label">PWC School Starts</div></td>
+                            <td class="calendar-date"><div class="date-number">19</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">20</div><div class="date-label">Paryushan Begins</div></td>
+                            <td class="calendar-date"><div class="date-number">21</div></td>
+                            <td class="calendar-date"><div class="date-number">22</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">23</div></td>
+                            <td class="calendar-date"><div class="date-number">24</div></td>
+                            <td class="calendar-date"><div class="date-number">25</div></td>
+                            <td class="calendar-date"><div class="date-number">26</div></td>
+                            <td class="calendar-date multi-festival"><div class="date-number">27</div><div class="date-label">Janmashtami</div></td>
+                            <td class="calendar-date"><div class="date-number">28</div></td>
+                            <td class="calendar-date"><div class="date-number">29</div></td>
+                        </tr>
+                        <tr>
+                            <td class="calendar-date"><div class="date-number">30</div></td>
+                            <td class="calendar-date"><div class="date-number">31</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">1</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">2</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">3</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">4</div></td>
+                            <td class="calendar-date other-month"><div class="date-number">5</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="month-events">
+                    <h4>📅 August 2026 Events</h4>
+                    <div class="event-categories">
+                        <div class="category-section">
+                            <div class="category-title balgokul-title">🏫 Balgokul Events</div>
+                            <div class="event-list">
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">August 2026</div>
+                                    <div class="event-title">📋 Academic Year Ends</div>
+                                    <div class="event-details">2025-2026 Balgokul year complete</div>
+                                </div>
+                                <div class="event-item balgokul-event">
+                                    <div class="event-date">Late August</div>
+                                    <div class="event-title">📅 Planning for 2026-2027</div>
+                                    <div class="event-details">Preparing for next academic year</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title hindu-title">🕉️ Religious Festivals</div>
+                            <div class="event-list">
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Aug 15</div>
+                                    <div class="event-title">🇮🇳 Independence Day (India)</div>
+                                    <div class="event-details">Indian independence celebration</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Aug 20-27</div>
+                                    <div class="event-title">🙏 Paryushan Parva</div>
+                                    <div class="event-details">8-day Jain festival of purification</div>
+                                </div>
+                                <div class="event-item hindu-event">
+                                    <div class="event-date">Aug 27</div>
+                                    <div class="event-title">🕉️ Janmashtami</div>
+                                    <div class="event-details">Lord Krishna's birthday</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-section">
+                            <div class="category-title us-title">🇺🇸 US/PWC Events</div>
+                            <div class="event-list">
+                                <div class="event-item us-event">
+                                    <div class="event-date">Aug 18</div>
+                                    <div class="event-title">🏫 PWC Schools Start</div>
+                                    <div class="event-details">Prince William County new year</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <h3>📋 Complete Academic Year Calendar Legend</h3>
+            <div class="legend-grid">
+                <div class="legend-item">
+                    <div class="legend-color legend-balgokul"></div>
+                    <div class="legend-text">
+                        <strong>Balgokul Classes</strong><br>
+                        <small>Weekly Saturday sessions</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-special"></div>
+                    <div class="legend-text">
+                        <strong>Balgokul Special Events</strong><br>
+                        <small>Diwali Party & celebrations</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-holiday"></div>
+                    <div class="legend-text">
+                        <strong>Balgokul Holidays</strong><br>
+                        <small>No classes scheduled</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-milestone"></div>
+                    <div class="legend-text">
+                        <strong>Balgokul Milestones</strong><br>
+                        <small>First/Last class & major dates</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-hindu"></div>
+                    <div class="legend-text">
+                        <strong>Religious Festivals</strong><br>
+                        <small>Hindu, Jain, Buddhist, Sikh</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-us"></div>
+                    <div class="legend-text">
+                        <strong>US/PWC Holidays</strong><br>
+                        <small>Federal & school district holidays</small>
+                    </div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color legend-multi"></div>
+                    <div class="legend-text">
+                        <strong>Multi-Religious</strong><br>
+                        <small>Major festivals from multiple traditions</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+          

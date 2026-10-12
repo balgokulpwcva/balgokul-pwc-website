@@ -1,0 +1,1027 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sacred Geography Classroom</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Mukta:wght@400;500;700&display=swap">
+<style>
+/* Layout: app chrome (theme-aware) around a lamp-lit indigo "stage" that stays dark for projectors. */
+:root{
+  --bg:#eceff3; --surface:#ffffff; --ink:#1d2333; --muted:#5a6273; --line:#d5dae2;
+  --accent:#1d6b74; --accent-ink:#ffffff; --mark:#b8790a;
+  --stage:#1b2238; --stage2:#252e4b; --stage3:#313b5d; --sink:#f3eee3; --smuted:#bdb6a8;
+  --gold:#f2b134; --teal:#6fcfc6; --good:#86d9a1; --bad:#f0907a;
+  --display:"Yatra One","Mukta",Georgia,serif; --body:"Mukta","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0f131d; --surface:#171d2b; --ink:#e7e9ef; --muted:#9ba2b3; --line:#283044;
+  --accent:#6cc5bd; --accent-ink:#0f131d; --mark:#f2b134; --stage:#141a2c; --stage2:#1f2741; --stage3:#2a3352; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f131d; --surface:#171d2b; --ink:#e7e9ef; --muted:#9ba2b3; --line:#283044;
+  --accent:#6cc5bd; --accent-ink:#0f131d; --mark:#f2b134; --stage:#141a2c; --stage2:#1f2741; --stage3:#2a3352; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{background:var(--bg);color:var(--ink)}
+body{font-family:var(--body);font-size:16px;line-height:1.45;padding-inline:16px;padding-block:0 40px}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.app{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:14px}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 8px;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-direction:column;min-width:0}
+.brand b{font-family:var(--display);font-weight:400;font-size:24px;line-height:1.1;color:var(--ink)}
+.brand span{font-size:13px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 12px;font-weight:500}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+select.btn{max-width:260px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg button{border:0;background:transparent;padding:6px 10px;font-weight:500;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+/* Home */
+.hero{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:stretch}
+.today{background:var(--stage);color:var(--sink);border-radius:14px;padding:28px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.today .eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:700}
+.today h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,4vw,48px);line-height:1.1;margin:0;text-wrap:balance}
+.today p{margin:0;color:var(--smuted);max-width:60ch}
+.today .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+.today .btn{background:var(--gold);border-color:var(--gold);color:#1b2238;font-weight:700}
+.today .btn.ghost{background:transparent;color:var(--sink);border-color:var(--stage3)}
+.about{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.about h2{margin:0;font-size:18px}
+.about p,.about li{color:var(--muted);margin:0}
+.about ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:4px}
+.year h2{font-family:var(--display);font-weight:400;font-size:28px;margin:8px 0 4px}
+.months{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.month{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.month h3{margin:0 0 4px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.day{display:grid;grid-template-columns:52px 1fr;gap:10px;align-items:start;padding:8px;border-radius:8px;text-align:left;border:0;background:transparent;width:100%}
+button.day:hover{background:var(--bg)}
+.day .d{font-variant-numeric:tabular-nums;font-weight:700;font-size:20px;line-height:1;color:var(--ink)}
+.day .d small{display:block;font-size:11px;font-weight:500;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.day .t{font-weight:500;line-height:1.25}
+.day .t em{display:block;font-style:normal;font-size:13px;color:var(--muted)}
+.day.off .t{color:var(--muted);font-weight:400}
+.day.now{background:color-mix(in srgb,var(--mark) 16%,transparent);outline:2px solid var(--mark)}
+.day.past .d,.day.past .t{opacity:.62}
+.pill{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:1px 7px;border-radius:99px;background:var(--mark);color:#1b2238;margin-left:6px;vertical-align:2px}
+/* Class view */
+.runbar{display:flex;gap:4px;flex-wrap:wrap}
+.runbar button{flex:1 1 90px;border:1px solid var(--line);background:var(--surface);border-radius:8px;padding:6px 8px;text-align:left;line-height:1.15;min-width:0}
+.runbar button b{display:block;font-size:13px}
+.runbar button span{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.runbar button[aria-current="true"]{border-color:var(--accent);box-shadow:inset 0 -3px 0 var(--accent)}
+.stagewrap{position:relative}
+.stage{container-type:inline-size;background:var(--stage);color:var(--sink);border-radius:14px;aspect-ratio:16/9;width:100%;padding:3.6cqw 4.4cqw;display:flex;flex-direction:column;gap:1.4cqw;font-size:max(15px,1.75cqw);position:relative}
+.stagewrap:fullscreen{background:var(--stage);display:flex;align-items:center;justify-content:center}
+.stagewrap:fullscreen .stage{border-radius:0;max-width:calc(100vh*16/9);overflow:auto}
+.s-eyebrow{color:var(--gold);text-transform:uppercase;letter-spacing:.14em;font-weight:700;font-size:.72em}
+.s-h{font-family:var(--display);font-weight:400;font-size:2.3em;line-height:1.08;margin:0;text-wrap:balance}
+.s-sub{color:var(--smuted);margin:0;font-size:1.05em;max-width:62ch}
+.clock{position:absolute;right:3cqw;top:2.6cqw;display:flex;gap:.4em;align-items:center;font-variant-numeric:tabular-nums}
+.clock button{background:var(--stage2);border:1px solid var(--stage3);border-radius:99px;padding:.2em .8em;color:var(--sink);font-size:.8em;font-weight:700}
+.clock button.done{background:var(--gold);color:#1b2238;animation:pulse 1s ease-in-out infinite alternate}
+@keyframes pulse{to{opacity:.6}}
+@media (prefers-reduced-motion:reduce){.clock button.done{animation:none}}
+.grow{flex:1;min-height:0}
+/* title slide */
+.t-grid{display:grid;grid-template-columns:1fr auto;gap:3cqw;align-items:center;flex:1}
+.t-num{font-family:var(--display);color:var(--gold);font-size:1.3em}
+.t-title{font-family:var(--display);font-size:3.4em;line-height:1.02;margin:.15em 0 .3em;text-wrap:balance}
+.t-meta{color:var(--smuted);font-size:1.05em}
+.stamp{width:13cqw;height:13cqw;min-width:110px;min-height:110px;border:.35cqw dashed var(--gold);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-12deg);color:var(--gold);text-align:center;gap:.2em}
+.stamp b{font-family:var(--display);font-weight:400;font-size:1.15em;letter-spacing:.06em;line-height:1}
+.stamp small{font-size:.55em;letter-spacing:.2em;text-transform:uppercase}
+.runrow{display:flex;gap:.5em;flex-wrap:wrap}
+.runrow span{background:var(--stage2);border-radius:99px;padding:.15em .8em;font-size:.8em}
+.runrow span b{color:var(--gold)}
+/* wonder */
+.wonder{flex:1;display:flex;flex-direction:column;justify-content:center;gap:1em}
+.wonder .q{font-family:var(--display);font-size:3em;line-height:1.1;max-width:24ch;text-wrap:balance;margin:0}
+.wonder .hint{display:inline-flex;gap:.5em;align-items:center;background:var(--stage2);border-radius:99px;padding:.3em 1em;font-weight:700;color:var(--teal);align-self:flex-start;font-size:.85em}
+/* learn */
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2cqw}
+.card{background:var(--stage2);border-radius:10px;padding:1.4cqw 1.6cqw;display:flex;flex-direction:column;gap:.3em}
+.card h3{margin:0;font-size:1.05em;color:var(--gold)}
+.card p{margin:0;font-size:.9em;line-height:1.4}
+.vocab{display:flex;gap:.6em;flex-wrap:wrap;align-items:center}
+.vocab .lbl{font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--smuted);font-weight:700}
+.chip{background:transparent;border:1px solid var(--teal);color:var(--sink);border-radius:8px;padding:.25em .7em;font-size:.82em;text-align:left;line-height:1.2}
+.chip b{color:var(--teal)}
+.chip small{display:block;color:var(--smuted);font-size:.85em}
+.chip i{font-style:normal;color:var(--gold)}
+.learnrow{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:1.6cqw;align-items:start}
+.diagram svg{width:100%;height:auto;display:block}
+/* map */
+.maprow{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:2cqw;flex:1;min-height:0}
+.mapbox{background:var(--stage2);border-radius:10px;padding:.6cqw;display:flex;align-items:flex-start;justify-content:center;min-height:0;align-self:start}
+.mapbox svg{width:100%;height:auto;max-height:40cqw;display:block}
+.legend{display:grid;grid-template-columns:repeat(auto-fill,minmax(15em,1fr));gap:.4em;min-width:0;align-content:start}
+.legend button{display:grid;grid-template-columns:1.7em 1fr;gap:.6em;align-items:start;text-align:left;background:var(--stage2);border:1px solid transparent;border-radius:8px;padding:.45em .7em;color:var(--sink);font-size:.86em;line-height:1.25}
+.legend button[aria-pressed="true"]{border-color:var(--gold)}
+.legend .n{display:inline-flex;width:1.6em;height:1.6em;border-radius:50%;background:var(--gold);color:#1b2238;font-weight:700;align-items:center;justify-content:center;font-size:.85em}
+.legend small{display:block;color:var(--smuted)}
+.legend .blurb{display:block;color:var(--sink);margin-top:.2em}
+/* explore */
+.exrow{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.4fr);gap:2cqw;flex:1;min-height:0}
+.excol{display:flex;flex-direction:column;gap:.8em;min-width:0}
+.box{background:var(--stage2);border-radius:10px;padding:1em 1.1em}
+.box h4{margin:0 0 .25em;font-size:.72em;letter-spacing:.14em;text-transform:uppercase;color:var(--smuted)}
+.box p{margin:0;font-size:.92em}
+.box.path{border-left:.3em solid var(--teal)}
+.gametabs{display:flex;gap:.4em;flex-wrap:wrap}
+.gametabs button{background:transparent;border:1px solid var(--stage3);color:var(--smuted);border-radius:99px;padding:.2em .9em;font-size:.82em;font-weight:700}
+.gametabs button[aria-pressed="true"]{background:var(--teal);border-color:var(--teal);color:#1b2238}
+.game{background:var(--stage2);border-radius:10px;padding:1em;display:flex;flex-direction:column;gap:.7em;flex:1;min-height:0}
+.game .ghead{display:flex;justify-content:space-between;gap:1em;align-items:center;flex-wrap:wrap}
+.game .ghead b{font-size:1em}
+.game .status{color:var(--teal);font-weight:700;font-size:.85em}
+.gbtn{background:var(--stage3);border:0;color:var(--sink);border-radius:8px;padding:.3em .8em;font-size:.82em;font-weight:700}
+.tok{background:var(--stage);border:1px solid var(--stage3);color:var(--sink);border-radius:8px;padding:.35em .7em;font-size:.85em;text-align:left;line-height:1.2}
+.tok.sel{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold)}
+.tok.ok{border-color:var(--good);color:var(--good);cursor:default}
+.tok.no{border-color:var(--bad);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.tok.no{animation:none}}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:.5em}
+.match .col{display:flex;flex-direction:column;gap:.4em}
+.pool{display:flex;flex-wrap:wrap;gap:.4em}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(9em,1fr));gap:.5em}
+.bucket{background:var(--stage);border:1px dashed var(--stage3);border-radius:8px;padding:.5em;min-height:4em;display:flex;flex-direction:column;gap:.35em;text-align:left;color:var(--sink)}
+.bucket>b{font-size:.78em;letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.bucket.armed{border-color:var(--gold);border-style:solid}
+.bucket .tok{font-size:.78em}
+.order{display:flex;flex-direction:column;gap:.35em;padding:0;margin:0;list-style:none}
+.order li{display:grid;grid-template-columns:1.6em 1fr auto;gap:.5em;align-items:center;background:var(--stage);border:1px solid var(--stage3);border-radius:8px;padding:.3em .5em;font-size:.88em}
+.order li.ok{border-color:var(--good)}
+.order li.no{border-color:var(--bad)}
+.order li .i{color:var(--gold);font-weight:700;font-variant-numeric:tabular-nums}
+.order li button{background:var(--stage3);border:0;border-radius:6px;color:var(--sink);padding:.05em .45em;margin-left:.2em}
+.find{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:1em;align-items:center;min-height:0}
+.find svg{width:100%;height:auto;max-height:30cqw;display:block}
+.find .prompt{font-family:var(--display);font-size:1.5em;color:var(--gold);line-height:1.1}
+.checklist{display:flex;flex-direction:column;gap:.35em}
+.checklist label{display:flex;gap:.6em;align-items:center;background:var(--stage);border:1px solid var(--stage3);border-radius:8px;padding:.35em .6em;font-size:.9em;cursor:pointer}
+.checklist input{width:1.1em;height:1.1em;accent-color:var(--teal)}
+.checklist small{color:var(--smuted);margin-left:auto;font-size:.75em;text-transform:uppercase;letter-spacing:.08em}
+.gop{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:1em;align-items:center}
+.gop svg{width:100%;max-height:27cqw}
+.gop .ctl{display:flex;flex-direction:column;gap:.6em;font-size:.85em}
+.swatches{display:flex;gap:.3em;flex-wrap:wrap;max-width:9em}
+.swatches button{width:1.6em;height:1.6em;border-radius:50%;border:2px solid var(--stage3)}
+.swatches button[aria-pressed="true"]{border-color:var(--sink)}
+/* quiz */
+.quiz{flex:1;display:flex;flex-direction:column;gap:1em;justify-content:center;max-width:56em}
+.quiz .qn{color:var(--smuted);font-size:.8em;letter-spacing:.12em;text-transform:uppercase;font-weight:700;font-variant-numeric:tabular-nums}
+.quiz .qq{font-family:var(--display);font-size:2em;line-height:1.12;margin:0;text-wrap:balance}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:.7em}
+.opt{background:var(--stage2);border:2px solid var(--stage3);border-radius:10px;padding:.7em 1em;text-align:left;color:var(--sink);display:grid;grid-template-columns:1.7em 1fr;gap:.5em;align-items:center;font-size:.95em}
+.opt .k{width:1.6em;height:1.6em;border-radius:50%;background:var(--stage3);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.85em}
+.opt.ok{border-color:var(--good)}
+.opt.ok .k{background:var(--good);color:#1b2238}
+.opt.no{border-color:var(--bad)}
+.opt.no .k{background:var(--bad);color:#1b2238}
+.why{margin:0;color:var(--teal);font-weight:500;min-height:1.4em}
+.qnav{display:flex;gap:.6em;align-items:center;flex-wrap:wrap}
+.score{margin-left:auto;font-variant-numeric:tabular-nums;color:var(--gold);font-weight:700}
+/* reflect */
+.reflect{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:2cqw;flex:1;align-items:stretch}
+.passport{background:var(--sink);color:#1b2238;border-radius:10px;padding:1.6cqw;display:flex;flex-direction:column;gap:.6em;position:relative}
+.passport h3{margin:0;font-family:var(--display);font-weight:400;font-size:1.4em}
+.passport .lines{flex:1;background:repeating-linear-gradient(transparent 0 1.9em,#c9c1b0 1.9em calc(1.9em + 1px));min-height:6em}
+.passport .stamp{position:absolute;right:1.4cqw;top:1.2cqw;width:9cqw;height:9cqw;min-width:80px;min-height:80px;color:#a8660a;border-color:#a8660a;font-size:.8em}
+.nextup{display:flex;flex-direction:column;gap:.8em}
+/* bottom controls */
+.nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.nav .sp{flex:1}
+.notes{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+.notes h3{margin:0 0 4px;font-size:13px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.notes p{margin:0;max-width:75ch}
+.note-sm{font-size:13px;color:var(--muted)}
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr}
+  .stage{aspect-ratio:auto;font-size:15px;padding:18px;gap:14px}
+  .clock{position:static;align-self:flex-end}
+  .t-grid,.learnrow,.maprow,.exrow,.reflect,.find,.gop{grid-template-columns:1fr}
+  .cards,.opts,.match{grid-template-columns:1fr}
+  .stamp{width:110px;height:110px}
+  .mapbox svg,.find svg{max-height:none}
+  .t-title{font-size:2.2em}.wonder .q{font-size:2em}.s-h{font-size:1.8em}
+}
+</style></head><body>
+<div class="app">
+  <header class="top">
+    <button class="brand" id="brand" style="background:none;border:0;padding:0;text-align:left"><b>Sacred Geography</b><span>Bal Gokul · 2026–27 · Grades 9–12</span></button>
+    <div class="controls">
+      <select class="btn" id="clsSel" aria-label="Choose a class"></select>
+    </div>
+  </header>
+  <main id="main"></main>
+</div>
+<script>
+const MAP_INDIA="M200.4,40.3L200.2,38.4L199.4,37L198.4,37.2L197,35.6L194.2,35.8L191.8,35.2L191.4,34.4L190.2,33.6L186.8,32.8L185.6,31.8L185.6,29.2L185.2,27.8L184.4,26.8L183.4,26.2L181.4,26.2L178.6,25.2L177.8,23.8L176.4,23.4L174.8,23.6L173,21.5L170.6,21.2L170,20L169.4,19.6L168.7,18.5L168.8,17.9L166.9,16.3L164.7,14.9L162.7,14.4L160.7,14.5L159.2,15.4L158.5,14.3L158.7,12.5L158,11.8L158.4,11.1L157.6,10.7L155.6,10.3L154.8,10.6L153.4,10L153.4,9.5L151.3,9.7L150.7,9.5L148.5,10.3L148,11.2L146.9,9.5L146.8,8.7L144.7,9.2L144.1,8L142.6,8.5L141.5,9.2L141.3,10.6L140,9.8L138.5,9.9L137.2,10.5L135.5,11.7L133,11.6L132.6,12.9L130.8,13.3L129.5,13.2L128.2,12.2L126.8,11.9L126,12L123.4,11.6L123.7,12.7L124.4,13.2L125.7,13.3L126.5,13.8L127.4,14.9L126.7,15.8L125.5,15.4L123.8,15.5L123.1,15.9L122.1,15.8L121.4,15.3L120.1,15.4L118.2,14.8L117.5,14.8L115.4,15.6L114.3,15.6L113,15.4L111,16.3L111.5,17.8L110.8,19L109.6,19.8L109.2,20.5L107.4,21L107.1,22.2L105.2,23.5L104.4,23.7L103.1,24.7L101.9,24.6L101,25.3L100.8,27.3L100.5,27.8L100.6,28.8L101.4,29.8L100.2,32L101.4,33L103.7,33.6L105.7,33L106.7,32.5L107.8,32.5L108.5,33.2L110,32.7L110.5,33.2L111.8,32.5L112.6,33.1L113.6,32.8L114,34.3L113.2,34.8L112.5,35.6L113.8,36.5L116.6,36.7L117.3,38L117.9,38.3L118.4,39.5L120,39.1L122.3,39.2L123.3,39.4L125.7,39.5L125.7,40.7L124.5,41.6L124,42.6L123.9,43.3L125,45.4L126.2,45.1L127.4,45.9L128.5,45.8L129.2,46.7L130.1,46.3L130.7,47L132.3,47.1L132.6,47.9L131.9,48.2L131.5,49L132.2,49.5L131.2,50.4L131.4,51.2L130.8,51.7L130.4,52.5L129.6,52.7L129.4,53.3L128.6,53.8L126.8,53.7L125.6,54.1L124.6,54.7L123.3,56.7L124,57L122.7,58.7L122.1,58.3L120.7,58.6L119.3,58.5L118.7,59.5L118.4,62L118,62.4L119.4,64.4L120,65.8L119.9,67.3L120.2,69.6L120.9,70.9L121.9,72.2L121.3,74L122,75.2L121.9,76.4L121.4,77.4L122.6,78.6L122.7,79.5L122.2,80.2L122.6,80.9L122,81.3L121.5,82.5L122.4,84.2L122.5,85.2L123.4,85.8L123.4,87L122.5,87.4L123.1,88.4L124.6,88.7L125.5,89.6L126.6,89.8L128.1,89.2L128.9,89.6L129.7,90.7L131.5,91.4L136.5,93.7L137.4,94.6L139,94.1L140.4,95L142.6,94.7L142.7,93.8L143.2,93.4L144.1,93.7L143.2,95.3L143.1,96.1L143.9,96.8L143.1,97.4L143,98.7L143.8,99.3L143.7,100L144.6,100.4L146.3,100.4L147.2,100.1L148.9,101L150.3,100.7L150.5,100L152.2,100.8L152.7,101.8L153.8,101.5L154.8,102.3L155.8,102.6L156.7,103.6L156.4,104.1L157.4,104.4L157.5,105.4L156.6,105.6L156.3,106.6L155.2,108L154.4,107.8L153.6,108.5L152.5,108.4L150.2,109.3L148.5,108.7L146.6,110L146.4,110.8L143.5,111.5L142.7,112.3L142.3,112.2L141.4,113.3L141,114.4L141.2,114.8L139.7,115.7L140.7,116.4L141.1,117.8L142.3,118.9L141.7,119.9L142.7,120.3L143.1,120.9L142.9,121.7L141.9,121.7L141.7,122.4L140.7,123.4L140.6,124.9L140.2,127.4L141,127.6L141,128.3L142,128.2L142.8,127.6L143.8,127.4L144,128.2L143.4,128.9L141,129.4L140.9,130.2L140.2,130.7L139.1,130.7L137.3,132.1L137.4,132.9L136.5,133L136.1,134.4L135.3,135.5L133,137.4L132.6,137.4L131.4,139.5L130.8,139.4L129.9,139.7L128.9,140.6L128.1,143L129.2,144.6L129.5,146L126.6,148.1L126.1,148.6L121.9,149.6L117.9,151.1L115.6,158.6L111.7,165.3L110.1,166.9L108.9,169.4L104.7,171L99.6,173.8L98.1,174.3L96,176.6L94.1,182.1L92.6,183.7L90.1,185.6L88.5,187.6L88,190.8L83.3,192.4L77.7,192.5L74.1,193.3L68.1,195.8L67.4,195.9L65.2,195.6L63.7,193.4L63.5,191.6L61.8,189.8L60.1,189.3L57.4,189.8L55.9,191.3L54.5,192L52.7,193.9L50.5,198.7L48.7,200L47.3,202L45.2,203.6L44.1,204.3L42.9,205.5L41.7,206.3L40.3,209.8L40,212.7L39.7,213.9L40.2,215.1L44.5,217L45.8,218L47.7,218.4L51.1,218L52.3,218.3L53.5,219L53.7,220.4L53.5,221.5L53.7,222.5L53.3,224.1L53.5,225L52.8,226.9L51.7,228.3L52,231.2L53.5,233.4L54.4,234.1L55.4,235.7L57.7,236.5L60.6,236.3L62.2,235.7L62.9,235.7L63.5,236.5L63.3,239.4L63.6,239.5L63.3,242.1L64.7,243.4L65,244.4L67.8,247L68.2,249.2L68.8,251.2L70.5,253.8L71.3,255.7L71.9,256.2L71.5,256.8L70.2,257.3L69.7,258.1L69.7,259.1L70.1,259.5L70,261.1L70.7,261.4L72.1,261.3L71,262.9L69.7,262.7L67.6,264L67,265.1L66.1,265.6L64.3,265.7L62.9,265.5L61.4,265L61.7,264.4L61.3,263L62.1,261.8L61.5,261.6L58.2,262.5L57.3,263L56.5,263L55.1,263.5L52.2,264.1L51.3,266L50.5,266.6L44.6,266.6L41.9,264.2L40.1,264.6L38.9,264.4L37.3,264.6L36.3,264.4L33.9,265.3L31.9,264.5L30.3,265.5L29.7,265.4L28.9,263.9L28.1,264.4L27.6,265.7L27.1,265.7L26.6,263.8L25.3,264.1L25.4,264.7L25.1,270.6L17.6,270.6L16.6,271.7L15.9,271.6L15.3,272.1L15.3,273L14.2,273.3L14.2,274.8L13.8,275.4L15.2,277L13.8,277.1L13.6,277.9L14.3,278.5L15.7,278.6L17,278.4L17.9,277.8L18,276.7L18.6,275.1L20.6,275L21.6,273.8L22.8,273.5L23.1,274L22.6,274.8L21,275.7L20,276.7L18.5,278.9L18.5,279.7L18.9,280.3L19.9,280.6L21.2,282.1L21.4,283L22.7,283.8L22.7,285.1L21.6,285.5L23.6,287.2L25.6,288.5L31.1,291.6L32.6,292.6L33.9,293.3L35.4,293.6L36.3,293.4L37.8,293.8L39,294.5L40.9,294.4L41.6,294.8L43.5,295L44.2,295.2L44.9,294.3L44.9,293.7L45.6,293.3L48.2,292.5L48.9,292L49.9,292L51.4,291.6L52,291.8L53.3,291.2L55.3,290.9L56.9,291.5L57.7,291.3L58,290.4L58.7,290.4L58.1,291.6L57,292.3L56.5,293.9L56.4,294.8L55.4,296L55.2,296.9L54,298L53.5,299L51.3,299L50.9,298.8L48.9,299.5L47.3,301.1L46.8,301L46.2,302L45,301.4L44.6,300.5L44.1,301L44,302L43.3,302.1L43,303L42,303.1L41,301.9L40.3,301.9L39.7,303.2L38.3,303.7L36.7,303.6L35.7,304.6L34.5,304.9L33.5,304.3L33.4,302.5L34,302L32.2,301.8L30.8,302.2L30.8,301.3L30.2,301.1L29.6,301.8L28.7,303.9L29.5,305.7L35.2,311.8L36.7,313L37.6,313.5L38.7,314.8L41.7,317.3L42.1,317.4L44.1,319.3L48.2,324L51,327L53.1,328.9L55.2,330.6L57.3,332L57.9,332.2L58.8,332.9L60.9,334L63.4,334.8L65,335.6L66.8,336.2L66.9,335.9L69.6,336L70.3,335.2L71.6,335.3L71.7,334.9L74.1,334.3L76.5,333.1L78.8,332.6L79.6,332.2L80.4,330.9L81.6,330.8L84.9,329.4L85.5,328.8L86,328.8L88.2,327.8L89,327.6L90.9,326.7L92.2,325.8L91.7,325.3L92.6,323.3L94.7,320.9L95.3,319.2L95.4,318.5L96.1,317.4L95.5,316.1L95,316.1L94.3,314.1L95.1,313.6L95.1,312.1L94.8,311.1L94.8,309.4L96,307.9L96.2,307.1L95.9,305.5L96.6,305L96.8,304.3L97.8,303.5L98.2,305.5L98.6,305.9L99.6,304.8L101,304L102.9,304.3L104.2,305.2L105.1,305.4L106.8,304.4L107.4,304.3L108.2,304.8L107.4,305.3L106.6,304.8L105.8,305.4L105.2,306.5L104,306.3L102.9,305.7L101.7,305.9L101.2,306.4L100.7,307.9L100.2,310.5L100.3,311.7L100.7,312.1L102.4,310.9L102.4,311.9L101.3,314.2L101.1,315.1L100.5,315.8L100.6,316.5L101.1,316.8L102.1,316.3L104.3,316.4L104.9,316.2L105.7,316.7L106.9,316.6L106.7,317.3L105.9,318.2L105.5,318L104.6,319.2L103.5,320L104,321.2L103,322.2L102.5,323.1L102.4,324.6L102.8,325.3L102.4,326.8L102.5,328L103.2,328L103.2,327.3L104.2,327.4L104.3,328.4L105,328.4L105.5,329.1L104.5,329.3L105.1,331.4L105.7,331.7L106.6,333.7L106.9,334L106.9,335.1L107.8,337L108,338.2L107.8,339.9L106.6,341.3L106.4,342.7L105.5,343.3L104.8,345.1L105,346L104.8,347.7L104.2,348.6L104.4,350.5L103.3,351.3L103.7,352.7L103.1,353.3L103.7,354L103.7,355L104.2,355.9L104.2,356.5L104.6,357.8L104.3,358.2L104.5,359.2L105.6,360.2L104.9,360.7L105.3,362.2L105.2,362.6L106.3,363.5L105.8,363.8L105.5,365.5L105.9,366.1L105.7,366.7L106.5,367.9L106.4,369.2L106,370.9L106.9,371.5L107.3,369.9L108.3,370.1L109.2,369.2L109,368.2L109.8,368.4L110.2,370L108.1,372.3L108.5,372.9L109.8,373.3L109.5,374.2L108.7,373.6L107.3,374.2L107.3,377L108.6,379.2L108.3,379.4L107.9,380.9L108.3,382.7L109.1,383.4L109.4,384.1L110.3,384.3L111.3,385L109.5,385.1L108.7,385.5L109.7,386.2L109.5,387.4L110.2,389L110.7,390.7L112.3,394.4L112.7,395.8L112.3,396.2L112.8,397.8L113.1,398.2L112.9,399.1L113.6,399.7L114,401.3L113.6,402.3L114.3,402.4L114.5,404.7L115.7,408L115.6,409.5L115.9,410.3L115.6,412L116,413.8L116.2,415.5L117,417.6L116.9,418.5L116.3,419.3L117.2,421.1L117.7,423.3L118.3,424.3L119.4,428L119.3,428.9L119.8,429.7L119.7,430.2L120.2,431.2L120.9,431.3L121.8,431.9L122.6,433L123.3,435L123.8,435.7L124.7,437.7L124.8,438.7L125.4,440.2L126.2,440.1L126.1,441L127,441L127.5,442.1L126.6,441.9L126.1,442.5L126.9,442.9L127.6,442.7L128.1,443.8L128.9,446.9L128.5,448.2L129.7,449L129.8,449.6L130.6,449.9L131,450.9L130.9,451.7L132,452.3L132.5,453.3L132.4,454.4L133.8,455.5L134.9,455.2L135.2,455.7L135.4,457.6L136.5,459.7L137.1,459.6L138.1,462.5L138.3,463.8L139.1,465.1L140.3,470.3L141.3,471.1L141.8,471.8L142.4,473.6L143,476.7L143.5,477L143.4,477.9L143.9,481.8L143.9,483.1L144.2,483.3L145,486.5L146.3,492.3L146.9,493.2L146.7,493.6L147.9,496.2L149.3,499.6L150.6,502.1L150.8,502.3L151.6,504.1L153.4,508.5L154,509.8L154.7,509.6L156.1,511L156.4,511.8L157.3,513L157.7,512.8L160.6,515.9L161.7,518.4L162.4,520.3L163.6,521.1L164.4,522.2L165.7,525.9L166.9,528.6L167.5,530.8L168.2,534.3L168.4,534.4L170.3,538.8L171.9,542.2L172.6,544L173.1,546.3L173.7,547.4L173.7,548L174.4,550L174.8,549.3L175.4,549.3L175.3,550.6L174.9,551.4L175.7,555.4L175.9,557.9L176.5,560.8L177.2,562.8L178.1,564.9L178.8,565.3L178.9,566.1L179.4,567.2L179.4,567.6L180.3,569.5L180.9,572L182,572.7L182.7,573.4L184,575.3L186,577.7L189.5,582.1L189.4,582.2L191.7,584.1L195,586.6L196.7,587.5L199.1,588.2L201.1,588.5L201.3,587.6L202.5,586.9L204.4,586.7L205.6,586.1L206.4,585.1L207.9,584.5L209.3,583.5L211.2,582.4L211.4,581.6L212.6,580.1L212.5,579.5L212.8,578.2L212.5,577.3L212.7,576.3L213.4,575.1L213.2,574.6L213.4,572.5L213.8,571.4L214.4,570.6L216.2,569.5L218.1,567.9L220.8,567.3L221.7,567.5L223.1,567L223.3,566.2L224.4,566.3L224.5,565.9L226.1,565.3L228.6,564.7L230.1,564.6L231.8,564.8L232.2,564.2L231.2,564L230.2,563.3L228.4,561.3L228,560.4L228.3,560.1L228.6,558.3L229.3,557.4L229.9,555.8L231.1,554.6L231.8,553.5L232.5,552.9L232.6,552.1L235,549.4L234.6,548.1L234.9,546.4L235.6,545.7L235.9,544.8L237.6,544.1L237.9,543.6L239.8,543.6L240.1,543.2L241.1,543L242.3,543.3L244.6,543.5L245.5,543.7L247,544.5L247.5,544L247.1,538.1L247,534.9L247,532.2L247.2,529.4L247.2,526.8L246.7,524L246.8,523.1L246.2,521.4L245.3,519.5L245.1,518.2L245.3,517.2L247.2,509.9L247.7,508.8L250.2,504.9L251.3,503.2L252.9,501.1L253.4,499.2L255.1,494.4L255,492.8L255.2,491.3L255.6,489.7L255.9,487.5L256.3,486.6L256.9,484.3L256.9,482.9L256.2,480.8L254.8,477.6L254.7,476L255.1,474.4L253.1,469.6L252.7,468.3L252.6,466.3L252.8,464.5L253.5,462.5L253.8,458.9L252.9,455.9L252.4,455.3L251.8,453.5L251.7,452.2L251.4,451.1L251,449.1L251,448.1L251.8,445.8L251.7,444.5L252.4,442.7L253.7,441.2L254.6,439.3L254.6,438.7L255.2,436.9L256.6,435.3L257.5,434.6L259.7,433.4L261.3,432.8L263,432.4L265.2,432.6L266.2,433.3L266,434.1L266.3,435.2L266.8,436L268.2,435.7L268.8,435.8L269.9,435.2L270.4,434.7L269.9,433.7L271.3,431.9L272.8,430.7L272.9,429.8L273.9,428L274,426.5L274.9,425L276,424.1L277.9,423.2L280.8,422.9L281.3,423.1L283,423.4L284.5,423.8L287.5,422.4L289.3,422.1L290.5,421.2L294.7,419.1L295.5,418.9L296.4,417.7L296.8,416.3L296.9,414.7L297.3,413L296.4,413L295.1,412.3L295,411.5L295.5,410.8L296.1,409.2L298.2,407.1L299.8,405.8L301.4,404.7L303.8,403.3L306.4,402L309.9,400.5L310.4,399.9L313.2,398.8L314.3,398.2L314.7,397.5L315.7,396.8L315.9,396.2L316.9,395.6L317,395L317.8,394.4L318.2,393.2L319.4,391.7L320.6,391L321.5,389.7L323,388.8L323.9,388L325.3,387.3L327.4,386.4L331.6,384.4L332.7,383.7L333.1,382.5L336.5,379.3L336.8,378.5L338.8,376.9L339.4,375.8L341.2,374.2L342.2,372.2L343.6,370.9L345.2,368.8L344.7,368L345.5,367.8L346.8,366.2L347.7,365.3L350.1,363.4L351.7,362.4L352.2,361.7L354.8,359.7L356.9,358.4L358.6,357.4L359.8,357L360.5,356.3L361.9,355.6L363.2,355.3L367,354L369.1,353.4L371,353.1L374.3,352.1L376.2,351.1L376.9,350.4L377.7,350.5L378.5,350L379,348.6L380.1,347.3L380.7,346.1L383.6,344.8L383.7,344L384.4,344L385.5,343.3L385.7,342.2L384.9,342.1L384.6,341.3L384.8,340.6L386.1,339.1L390.6,336.2L389.9,334.6L387.8,334.7L387.9,334.1L389.4,334.2L389.5,333.5L388.7,331.7L386.7,327.7L386.5,326.5L387.9,323.7L389.8,321.7L392.4,319.7L394.2,319.1L396.9,318.9L398.7,318.1L401.2,317.4L404.1,316.8L405.3,316.1L405.7,316.2L406.7,315.4L407.9,314.1L408.8,313.7L410.3,311.7L410.5,310.8L411.4,309.7L413.6,308.3L413.8,307.7L412.7,306.3L413.7,306.3L414.2,307L414.5,308.5L413.8,310.2L413.1,310.8L413.5,311.7L413.3,312.5L414.3,314.6L414.2,315.6L414.7,317.2L414.3,317.7L414.9,318.8L415.8,318.9L415.7,317.9L416.2,316.5L415.6,315.8L416.8,315.8L417.6,316.4L417.7,317.9L419,317.8L419.5,316.5L419.1,315.8L419.6,314.2L419,313.7L419.8,313L421.5,312.8L421.6,312.2L422.4,311.2L422,310.7L422.3,309.8L423.2,309.5L423.6,309.6L424.1,309.9L424.5,309.9L424.8,309.7L424.5,308.9L424.8,308.8L425.2,309.5L425.3,310.1L424.6,310.5L424.3,312.4L424,313.3L424.3,313.9L424,314.9L424.2,316.2L425,316.8L425.9,316.9L426.3,317.5L427.3,317.3L426.9,315.8L427.4,315.9L427.8,316.9L430.1,318L431.4,317.7L432,317.3L431.2,315.4L430.4,314.4L430.7,313L430.4,311.7L431.2,311.3L431.5,310.4L430.8,309.1L430.9,307.8L431.4,307L431.4,306.1L430.7,304.8L429.9,304.3L429.7,303.5L430,301.4L429.2,299L428.8,298.8L428.6,297L429.2,296.1L428.6,295.6L428.2,294.9L429.2,294.1L429.4,293.1L429,292.5L428.2,292.4L427.8,291.4L427.1,290.8L427.7,289.2L427.3,288.4L428.6,287.1L428.9,285.9L428.1,285.3L427.7,285.4L426.2,284.9L425.5,285.5L424.4,284.9L423.9,284L424.6,283.8L425.2,282.5L425.3,281L424.9,280.3L423.5,279L422.8,278L421.6,277.9L421.9,277.2L421.5,276.7L421.4,275.5L422,273.7L421.5,272.8L423.2,272.6L424.1,271.7L424.7,271.7L424.8,269L424,267.7L424.9,267.1L424.6,266.6L424.8,264.9L424.2,263.8L421.8,263.7L421.1,264.1L420.5,263.1L420.1,263.1L418.5,262.3L417.8,262.6L416.6,262.3L415.3,261.1L414.1,260.8L412.1,259.1L410.7,257.1L410.2,256.6L411.2,255.6L411.3,255L412.9,253L413.4,251L414.5,250.8L415.2,251.5L415.4,252.2L416.1,252.6L416.8,251.2L417.6,251.2L419,249.2L418.8,247.4L419.2,247L418.8,246.3L419.5,245.8L421.1,246.1L421.6,246.5L422.4,245.9L424.3,245.9L424.7,246.3L426.3,246.5L426.6,245.9L427.5,246.4L429,246.5L429.1,244.9L430.1,244.6L430.2,244L428.8,244L427.6,243.4L426.8,242.6L426.5,241.1L426.8,240.8L426.2,239.6L424.1,240L423.9,240.5L422.9,240.4L421.8,239.8L421,239.7L420,239L420,238.3L419,237.9L419.1,236.7L418,236.5L417.5,235.7L415.3,234.3L413.7,234L412.9,234.1L412,233.4L411.9,231.4L412.2,231.3L412.6,230.1L413.4,229.3L413.2,228.5L413.5,227.1L416.8,225.6L417,224.3L417.7,223.7L418.3,223.7L418.9,222.7L419.8,223L420.5,222.8L419.9,221.3L419.2,220.7L417.2,220.3L417.1,219.1L417.7,217.8L419,219.3L419.7,219.2L421.2,220.8L422.5,220.6L423,221.7L423.6,221.8L423.8,222.7L424.9,223.6L423.6,223.7L423.9,224.4L425.8,223.8L426.4,224.1L426.3,224.9L426.8,225.4L427.5,224.3L428.5,224.3L429.1,225.2L430.9,225.2L431,224.3L430.3,224L429.7,223L428.3,222.7L428.2,222.3L429.1,221L429.7,221.6L430.8,222L431.7,222L432.1,224.5L432.8,225.3L432.7,226.3L433.1,227.2L434.5,227.5L435.2,228.3L435.1,228.7L436.5,229.2L437.2,229.9L438.1,229.4L439.3,230L440.3,229.8L440.8,230.6L441.7,230.4L441.6,229.5L442.9,228.7L441.9,227.2L442.3,226.4L443.2,226.5L444.1,227L444.9,226.8L445.1,227.7L445.6,228.2L446.4,229.8L447.4,230.4L447.6,231.5L446.6,232.6L446.5,233.8L446.8,234.8L446.5,235.2L447.4,236.7L447.6,237.7L447,240.7L446.7,241.2L446.4,242.8L446.8,243.6L447.5,244.3L448.2,243.8L451.1,244.8L452.4,245.5L453.4,245.5L456.2,246.2L457.4,246.7L459,246.9L460.5,246.5L462.7,246.5L464.8,246.8L465.4,246.3L466.9,246.8L468.6,246.7L471.5,246L474.9,246.1L476.7,246.5L477.3,246.4L479.6,247.3L481.1,247L481.5,246.5L482.8,247.5L484.9,246.6L488.3,246.4L489.4,246.5L491.2,246.2L492.7,246.8L493.3,247.5L493.9,247.4L494.5,248.1L496.2,248.6L496.9,248.5L497.3,249L498.5,249.5L498.4,250.7L499,251.2L499.8,251.1L499.9,252.3L498.7,252.9L497.7,252.9L496.1,251.7L494.9,251.8L494.9,253.2L495.4,253.4L495.9,255.3L495.1,256.4L494.7,258.4L494.6,259.4L494.2,259.9L493.2,259.4L493,260L493.3,261.6L491.9,262.5L490.2,262.4L488.4,263.3L488.8,264.6L488.1,267.2L487.5,266.5L484.9,265.1L485.3,267.2L484.6,267.1L483.1,266.5L482.7,267.2L482.7,268L481.8,268.5L480.9,268.5L478.2,267.7L477.5,267.9L477.9,269L477.5,269.9L475.7,270.4L474.8,271.5L474.6,272.4L475.1,273.3L474.2,275L473.3,275L473.1,276.2L474.1,276.3L474.1,277L473.1,276.7L473.2,277.6L474.2,279.1L474,279.6L475,280.2L475.1,281.2L475.5,281.7L475.9,283.2L475.8,283.6L476.5,285.2L476.5,286.6L476.9,288L477.9,288.9L478.3,288.3L477.7,286.9L477.7,285.4L478.3,284.7L479,284.8L480.1,286.2L479.8,286.8L481,289.2L480.9,290L481.5,290.6L484.4,290.2L485.7,289.3L486.6,288.1L486.2,287.3L486.1,286.4L485.2,284.3L485.3,283.8L486.5,282.9L486.9,281.9L488.4,281.2L489.4,280.4L489.2,278.6L488.7,276.3L489.6,275.3L490,276.6L491.4,277.1L491.7,276.4L492.4,276.1L492.9,275.3L494.1,276L495.6,275.7L495.8,276.4L495.5,277.1L496.1,278.3L496.4,280.1L497.1,282.2L497.6,283L498,285.3L497,285.3L497.2,286.9L497.2,287.9L497.8,288.9L497.5,290.6L497.9,291.4L499.1,292.6L499.2,293.7L499.6,294.9L500.4,295.7L500.6,297.9L501,300.1L500.9,300.7L501.8,304.9L501.8,305.6L502.2,307.3L501.3,307.3L502.1,308.8L502,309.8L502.7,310.3L503.6,309.8L503.6,307.9L503.9,307.1L504.5,307L506.4,308.5L507.1,308.7L507.3,309.5L508.3,310.4L509.1,309.4L509.9,309.4L510.1,307.9L511,308L510.7,307.1L511.3,305.8L513.2,306.1L512.8,305.1L514,304.9L513.6,302.1L513.7,301.4L512.8,300.9L512.7,300.1L512.2,299.5L512.3,298.7L512.8,298.1L512.2,297.3L511.8,295.9L512.1,295.1L511.9,293.9L512.2,293.6L512.7,291.7L513.1,291.6L512.5,289.8L512.5,289.1L513.7,288.8L514.8,289.9L515.9,289.9L516.5,289.2L517.4,287.1L517.7,285.6L517.4,284.6L517.5,283.4L518,282.2L517.8,281L518,279.8L518.6,278.2L518.3,277.2L518.7,276.3L518.1,275.8L517.8,274.9L518,273.8L517.7,272.6L517.9,271.6L516.7,270.4L516.5,269L516.9,268.2L518.3,268.6L519.2,270.5L520,271.1L522.1,270.6L522.5,269.8L524.4,270L525.2,269.9L526.4,271.5L527.9,271L529.1,271.3L530.4,271.5L532.3,273.2L533.1,273L533.4,271.4L534.7,269.3L535.1,268.4L535.2,266.7L536.4,264.5L536.4,263.4L537,263.3L538.2,261.2L539.1,258.5L540.2,258.1L540.8,257.1L540.8,255.9L542,255.8L542.6,254.8L542.4,254.3L542.6,253.2L543.7,252.1L544.1,250.3L544.8,249.5L544.8,247.5L543.9,246.9L542.8,246.7L541.9,246.2L541.9,244.3L542.7,242.8L542.6,242.2L543.5,241.5L543.7,240.7L546.1,240.2L546.9,238.8L548.3,237.9L548.5,237L550.1,235.4L550.8,235.2L551,234.1L550.2,232.7L550.3,232L551,231.3L551.9,230.9L553.2,229.5L553.7,228.5L552.4,228L552.3,226.7L552.8,225.8L552.3,225.3L552.6,222.4L551.5,220.5L552.3,219.6L552.1,219.2L553.1,218.3L553,217.7L554.2,217L554.7,216.4L556.1,217L556.9,216.5L558.6,216L559.7,215.1L560.2,213.8L560.9,213.3L562,213.8L563.3,211.9L564.5,212.4L564.9,212L565.4,210.5L566,209.7L567.5,209.7L568.9,209L569.4,208L570.3,206.9L570.4,206.4L571.8,205.6L573.7,205L574.6,204.5L575.5,204.5L576.1,204.1L578.1,204.2L578.4,204L580.2,204L581.9,203.2L582.1,202.7L585.9,203.1L586.9,204.6L587.7,204.8L587.7,205.5L587.1,206.2L588,206.6L589.3,206.8L590.6,207.4L591.2,208L592.4,207.9L593.3,207.2L591.8,205.7L591.8,205.3L590.7,204.1L590,203.6L589.2,202.5L589.2,201.9L588.1,200.9L588.6,199.8L588.1,199.1L588.1,197.7L588.7,196.8L589.5,196.7L590.4,195.2L591.8,195.3L592.3,194.3L594.9,192L596,191.7L597.2,192.5L597.6,192.2L597.4,190.5L597.8,189.6L596.5,188.1L596.5,187.2L597.2,186.7L597.2,186L595.4,185.1L594.7,184.1L594.1,183.9L592.5,182.8L591.6,182.6L590.5,183.4L589.5,183.4L587.8,182.2L587.9,181.6L587.2,180.9L587.2,180.3L585.2,179.6L585,178.6L583.7,178.2L582.9,177.6L582.3,177.6L581,178.8L579.9,179.1L580.1,180.3L579,180.3L579.8,178.3L580.5,177.6L580.7,176.4L581.2,176.1L582.1,176.5L582.8,176.4L582.6,175.3L581.6,174.4L581.6,173.8L580.4,172.6L580.5,171.4L579.3,171.3L578.8,170.8L578.6,169.7L577.2,169L577.4,168.5L576.7,167.9L574.9,168.3L575.7,167.4L576,166.1L575.2,165.7L575.3,165.1L573.9,164.7L573.1,164.1L572.7,163.1L571.1,162.3L570.3,162.7L569.3,162.5L567.5,163.7L566.2,163L564.7,164L565,164.5L564.1,165.7L563,165.8L562.1,165.3L561.5,166.4L561,166.1L560.3,166.7L560.2,167.5L559.2,167.3L559.1,166.5L558.4,166.4L557.6,167.3L556,167.3L555.5,167.9L553.6,167.9L552.7,168.2L551.9,167.2L550.1,166.7L548.5,166.9L547,166.3L546.2,166.7L545.9,165.6L545,165.4L544.7,164.3L543.9,163.6L541.8,164.6L540.8,165.6L540.2,165.4L539,166.2L537.8,166.3L537.6,166.9L535.9,167L535.7,168.3L536.2,168.4L536.8,170L535.5,170.6L535.2,171.4L533.6,171.3L533.5,171.8L532.6,172.2L531.6,172.3L530.5,173.1L530.4,174.1L529.5,173.6L527.9,174.9L525.7,175.3L525.7,175.7L524.1,176.7L522.9,176.9L522.5,176.3L519.6,176.5L518.5,176.8L517.5,177.9L514.9,179.2L513.4,180.9L513,182.7L509.8,184.5L508.6,185L508.4,186L507.7,186L506.7,186.5L505.8,186.2L505.3,186.8L504.3,186.6L503.5,187L503.1,188.3L504.7,189.2L504.6,190.4L503.5,191L503,191.7L502.1,191.7L500.5,192.9L499.6,193.3L499.1,194.1L497.9,193.6L496.8,194.1L495.9,193.3L495.9,192.6L494.9,192.2L493.3,193.4L491.2,194.4L489.6,194.5L489.3,195.2L488.4,195.6L487.5,195.6L487,194.8L482.9,194.8L482.6,196L481.5,196.8L481.3,198.3L483,200.3L483.8,199.9L484.6,200.6L485.5,200.7L488.5,200.5L488.9,200.8L490.4,200.4L491,202.8L491.3,203.5L492.5,204.3L490.9,204.6L491.4,205.2L491.1,206.2L490.5,206.8L490.5,207.8L490.9,209L491.6,209.2L492.4,210.6L492.3,212.1L492.1,212.7L491.1,213.1L489.7,212.8L489.3,212.3L487.8,211.6L487.2,211.7L486.5,212.7L484.4,213.8L482.5,213.6L481.8,213.9L479.9,214.2L478.2,213.2L477.5,214.1L476.7,214.4L474.7,213.8L472.9,213.8L471.9,213.6L471.1,214.3L469.8,214.1L469,214.3L463.9,214.6L463.5,214.3L460.9,213.7L458.3,211.9L457.1,212L456.9,212.5L456,213L454.6,212.8L453.8,213.9L453.9,214.5L450.9,215.4L447.9,215.5L447.2,216L445.5,216L442.9,215L443,214.5L440.2,213.7L439.4,213.9L438.8,213.2L437.8,213.2L437.6,212.8L436.2,213.1L435.3,213.7L433.5,213.6L432.7,213.9L432,213.1L431.9,212.2L430.6,211.5L429.6,211.6L428.9,211.3L429,210.6L428.4,210.1L427.4,210.1L427.4,207.8L425.5,207.3L425.1,206.7L426,205.8L426,205L428.1,204.5L428.4,203.5L427.9,203.3L427.2,202.3L426.2,201.9L425.7,200.9L425.9,199.5L425.4,198.8L426.1,198.1L426.2,197.3L426.9,196.8L427.1,195.7L427.1,193.7L427.8,192.9L427.2,191.5L426.7,191.5L426.9,190.1L425.1,188.4L423.3,188.5L422.8,187.7L421.1,188.5L420.9,189.3L419.8,189L419.4,189.7L416.5,190.4L415.3,190.9L414.8,190.6L413.7,191.1L412.8,190.7L412.4,191.6L412.7,192.4L414,193.3L413.6,195.1L413.2,195.2L412.9,196.7L412.4,197.1L411.2,199.2L410.9,200.4L411.5,201.4L410.8,202.6L411.3,203.3L410.6,204.3L410.1,207.1L409.8,207.9L410.7,209.3L411.5,209.3L411.8,209.8L412.6,210.4L412.4,211L412.7,212L413.4,212.6L413.3,213.2L413.8,214.6L413.3,216L413.3,217.1L411.9,219.7L412.1,220.3L411.8,221.5L410.2,222.8L408.3,221.3L408,220.5L407.2,220.7L407,221.3L405.9,220.6L405.3,221.8L404.2,221.4L403,222.1L401.7,222.1L401,221.6L399.3,221.2L397.8,221.6L396.3,222.6L395.3,222.5L394.9,221.7L393.2,221.9L391.8,221L391.4,218.3L390.3,219.4L388.7,219.7L388.6,220.2L387.9,220.8L386.6,221.2L385.3,220.8L384.7,221.5L383.8,221L382.8,220.7L381.4,220.1L380.8,219.2L380,219.2L379.1,218.6L376.2,217.6L373.1,217.8L370.6,216.7L369.5,216.9L369.1,217.4L367.2,218.6L367,217.8L365,217.2L364.5,216.6L364.7,214.1L363.6,213.1L362.1,212.9L360.9,213.2L359.9,214.1L359,214.4L358.2,214.2L356.7,215.2L354,214.6L353.5,213.7L353.9,212.7L352.2,212.6L351.1,213L350.5,212.5L349.3,210.8L347.1,210.2L346.4,209.6L345.9,210L345.1,209.9L342.9,209.1L343.5,208L343.5,206.6L343.8,205.6L342.4,203.3L340.3,202.9L338.8,202.6L336.9,202.5L335.5,202L335.1,200.9L333.5,200.5L332.1,199.6L331,201.1L330.4,201.3L328.7,201L326.7,201.5L327.7,202.4L327.3,203.1L326.6,202.6L322.3,200.6L317.8,200.4L318.1,201.6L317.5,202.8L316.8,203.3L315.9,203.3L315.4,202.3L313.3,200.8L310.7,201L309.1,200.6L308.6,200L304.7,200L304.8,199L305.1,198.3L304.8,197.2L304.3,196.6L304.1,195.8L303.3,195.7L300.8,196.3L299.5,196.5L298,195.9L297.4,195.2L296.1,194.5L294.2,193.1L293.1,192.7L292.4,192.7L291.2,191.6L289.4,191.4L288,192.9L286.7,192.1L286.1,191.9L284,190.2L282.9,190.1L279.6,188.3L279.7,187.6L278.9,186.8L277.5,186.5L277.4,187.1L276.7,187.2L276.4,186.1L274.7,184.2L274.7,183.5L274.2,182.8L271.6,182.3L270.3,181.2L268.1,180.7L268.2,180L266.9,180L265.7,179.4L265.4,178.7L264.3,178.6L263,177.3L262.2,177.2L260.8,176.2L260.1,176.7L260.4,178.5L259.6,178.2L259.2,177.6L258.3,177.2L257.5,177.4L256.5,176.7L256.3,176L255.6,175.8L255,174.8L254.3,174.9L252.4,173.4L251.3,173.2L251.2,171.7L252.5,169.9L252.6,168.8L252.9,167.9L253.7,167.3L254.7,167.6L255.4,167.1L255.2,166.3L255.9,165.9L256.3,163.7L255.6,163.1L255.4,162.1L254.8,161.8L254.9,161.1L256,160.9L255.9,160.2L256.8,159.8L258.2,158.1L258.3,157L257.8,156.7L257.3,155.4L258.3,154.1L259.8,154.1L261.1,152.9L261.9,150.9L263.6,150.8L264.8,150L266,148.3L267.6,147.4L267.4,146.8L267.9,145.8L268.7,146.5L269.9,146.3L270.9,145.9L270.6,145.1L269.6,144.6L268.5,144.7L268.1,143.9L266.7,143.7L265.7,143.2L264.3,141.7L263.9,141.7L262.1,140.6L260.8,141L259.9,140.2L259.3,140.2L258.2,139.5L256.9,139.6L256.3,138.7L255.1,138.7L254.2,138.2L254.4,137.1L253.9,136.7L255,135.6L254.8,134.8L254,134.7L253.6,133.9L252.2,134.4L251,133.2L249.8,132.5L248.6,132.3L247.8,131.6L247.1,130.5L245.5,130.3L243.3,130.7L242.1,131.2L241.1,130.9L240.3,130.1L240.1,129.4L238.5,129.5L238.3,127.9L236.4,127.2L236,125.6L234.5,124.8L235,124.1L234.4,123.7L234.5,123.1L233.4,122.7L233.5,122.3L232.8,121.4L231.5,120.8L231.2,121.4L230.4,121.5L230.4,123L228.9,122.7L228.3,123.8L226.7,124.1L225.6,123.8L225.1,122.3L225.9,121.1L224.4,119.8L224.9,119.2L226.4,118.4L226.9,117.9L226.2,117.2L226,116.4L225.2,116.5L224.1,113.8L224.7,113.4L224.8,112L225.6,110.7L224.8,110L223.6,107.7L222.6,107.5L219.9,104.5L220.2,103.9L219.5,103.4L219.4,101.2L217.9,99.2L218.3,98.7L220,98.3L220.9,97.6L222.2,98L223.3,96.9L224.5,96.5L225.6,97.7L225.1,98.7L226.3,101.3L227.4,101.7L229.4,103.3L229.8,102.6L231.2,102.3L232.1,102.5L232.5,101.6L232.4,100.9L233.7,100L235,99.7L236.2,98.8L236.7,99.2L238.2,99.6L238.8,98.4L240,97.2L241,96.5L240.9,95.4L241.1,94.8L239.6,94L239.2,93.3L239.5,92.5L237.8,91.6L236.7,90L236.6,89.3L237.2,88.7L237.5,87.6L238.3,86.5L237.7,86L236.5,86.2L234.3,85.2L233,86.4L231.5,85.5L231.4,85L230.7,84.5L230.5,83.6L229.3,83.2L228.8,82.4L228.6,80.3L228.2,78.7L228.1,77.6L230.1,77.9L231.7,77.6L231.7,77L230.2,76.1L230.6,74.9L229.3,73.6L228.7,71.7L227.7,70.5L228.1,70L229.9,69.3L231,69.9L232.2,70.2L233.4,69.6L234.5,69.8L235,69.5L236.3,69.7L237.3,70.1L238.2,69.8L238.6,68.8L238.3,68L239.8,67.3L239.8,66.2L241.2,65.8L242.2,64.3L241.5,63.6L240.7,62L240.5,60.8L242.1,60.7L242.5,61L245.9,60.4L246.2,59.2L245.7,57.5L248,56.1L250.3,56.1L251.5,55.9L251.3,54.8L252,54.5L252.4,53.2L254.1,51.8L253.7,51.1L254.5,50.6L253.9,47.7L254.7,46.9L254.5,46.6L255.7,45.3L255.9,44.6L255.3,44.1L255.8,42.8L256.9,42.2L257.5,42.2L258.4,41.1L258.2,40.5L257.2,39.4L256,39.3L255.9,38.9L253.3,39.1L253.7,39.8L252.2,40.4L251.8,41.2L251.1,41.5L250.3,40.7L249.3,38.6L249.1,37.7L247.4,38.1L246.3,37.5L245.4,37.5L244,36.8L242.9,35.5L242.6,34.4L241.9,34.2L241.3,33.4L241.2,32.4L240,33.1L239,32.3L238.7,30.6L236.9,30.2L236.8,30.7L235.4,31.5L233.3,31.1L231.6,31.1L230.2,31.4L228.5,31.1L227.1,30.5L226,32.6L223.5,32.9L223.1,33.6L222.2,33.7L221.2,34.5L218.4,34.7L218.2,35.4L216.8,35.6L214.9,35.5L212.6,39.1L211,38.4L210,38.8L208.8,38.8L208.2,40.8L206.3,39.6L204.8,40.1L203.8,40.9L203.2,40.3L202.6,40.8L201.2,40.2ZM526.9,605.1L526,605.7L525.1,605.8L524.7,606.2L523.8,606.2L523.2,607.4L523.5,609.5L524,609.6L525,610.8L526.1,613.3L526.5,613.8L526.4,614.6L527.1,614.9L527.3,613.7L528.3,613.8L528.2,611.9L528.8,610.9L528.8,609.5L528,608.3L527.8,606ZM524.7,601.5L524.2,602.2L522.9,603L522.9,604.7L524.7,603.8L525.5,602.4ZM517.6,589.6L516.4,590.2L516.2,591L517.6,592.4L518.5,592L519.1,591.4L518.1,589.9ZM521.3,589.5L520.4,590.3L521.7,591.5L521.9,590.2ZM520.7,585.3L519.3,586.4L519.3,587L519.8,588.2L520.5,588.5L521.2,588.5L520.3,587.1L521.1,585.9ZM512.6,582.9L512,583.3L511.8,584.2L512.3,585.4L513.2,585.1L512.6,584.4L513,583.2ZM505.6,565.1L505.3,565.7L504.4,565.8L504.4,567L504.8,567.6L506.1,567.6L506.6,566.8L506.4,565.7ZM501,532.4L500.1,532.2L498.2,534.1L497.7,534.2L497.7,536.9L498.3,537.4L498.2,538.2L497.7,539.3L498.8,539.1L499.7,539.8L500.7,539.8L501.6,538.6L501,538.2L501.3,537.5L502.4,536.4L502.4,534.7L501.9,534.2L501.8,532.9ZM503.2,520.1L502.5,520.2L502.6,522L501.9,522.1L501.8,522.9L502.9,523.1L504,522.7L503.8,520.7ZM494.7,518.3L494.5,519.5L495.6,519.6L495.6,518.5ZM509.5,509.3L508.6,510.1L510.1,511L510.6,512.3L511.2,512.3L511,511.1L509.8,509.2ZM511.6,505.8L511.1,506.5L510.9,507.5L511.6,508.4L512,508L511.9,506.2ZM504.2,505.5L503.2,506.3L502.6,507.9L502.4,509.8L502.5,512.3L501.9,512.2L501.6,511.3L501,511.6L500.4,513L501.2,513.9L501.2,515.6L502.1,515.9L502,516.6L502.3,518.2L502.9,518.6L503.1,519.7L503.9,519.9L504.4,520.4L505.1,518.5L505.3,517L505.1,516.6L505.5,515.1L506,512.3L505.8,511.3L504.6,511.4L504.9,510.5L505.4,510L505.5,509.1L504.8,508.2L505.3,506.6L504.3,506.4ZM506.5,503.9L505,505.1L505.5,505.8L504.9,508.4L505.5,508.7L507.1,506.9L508,504.9L507.5,504ZM508.2,491.8L508.1,492.1L507.6,492.4L507.2,492.5L506,492.3L505.8,493L504.6,493.6L505,496.1L504.9,497.2L504.2,498.2L504.3,500.1L504.1,503.5L504.6,504L505.6,503.7L507.1,503.9L507.9,503.6L506.8,501.7L508.4,501.6L508.9,501.1L509.8,499.3L509.3,498.1L509.5,496.6L509.3,494.9L508.8,494.5L509.2,493.8ZM504.2,490.3L503.5,490.7L503.6,492.2L503.2,492.8L503.5,493.9L504.6,492.6L504.5,490.7ZM511,479.1L510.8,478.5L509.9,479.1L508.7,479.3L508.5,480.1L507.6,480.7L507.9,481.4L507.2,481.8L506.8,482.7L506.6,484.7L506.8,485.2L506.3,487.1L505.9,489.7L506.1,490.3L506.2,492.1L507.6,492.3L507.6,491.9L507.3,491.6L507.8,491.3L507.8,490.6L508.4,489.2L509.4,489.8L510.5,489.4L510.8,488.8L510.9,486.3L511.3,485.4L511.1,484.5L509.7,483.5L510.4,483L511.4,483.9L511.9,483.4L511.2,482.5L510.8,481.4L511.1,479.7ZM421.1,317.4L420.2,318L420.9,318.6L421.8,318ZM416.2,315.9L416.3,316.5L416.1,317.3L417.1,317L416.9,316.2ZM424.5,316.7L424.2,318.2L424.6,318.5L425.8,318.3L425.4,316.9L424.9,317ZM421.2,315.4L420.4,315.8L420.9,317.2L422.1,317.5L422.1,316.3ZM420.9,313.8L420.1,314.6L420.4,315.6L421.4,314.3ZM413.4,314.3L413.5,313.7L412.5,312.7L411.2,315.3L410.8,316.7L411,317.2L412.2,317.5L413.1,317.2L413.1,316.1L413.4,315.3ZM422.9,311.7L421.9,312.8L422.9,313.7L423.2,312.1ZM423.3,309.6L422.7,310.1L422.6,310.9L423.6,311.1L424.3,310L424,309.9L423.8,309.8ZM411.4,311.6L412.5,310L411.6,309.8L411.2,310.6Z";
+const MAP_LANKA="M249.4,557.4L248.2,557.6L247.2,556.3L246.9,555.7L247.2,555.3L247.4,555.1L247.8,555.2L248.2,556.4ZM247.5,569L248.1,570.5L246.4,569.5L245.4,568.6L244.9,567.9L247.2,568.7ZM249.7,553.7L251.5,553.9L253.6,553.8L255.1,554.1L257.5,557.2L264.2,562.7L267.9,568.3L268.2,569.5L268.7,570.6L269.5,570.9L270.3,571.4L273.9,576.8L274.4,577.8L274.3,579L274.5,579.9L275.5,580.3L276.7,580.6L277.5,581.4L278.5,585.7L278.5,587L278.7,587.6L283.3,594.3L283.6,595.2L283.5,595.8L283.7,596.3L284.5,597.5L286,600.7L286.6,601.4L287.5,604.2L287.5,609.6L287.3,612L286.4,614.9L285.4,617.7L284.2,619.8L282.7,621.5L277.6,625.2L276.1,625.9L269.4,628.2L264.5,630.4L259.9,631L255.4,629.8L251.9,626.9L250.2,622.7L249,618.3L247.2,613.4L245.9,598.3L245.2,594.1L244.1,588.7L244.3,586.4L245,584.1L245,589L245.6,589.6L246.1,589L246.7,583.9L247,581.8L248.8,576.2L248.9,575.2L248.5,573.1L248.6,572L251.3,568.1L252,565.8L252.3,563.5L252.2,560.9L251.7,558.4L253.9,559.2L255.1,560.1L256.4,560.7L257.4,560.4L258.5,560.4L257.7,559L255.1,557.8L250.9,557L249.6,556L249.1,555.1L249.3,554.1Z";
+const MAP_LAC="M96,15.2L96.5,15.1L98.6,14.7L100.6,14L102.4,13.4L105.3,13.3L109.9,13L112.4,12.6L118.2,12.4L124.6,12.3L125.4,12.2L128.1,12.9L130,13.5L130.8,13.5L133.9,12L138.7,10.3L140.8,9.5L142,9.3L143.8,9.3L145.3,9.8L146.9,10.4L147.8,10.9L148.9,10.6L151.1,10.2L152.9,10.5L156.9,11.7L157.5,12.3L158.5,15.2L159.2,15.5L161.5,14.8L163.3,15.2L165.4,16.1L166.8,17L167.7,18L168.7,19.6L169,20.8L169.5,22.4L169.4,26.6L168.7,27.3L168.1,28.2L168.2,29L168.9,29.7L170.2,30.1L171.4,30.3L172.1,31L172.9,33.4L173.6,33.8L175,33.8L177.7,33.3L180.1,32.4L181.1,32.3L181.3,34.5L182.6,35.4L184.5,36.4L185.3,36.8L185.3,36.8L186.2,38.6L187.6,41.3L188.5,43.1L189.6,45.1L190.1,46.1L191,47.8L190.6,48.7L190,50.2L187.8,51.2L185.7,52L185.2,52.4L184.9,53.1L183.9,54.3L181.9,55.3L180.2,55.2L179.1,54.9L173.4,56.7L170.8,56.6L168.7,57.7L167.2,58.8L164.2,59.9L162.1,60L159,59.3L155.3,58L153.8,57.2L152.4,57.3L149,57.1L145.8,56.5L141.9,55.7L139.9,55.3L136,54.7L133.5,55.6L131.1,56.4L129.2,56.9L127.6,59.4L127,60.3L126.3,61.6L125.9,62.4L126.2,63.5L128.5,64.2L129.4,65.3L129.6,66.2L128.8,67.1L128.1,67.8L128.1,68.5L128.4,69.1L129,69.6L132.2,69.9L134.2,69.9L134.9,70.2L135.1,71.1L134.3,72.3L131.6,73.2L130,74.2L129.5,75.6L129.6,76.6L130.1,77.4L131.4,78.2L132.6,79.1L133,79.9L132.8,80.9L132.4,82.3L131,84L129.9,85.2L129.8,85.6L130.1,86.2L130.9,87.1L132.5,88.5L134.5,89.6L135.7,89.9L136.1,90.2L136.5,91.5L136.6,92.8L136.1,93.8L137.1,94.6L139.7,94.6L141.7,94.9L142.7,94.6L143.3,94.9L142.9,97.8L143.2,99.6L143.7,100.1L145.8,100.9L149.7,100.8L152.1,101.6L153.2,102L96,102ZM153.2,102L152.1,101.6L149.7,100.8L145.8,100.9L143.7,100.1L143.2,99.6L142.9,97.8L143.3,94.9L142.7,94.6L141.7,94.9L139.7,94.6L137.1,94.6L136.1,93.8L136.6,92.8L136.5,91.5L136.1,90.2L135.7,89.9L134.5,89.6L132.5,88.5L130.9,87.1L130.1,86.2L129.8,85.6L129.9,85.2L131,84L132.4,82.3L132.8,80.9L133,79.9L132.6,79.1L131.4,78.2L130.1,77.4L129.6,76.6L129.5,75.6L130,74.2L131.6,73.2L134.3,72.3L135.1,71.1L134.9,70.2L134.2,69.9L132.2,69.9L129,69.6L128.4,69.1L128.1,68.5L128.1,67.8L128.8,67.1L129.6,66.2L129.4,65.3L128.5,64.2L126.2,63.5L125.9,62.4L126.3,61.6L127,60.3L127.6,59.4L129.2,56.9L131.1,56.4L133.5,55.6L136,54.7L139.9,55.3L141.9,55.7L145.8,56.5L149,57.1L152.4,57.3L153.8,57.2L155.3,58L159,59.3L162.1,60L164.2,59.9L167.2,58.8L168.7,57.7L170.8,56.6L173.4,56.7L179.1,54.9L180.2,55.2L181.9,55.3L183.9,54.3L184.9,53.1L185.2,52.4L185.7,52L187.8,51.2L190,50.2L190.6,48.7L191,47.8L193.4,46.6L195.9,45.3L198.5,44L201.4,42.4L204,41.1L206,40.1L206,40.1L206.2,40.3L207.1,40.8L207.9,41L208.9,40.6L210.2,40.2L210.9,40.4L210.9,41L210.1,43.9L210.2,45L211.5,47.3L213.2,51.1L214.8,54.6L215.6,56.9L216.6,57.9L220.3,58.8L223.4,59.6L225.3,60.9L227.3,62.2L228.7,62.9L229.4,64L229.5,64.8L229.4,65.4L228.7,66.2L225.1,68.3L224.6,68.9L224.5,69.7L225.3,72.3L225.7,73.8L225.8,77L226.1,80L227.3,81.4L228.4,82.3L228.9,83.1L230.2,84.2L231.3,85L232.3,85.5L232.7,86.6L232.5,87.8L232,89L232.2,89.5L232.9,90L234.1,91.1L234.2,92.7L234.1,93.8L234.6,94.8L234.7,95.9L234.3,98.7L234.4,99.9L234.4,100L233.4,100.1L232.5,100.5L231.5,102L227.1,102L227.1,102L226.8,101.8L225.4,100.7L225.1,100L224.8,98.8L224,98L222.6,98.4L220.5,98.6L218.3,98.8L217.9,99.1L217.8,99.6L218.4,100.7L218.8,102L153.2,102ZM218.8,102L218.4,100.7L217.8,99.6L217.9,99.1L218.3,98.8L220.5,98.6L222.6,98.4L224,98L224.8,98.8L225.1,100L225.4,100.7L226.8,101.8L227.1,102L218.8,102ZM231.5,102L232.5,100.5L233.4,100.1L234.4,100L234.4,99.9L234.3,98.7L234.7,95.9L234.6,94.8L234.1,93.8L234.2,92.7L234.1,91.1L232.9,90L232.2,89.5L232,89L232.5,87.8L232.7,86.6L232.3,85.5L231.3,85L230.2,84.2L228.9,83.1L228.4,82.3L227.3,81.4L226.1,80L225.8,77L225.7,73.8L225.3,72.3L224.5,69.7L224.6,68.9L225.1,68.3L228.7,66.2L229.4,65.4L229.5,64.8L229.4,64L228.7,62.9L227.3,62.2L225.3,60.9L223.4,59.6L220.3,58.8L216.6,57.9L215.6,56.9L214.8,54.6L213.2,51.1L211.5,47.3L210.2,45L210.1,43.9L210.9,41L210.9,40.4L210.2,40.2L208.9,40.6L207.9,41L207.1,40.8L206.2,40.3L206,40.1L206,40.1L204.5,40.4L201.4,40.6L200.4,40.5L198.9,40.5L195.9,39.8L191.8,39L187.6,37.7L185.3,36.8L184.5,36.4L182.6,35.4L181.3,34.5L181.1,32.3L180.1,32.4L177.7,33.3L175,33.8L173.6,33.8L172.9,33.4L172.1,31L171.4,30.3L170.2,30.1L168.9,29.7L168.2,29L168.1,28.2L168.7,27.3L169.4,26.6L169.5,22.4L169,20.8L168.7,19.6L167.7,18L166.8,17L165.4,16.1L163.3,15.2L161.5,14.8L159.2,15.5L158.5,15.2L157.5,12.3L156.9,11.7L152.9,10.5L151.1,10.2L148.9,10.6L147.8,10.9L146.9,10.4L145.3,9.8L143.8,9.3L142,9.3L140.8,9.5L140.5,9.4L139.9,8.9L137.5,7.3L137.4,6.8L141.2,5.3L143.4,4.7L144.6,4.2L144.8,4.3L145.3,5L146.8,5.5L147.8,5.4L148.4,5L150.2,4.1L151.6,3.1L152.4,2.3L152,1L149.7,-0.6L148.3,-1.5L147.9,-2L262,-2L262,102ZM191,47.8L190.1,46.1L189.6,45.1L188.5,43.1L187.6,41.3L186.2,38.6L185.3,36.8L187.6,37.7L191.8,39L195.9,39.8L198.9,40.5L200.4,40.5L201.4,40.6L204.5,40.4L206,40.1L204,41.1L201.4,42.4L198.5,44L195.9,45.3L193.4,46.6Z";
+const SITES = {
+  varanasi:{n:"Varanasi (Kashi)",lat:25.32,lon:83.01,r:"Uttar Pradesh",b:"Ancient city on the Ganga with stone ghats and the Kashi Vishwanath temple of Shiva."},
+  haridwar:{n:"Haridwar",lat:29.95,lon:78.16,r:"Uttarakhand",b:"Where the Ganga leaves the mountains for the plains. Evening aarti at Har ki Pauri ghat."},
+  kailash:{n:"Mount Kailash",lat:31.07,lon:81.31,r:"Tibet (China)",b:"Mountain linked with Shiva. Pilgrims walk around it (about 52 km) instead of climbing it."},
+  manasarovar:{n:"Lake Manasarovar",lat:30.67,lon:81.47,r:"Tibet (China)",b:"High-altitude lake near Kailash, honored in Hindu, Buddhist and Jain traditions."},
+  gangotri:{n:"Gangotri",lat:30.99,lon:78.94,r:"Uttarakhand",b:"Temple of Goddess Ganga, near the glacier where the river begins."},
+  yamunotri:{n:"Yamunotri",lat:31.01,lon:78.46,r:"Uttarakhand",b:"Temple of Goddess Yamuna, near the source of the Yamuna river."},
+  kedarnath:{n:"Kedarnath",lat:30.73,lon:79.07,r:"Uttarakhand",b:"Shiva temple at about 3,580 m. One of the 12 Jyotirlingas."},
+  badrinath:{n:"Badrinath",lat:30.74,lon:79.49,r:"Uttarakhand",b:"Vishnu temple (Badrinarayan) on the Alaknanda river. Part of both Char Dham circuits."},
+  pashupatinath:{n:"Pashupatinath",lat:27.71,lon:85.35,r:"Kathmandu, Nepal",b:"Shiva temple on the Bagmati river, part of the Kathmandu Valley World Heritage Site."},
+  prayagraj:{n:"Prayagraj",lat:25.43,lon:81.85,r:"Uttar Pradesh",b:"Triveni Sangam: where the Ganga and Yamuna meet with, in tradition, the unseen Saraswati."},
+  ujjain:{n:"Ujjain (Mahakaleshwar)",lat:23.18,lon:75.77,r:"Madhya Pradesh",b:"Mahakaleshwar Jyotirlinga on the Shipra river. One of the four Kumbh Mela cities."},
+  nashik:{n:"Nashik",lat:20.00,lon:73.79,r:"Maharashtra",b:"Kumbh Mela city on the Godavari. Trimbakeshwar Jyotirlinga is nearby."},
+  ayodhya:{n:"Ayodhya",lat:26.80,lon:82.20,r:"Uttar Pradesh",b:"City on the Sarayu river. In the Ramayana, Rama’s home and capital."},
+  mathura:{n:"Mathura",lat:27.49,lon:77.67,r:"Uttar Pradesh",b:"On the Yamuna. Many traditions honor it as Krishna’s birthplace."},
+  vrindavan:{n:"Vrindavan",lat:27.58,lon:77.70,r:"Uttar Pradesh",b:"Town of Krishna’s childhood stories, full of temples and devotional songs."},
+  dwarka:{n:"Dwarka",lat:22.24,lon:68.97,r:"Gujarat",b:"Western Char Dham. Dwarkadhish temple of Krishna beside the Arabian Sea."},
+  puri:{n:"Puri",lat:19.80,lon:85.82,r:"Odisha",b:"Eastern Char Dham. Jagannath temple and the Rath Yatra chariot festival."},
+  rameswaram:{n:"Rameswaram",lat:9.29,lon:79.31,r:"Tamil Nadu",b:"Island temple town. Southern Char Dham with very long pillared corridors."},
+  somnath:{n:"Somnath",lat:20.89,lon:70.40,r:"Gujarat",b:"Seaside Jyotirlinga temple, rebuilt many times. The present temple dates from 1951."},
+  kamakhya:{n:"Kamakhya",lat:26.17,lon:91.71,r:"Assam",b:"Goddess temple on Nilachal Hill above the Brahmaputra, in Guwahati."},
+  kalighat:{n:"Kalighat",lat:22.52,lon:88.34,r:"West Bengal",b:"Temple of Kali in Kolkata, beside an old channel of the Hooghly river."},
+  vaishno:{n:"Vaishno Devi",lat:33.03,lon:74.95,r:"Jammu & Kashmir",b:"Cave shrine of the Goddess in the Trikuta mountains, reached by a long uphill walk from Katra."},
+  kanchipuram:{n:"Kanchipuram",lat:12.83,lon:79.70,r:"Tamil Nadu",b:"Temple town of Kamakshi Amman, also famous for silk weaving."},
+  tirumala:{n:"Tirumala-Tirupati",lat:13.68,lon:79.35,r:"Andhra Pradesh",b:"Hilltop temple of Venkateswara, one of the most visited temples in the world."},
+  srirangam:{n:"Srirangam",lat:10.86,lon:78.69,r:"Tamil Nadu",b:"Ranganathaswamy temple on an island in the Kaveri river."},
+  guruvayur:{n:"Guruvayur",lat:10.59,lon:76.04,r:"Kerala",b:"Krishna temple (Guruvayurappan) known for its elephants and music."},
+  madurai:{n:"Madurai",lat:9.92,lon:78.12,r:"Tamil Nadu",b:"Meenakshi Amman temple at the heart of a city on the Vaigai river."},
+  tiruvannamalai:{n:"Tiruvannamalai",lat:12.23,lon:79.07,r:"Tamil Nadu",b:"Arunachaleswarar temple. A great lamp is lit on the hill for Karthigai Deepam."},
+  pandharpur:{n:"Pandharpur",lat:17.68,lon:75.33,r:"Maharashtra",b:"Vitthal temple on the Bhima river; end point of the Wari walk."},
+  thanjavur:{n:"Thanjavur",lat:10.78,lon:79.13,r:"Tamil Nadu",b:"Brihadisvara temple, completed around 1010 CE by the Chola king Rajaraja I."},
+  chidambaram:{n:"Chidambaram",lat:11.40,lon:79.69,r:"Tamil Nadu",b:"Nataraja temple, honoring Shiva as the Lord of the Dance."},
+  hampi:{n:"Hampi",lat:15.34,lon:76.46,r:"Karnataka",b:"Ruins of the Vijayanagara capital. The Virupaksha temple is still a place of worship."},
+  ellora:{n:"Ellora",lat:20.03,lon:75.18,r:"Maharashtra",b:"Hindu, Buddhist and Jain caves. The Kailasa temple was carved from one rock."},
+  khajuraho:{n:"Khajuraho",lat:24.85,lon:79.93,r:"Madhya Pradesh",b:"Chandela-era temples (about 950–1050 CE) with tall, curved Nagara towers."},
+  konark:{n:"Konark",lat:19.89,lon:86.09,r:"Odisha",b:"13th-century Sun Temple shaped like the chariot of Surya, with 24 carved wheels."},
+  pattadakal:{n:"Pattadakal",lat:15.95,lon:75.82,r:"Karnataka",b:"Northern (Nagara) and southern (Dravida) temple styles built side by side."},
+  bhubaneswar:{n:"Bhubaneswar",lat:20.30,lon:85.82,r:"Odisha",b:"City of temples. The Lingaraja temple shows the Kalinga style."}
+};
+
+const UNITS = {
+  1:"Foundations: Sacred Place, Temple and Pilgrimage",
+  2:"Sacred Rivers, Cities and Northern Routes",
+  3:"Pan-Indian Circuits and Major Traditions",
+  4:"Southern and Western Temple Landscapes",
+  5:"Living Sacred Places: Community, Ethics, Stewardship"
+};
+
+const NO_CLASS = [
+  ["2026-11-01","No class — Daylight Saving ends"],
+  ["2026-11-07","Grand Diwali Party (Saturday)"],
+  ["2026-11-08","No class — day after Diwali party"],
+  ["2026-11-29","No class — Thanksgiving weekend"],
+  ["2026-12-20","Winter break — Dec 20 to Jan 3"],
+  ["2027-01-17","No class — MLK weekend"],
+  ["2027-02-14","No class — Presidents Day weekend"],
+  ["2027-03-21","Spring break — Mar 21 and 28"],
+  ["2027-05-30","No class — Memorial Day weekend"]
+];
+
+const S = [
+/* ---------- 1 ---------- */
+{cls:"1",date:"2026-10-04",unit:1,title:"What Makes a Place Sacred?",stamp:"TIRTHA",
+ sites:["varanasi","haridwar","gangotri","kailash"],
+ wonder:{q:"Why do some places become sacred while others do not, and who decides?",sub:"Think of a place sacred to any community. Is its sacredness in the land itself, in the stories told about it, or in the people who keep returning?"},
+ learn:[
+  ["Tirtha: the crossing","The Sanskrit tirtha first meant a ford, a shallow place to cross a river. Texts such as the Mahabharata describe pilgrimage to tirthas, and the word became a metaphor for crossing from ordinary life toward the divine."],
+  ["A sacred geography","Hindu traditions map meaning onto the land: rivers honored as goddesses (Ganga, Yamuna), mountains as divine abodes (Kailash), cities as sacred centers (Kashi). Scholar Diana Eck explores this idea in India: A Sacred Geography (2012)."],
+  ["Three lenses","Scholars often study sacred places through narrative (stories that mark the site), practice (bathing, darshan, circling the site) and community (priests, pilgrims and families who sustain it)."],
+  ["Insider and outsider","Religious studies separates describing what devotees hold (the emic view) from analyzing it from outside (the etic view). Writing “many Hindus believe” keeps claims accurate and respectful."]],
+ vocab:[["tirtha","TEER-tha","ford; a sacred crossing place"],["kshetra","KSHAY-tra","a sacred field or region"],["emic / etic","EE-mik / ET-ik","insider description / outsider analysis"]],
+ explore:{shared:"Place Varanasi, Haridwar, Gangotri and Mount Kailash on the map. Note how all four connect to the Ganga or the Himalayas.",
+  task:"In small groups, take one site. Explain its sacredness through all three lenses: narrative, practice and community. Give a 60-second case to the class.",
+  discuss:"Can a place lose its sacredness? Consider pollution of the Ganga, mass tourism or rapid urban growth.",
+  games:[{t:"sort",title:"Narrative, practice or community?",buckets:["Narrative","Practice","Community"],items:[["Story of the Ganga descending from heaven",0],["Kailash described as Shiva’s abode",0],["King Bhagiratha’s penance brings the river to earth",0],["Ritual bath at Har ki Pauri, Haridwar",1],["Walking the circuit around Kailash",1],["Evening Ganga aarti",1],["Haridwar priests keeping family genealogy registers",2],["Boatmen families serving pilgrims for generations",2]]},
+         {t:"find",title:"Find it on the map",sites:["varanasi","haridwar","gangotri","kailash"]}]},
+ quiz:[["What did the word tirtha originally mean?","A ford or river crossing",["A temple tower","A royal decree","A festival season"],"The meaning grew from a physical crossing to a spiritual one."],
+  ["Which statement is emic (an insider description)?","“For devotees, bathing at the Sangam washes away sins.”",["“Pilgrimage boosts the regional economy.”","“The Ganga basin supports 400 million people.”","“Pilgrim numbers rise in winter.”"],"Emic statements report meaning from inside the tradition."],
+  ["At Haridwar, many priestly families are known for keeping…","Genealogy registers of pilgrim families",["Tax records","Weather logs","Temple blueprints"],"Families can trace ancestors’ visits across generations."],
+  ["Mount Kailash is sacred to which traditions?","Hindu, Buddhist, Jain and Bon",["Only Hindu","Only Buddhist","None; it is a climbing peak"],"Shared sacred landscapes are a theme of this course."],
+  ["Which phrasing best fits academic writing?","“Many Hindus regard the Ganga as a goddess.”",["“Hindus worship rivers.”","“The Ganga is a goddess.”","“Everyone in India bathes in the Ganga.”"],"It is accurate, specific and avoids generalizing."]],
+ reflect:{hs:"Write a thesis sentence: “A place becomes sacred when…” Support it with evidence from one of today’s sites."},
+ notes:{t:"Welcome to Sacred Geography. Explain the five-part routine and the academic, non-devotional approach: we study traditions, not practice them.",w:"Push past ‘it’s beautiful’. Ask who decides and how sacredness is maintained.",l:"Spend time on emic and etic; it frames every class this year.",m:"Note that Kailash is in Tibet (China): sacred geography crosses modern borders.",e:"Run the sort as a warm-up, then groups prepare 60-second cases.",q:"Let students answer individually, then discuss question 2.",r:"Collect thesis sentences; revisit them at the final class in May."}},
+
+/* ---------- 2 ---------- */
+{cls:"2",date:"2026-10-11",unit:1,title:"Inside a Hindu Temple",stamp:"DARSHAN",sites:[],
+ wonder:{q:"How does a building tell you how to move, where to look and how to feel?",sub:"Compare a temple, a cathedral, a stadium and a shopping mall."},
+ learn:[
+  ["A path toward the center","Many temples lead visitors from a gateway through halls of increasing sanctity to the garbhagriha (“womb chamber”), a small, dim inner shrine. Movement through space mirrors an inward journey."],
+  ["Tower and shrine","The tower above the shrine (shikhara in the north, vimana in the south) marks the sacred center from far away. Texts on architecture, the Vastu and Shilpa Shastras, set out proportions and plans."],
+  ["Darshan","Darshan means seeing and being seen by the deity. Scholars such as Diana Eck describe it as a two-way exchange of sight, which is why the murti’s eyes matter so much."],
+  ["Puja and prasad","Puja offers light, flowers, food and water. Food offered and returned is prasad. Many temples also circle the shrine clockwise (pradakshina)."]],
+ vocab:[["garbhagriha","GAR-bha-gri-ha","inner shrine room"],["pradakshina","pra-DUK-shi-na","clockwise circling"],["Vastu Shastra","VAAS-too SHAAS-tra","texts on sacred design"],["murti","MOOR-ti","sacred image"]],
+ diagram:"temple",
+ explore:{shared:"Use the temple diagram to trace a visitor’s path from gateway to shrine.",
+  task:"Compare two floor plans (a North Indian and a South Indian temple). Write three observations about how space, light and movement shape a visit.",
+  discuss:"Diaspora temples in the US often combine many deities, classrooms and kitchens under one roof. What changes when a temple is built far from its home region?",
+  games:[{t:"match",title:"Match the terms",pairs:[["darshan","seeing and being seen by the deity"],["puja","worship with offerings"],["murti","sacred image of a deity"],["prasad","food offered and returned as blessing"],["mandapa","pillared hall for gathering"],["garbhagriha","inner shrine room"],["pradakshina","clockwise circling of the shrine"]]},
+         {t:"order",title:"Order the spaces, outer to inner",items:["Gateway","Outer courtyard","Mandapa (hall)","Antarala (vestibule)","Garbhagriha (inner shrine)"]}]},
+ quiz:[["Why is the garbhagriha usually small and dim?","It concentrates attention on the murti, the sacred center",["To save building costs","Because lamps were banned","To store temple records"],"Space and light focus the visit inward."],
+  ["Darshan is best described as…","A two-way exchange of sight between devotee and deity",["A silent prayer","A temple tax","A dance form"],"This is why the murti’s eyes are so significant."],
+  ["Which texts give rules for temple proportions and plans?","Vastu and Shilpa Shastras",["Ramayana","Arthashastra","Panchatantra"],"They are treatises on architecture and image-making."],
+  ["Pradakshina is performed…","Clockwise, keeping the shrine on the right",["Counter-clockwise","Only by priests","Only at night"],"Many temples have a circumambulation path."]],
+ reflect:{hs:"Describe how one feature of temple design (path, light, tower or hall) shapes a visitor’s experience. Use one specific term from today."},
+ notes:{t:"If possible, show plans of a local Virginia temple alongside a historic one.",l:"Stress that practices vary; describe, don’t prescribe.",e:"After the order game, students compare plans.",r:"Next week: regional temple styles."}},
+
+/* ---------- 3 ---------- */
+{cls:"3",date:"2026-10-18",unit:1,title:"Architecture Across Regions",stamp:"SHIKHARA",
+ sites:["khajuraho","thanjavur","pattadakal","bhubaneswar","ellora"],
+ wonder:{q:"Why would two kingdoms in the same religious tradition build temples that look so different?",sub:"Consider materials, climate, rulers, guilds of artisans and competition."},
+ learn:[
+  ["Nagara (north)","A curvilinear shikhara rising over the shrine, often clustered with smaller tower forms. Example: Kandariya Mahadeva at Khajuraho (c. 1030 CE)."],
+  ["Dravida (south)","A stepped, pyramidal vimana. Brihadisvara at Thanjavur (c. 1010 CE) has a giant vimana; later southern temples shift emphasis to huge gopurams at the gates."],
+  ["Vesara and Kalinga","Vesara blends northern and southern features in the Deccan. At Pattadakal (7th–8th c.) both styles stand together. Kalinga is Odisha’s variant, seen at Lingaraja, Bhubaneswar."],
+  ["Rock-cut","The Kailasa temple (Ellora Cave 16, 8th c.) was carved downward from a single basalt cliff. Builders could only remove stone, never add it."]],
+ vocab:[["shikhara","SHIK-ha-ra","curved northern tower"],["vimana","vi-MAA-na","stepped southern tower"],["gopuram","GO-pu-ram","gateway tower"],["Vesara","VAY-sa-ra","mixed Deccan style"]],
+ diagram:"styles",
+ explore:{shared:"Sort the style clues, then compare the three tower silhouettes.",
+  task:"Typology is a tool, not a rule. Choose one temple and argue whether it fits neatly into one style label or blends several. Use two visual details as evidence.",
+  discuss:"Why might a later southern dynasty make gateways taller than the central shrine? What does that say about public display and power?",
+  games:[{t:"sort",title:"Which style?",buckets:["Nagara","Dravida","Rock-cut"],items:[["Curvilinear shikhara",0],["Kandariya Mahadeva, Khajuraho",0],["Lingaraja, Bhubaneswar (Kalinga variant)",0],["Stepped pyramidal vimana",1],["Brihadisvara, Thanjavur",1],["Monumental gateway gopurams",1],["Kailasa temple, Ellora",2],["Shaped by removing stone only",2]]},
+         {t:"find",title:"Find it on the map",sites:["khajuraho","thanjavur","pattadakal","bhubaneswar","ellora"]}]},
+ quiz:[["Which feature defines the Nagara style?","A curvilinear shikhara over the shrine",["Giant gateway towers","Rock-cut halls","A flat roof"],"Khajuraho is a classic example."],
+  ["Why is Pattadakal important to architectural history?","Northern and southern styles stand side by side",["It is the oldest temple","It is made of wood","It has no carvings"],"It shows experimentation under the Chalukyas."],
+  ["What made the Kailasa temple an engineering feat?","It was carved downward from one cliff",["It floats on water","It was assembled from metal","It was built in a year"],"Mistakes could not be undone."],
+  ["What is the strongest critique of style labels?","Real temples often blend features across categories",["The labels are too new","They only apply to Nepal","They are illegal"],"Typologies simplify a messy reality."]],
+ reflect:{hs:"In two sentences, explain one strength and one limitation of classifying temples by style."},
+ notes:{l:"Show photos of each example if available.",e:"Groups pick a temple and argue fit vs. blend.",r:"Next week: pilgrimage as a journey."}},
+
+/* ---------- 4 ---------- */
+{cls:"4",date:"2026-10-25",unit:1,title:"The Pilgrim’s Journey",stamp:"YATRA",sites:[],
+ wonder:{q:"Is a pilgrimage mainly about arriving, or about the journey itself?",sub:"Think of any long journey you’ve made with a purpose."},
+ learn:[
+  ["Yatra","A tirtha yatra is a journey to a sacred place. Motives include devotion, gratitude, a vow, prayer for family, rites for ancestors, learning and community."],
+  ["Liminality","Anthropologist Victor Turner described pilgrims as entering a “liminal” in-between state, leaving ordinary roles behind and sharing a sense of equality he called communitas."],
+  ["The journey matters","Walking, singing, fasting, shared meals and hardship are often seen as meaningful in themselves, not just obstacles."],
+  ["Changing pilgrimage","Trains, roads, helicopters and online booking have opened sacred sites to millions, raising questions about access, cost and crowding."]],
+ vocab:[["yatra","YAA-tra","journey, pilgrimage"],["liminality","lim-i-NAL-i-tee","in-between state"],["communitas","kom-YOO-ni-tas","shared sense of equality"],["vrata","VRUH-ta","vow"]],
+ explore:{shared:"Arrange the journey stages and discuss what changes for a pilgrim at each stage.",
+  task:"Plan a family pilgrimage to a site of your choice. Account for distance, cost, season, accessibility for elders and environmental impact. Present one trade-off you faced.",
+  discuss:"Does a helicopter ride to a mountain shrine change the meaning of pilgrimage? Make the case for both sides.",
+  games:[{t:"order",title:"Stages of a pilgrimage",items:["Prepare (vow, packing, farewells)","Travel","Arrive","Darshan and rituals","Share food and prasad","Return home","Remember and retell"]},
+         {t:"sort",title:"Turner’s ideas or not?",buckets:["Fits liminality / communitas","Doesn’t fit"],items:[["Pilgrims wear simple, similar clothing",0],["Strangers share meals on the road",0],["Social rank matters less during the journey",0],["VIP darshan lines for paying visitors",1],["Separate luxury tours from other pilgrims",1]]}]},
+ quiz:[["Turner used “communitas” to describe…","A shared sense of equality among pilgrims",["A tax on pilgrims","A type of temple","A sacred river"],"Pilgrims step outside ordinary social roles."],
+  ["Which is a liminal experience?","Being between ordinary life and the destination",["Paying a bill","Sleeping at home","Shopping"],"Liminal means in-between."],
+  ["Which is a common motive for pilgrimage?","Fulfilling a vow",["Earning a salary","Avoiding school","Military service"],"Vows (vratas) often motivate journeys."],
+  ["Which development most changed access to pilgrimage sites?","Modern transport such as railways and roads",["Printing presses","Telescopes","Sundials"],"Access expanded to millions."]],
+ reflect:{hs:"Answer with an example: how can a journey change a person, and does ease of travel change that?"},
+ notes:{t:"Diwali party is Sat Nov 7. No class Nov 1 or Nov 8.",l:"Introduce Turner as one scholar’s model, open to critique.",r:"Next class Nov 15: reading sources."}},
+
+/* ---------- 5 ---------- */
+{cls:"5",date:"2026-11-15",unit:1,title:"Reading Sources and Sacred Narratives",stamp:"SOURCES",sites:[],
+ wonder:{q:"Can a story be true in a different way from a history book?",sub:"What kinds of truth do communities care about?"},
+ learn:[
+  ["Kinds of sources","Narratives (epics, Puranas, sthala puranas or local temple histories), objects, places, images and written records such as inscriptions, travel accounts and colonial surveys."],
+  ["Source questions","Who made it? When? For whom? Why? What can it not tell us? Every source has a perspective."],
+  ["Sacred narratives","Sacred stories carry meaning, values and memory for devotees. Historians treat them as evidence of belief and practice, not as proof of events."],
+  ["Outside observers","Travelers such as Xuanzang (7th c.) and Al-Biruni (11th c.), and later colonial officials, wrote about Indian religion. Their accounts are valuable but shaped by their own assumptions."]],
+ vocab:[["sthala purana","STHUL-a poo-RAA-na","a temple’s local origin story"],["inscription","in-SKRIP-shun","text carved on stone or copper"],["provenance","PROV-e-nunce","where a source comes from"]],
+ explore:{shared:"Sort the source cards by type, then rank two of them by how useful they are for a specific question.",
+  task:"Question: “Why did pilgrims visit this temple in the 1100s?” Rank three sources (a sthala purana, a royal inscription, a modern travel blog) by usefulness. Justify each ranking with the source questions.",
+  discuss:"Can an outsider’s account ever be more accurate than an insider’s? When might it be less accurate?",
+  games:[{t:"sort",title:"Source type",buckets:["Narrative","Object","Place","Image","Written record"],items:[["A temple’s sthala purana",0],["Ramayana episode",0],["Bronze Nataraja",1],["Copper-plate land grant",4],["Ghats of Varanasi",2],["19th-century photograph of a festival",3],["Al-Biruni’s account of India",4],["Mughal-era miniature painting",3]]}]},
+ quiz:[["A copper-plate land grant to a temple is best used to learn…","Who funded the temple and what they gave",["Exact beliefs of every visitor","The weather that year","Modern visitor numbers"],"Grants record donors, gifts and dates."],
+  ["Historians treat sacred narratives as evidence of…","What communities believed and valued",["Exact historical events","Scientific facts","Nothing useful"],"They answer questions about belief and memory."],
+  ["Why read colonial surveys critically?","Their authors’ assumptions shaped what they recorded",["They are always fake","They are too short","They were written in Sanskrit"],"Every source has a perspective."],
+  ["What is a sthala purana?","A temple’s local origin story",["A tax receipt","A map","A dance"],"Many temples have one."]],
+ reflect:{hs:"Choose one source type and explain one question it can answer well and one it cannot."},
+ notes:{t:"Welcome back after Diwali. Optional, brief sharing.",l:"Model the source questions on one card together.",r:"Next: Varanasi."}},
+
+/* ---------- 6 ---------- */
+{cls:"6",date:"2026-11-22",unit:2,title:"Varanasi and Kashi Vishwanath",stamp:"KASHI",sites:["varanasi"],
+ wonder:{q:"How can a city be a home, a marketplace, a university town and a sacred center at once?",sub:"Who might experience Varanasi differently?"},
+ learn:[
+  ["Kashi, Banaras, Varanasi","On the Ganga’s western bank in Uttar Pradesh, often described as one of the world’s oldest continuously inhabited cities. Kashi means “city of light.”"],
+  ["Ghats and the river","More than 80 ghats line the river. They host bathing, worship, laundry, wrestling, music and cremation at Manikarnika and Harishchandra ghats."],
+  ["Kashi Vishwanath","A Jyotirlinga temple of Shiva. Destroyed and rebuilt several times; Queen Ahilyabai Holkar built the present temple in 1780. The Kashi Vishwanath Corridor (opened 2021) linked it to the river."],
+  ["Many meanings","Many Hindus regard dying in Kashi as granting liberation (moksha). The city is also a center of Banarasi silk, Hindustani music and Banaras Hindu University."]],
+ vocab:[["ghat","GAAT","steps to a river"],["moksha","MOKE-sha","liberation"],["aarti","AAR-tee","worship with lamps"]],
+ explore:{shared:"Follow a photo journey from the river to the temple lanes.",
+  task:"Annotate a city map showing religious, residential and commercial spaces. Then identify one place where these overlap and explain the tension or harmony.",
+  discuss:"The 2021 corridor made the temple easier to reach but cleared old lanes and homes. How should cities balance access, heritage and residents’ needs?",
+  games:[{t:"sort",title:"One city, many meanings",buckets:["Worship","Learning & arts","Work & trade","Life & death"],items:[["Evening Ganga aarti",0],["Kashi Vishwanath",0],["Banaras Hindu University",1],["Hindustani music gharanas",1],["Banarasi silk looms",2],["Boatmen ferrying visitors",2],["Cremation at Manikarnika ghat",3],["Hospices for the dying",3]]},
+         {t:"order",title:"From river to temple",items:["Boat on the Ganga at dawn","Climb the ghat steps","Walk the narrow lanes","Pass security and leave shoes","Darshan at Kashi Vishwanath"]}]},
+ quiz:[["Who built the present Kashi Vishwanath temple in 1780?","Queen Ahilyabai Holkar",["Rajaraja Chola","Akbar","Ashoka"],"She sponsored temples across India."],
+  ["Why do many Hindus hope to die in Kashi?","It is believed to grant moksha (liberation)",["Medical care is free","It is the capital","For tax reasons"],"An emic belief central to the city’s identity."],
+  ["What did the 2021 Kashi Vishwanath Corridor do?","Linked the temple directly to the river ghats",["Moved the temple","Closed the ghats","Built a dam"],"It also raised heritage debates."],
+  ["What does the name Kashi mean?","City of light",["City of rivers","Mountain city","Old town"],"Related to the Sanskrit for shining."]],
+ reflect:{hs:"Argue in three sentences: should a sacred city prioritize pilgrims, residents or heritage? Acknowledge one counterargument."},
+ notes:{l:"Cremation is part of life in Varanasi; handle it factually and briefly.",r:"No class Nov 29. Next: Kumbh Mela, Dec 6."}},
+
+/* ---------- 7 ---------- */
+{cls:"7",date:"2026-12-06",unit:2,title:"Prayagraj, Haridwar and the Kumbh Mela",stamp:"SANGAM",sites:["prayagraj","haridwar","ujjain","nashik"],
+ wonder:{q:"How do you build, run and dismantle a temporary city for tens of millions?",sub:"List the systems a city needs in its first 24 hours."},
+ learn:[
+  ["Triveni Sangam","At Prayagraj the Ganga and Yamuna meet; tradition adds the unseen Saraswati. Bathing at confluences is considered especially meritorious."],
+  ["Kumbh Mela","Rotates among Prayagraj, Haridwar, Ujjain and Nashik, timed by the positions of Jupiter, the sun and the moon. A story of drops of amrita (nectar) falling at these four places explains the cycle."],
+  ["Scale and planning","The 2025 Maha Kumbh at Prayagraj was reported by officials as drawing hundreds of millions of visits over about six weeks, with tents, pontoon bridges, hospitals and sanitation built on the riverbed."],
+  ["Heritage and risk","UNESCO inscribed the Kumbh Mela as Intangible Cultural Heritage in 2017. Crowd surges, including deadly ones, show the risks of extreme density."]],
+ vocab:[["sangam","SUNG-um","confluence"],["amrita","UM-ri-ta","nectar of immortality"],["akhara","a-KHAA-ra","order of ascetics"],["snan","SNAAN","ritual bath"]],
+ explore:{shared:"Build a tabletop temporary city with cards for water, toilets, medical care, paths, food and waste.",
+  task:"You are on the planning committee. Prioritize the six systems with a limited budget and justify your top two. Identify one environmental and one safety trade-off.",
+  discuss:"Who is responsible when a crowd disaster happens at a religious gathering: organizers, government, or no one? How can planning reduce risk?",
+  games:[{t:"match",title:"Problem and system",pairs:[["Peak bathing-day crowd surge","Timed entry and one-way routes"],["Waterborne disease risk","Clean water and sanitation"],["Lost children and elders","Lost-and-found centers"],["Crossing a wide river","Pontoon bridges"],["Tons of waste daily","Waste collection and segregation"],["Medical emergencies","Field hospitals"]]},
+         {t:"find",title:"The four Kumbh cities",sites:["prayagraj","haridwar","ujjain","nashik"]}]},
+ quiz:[["What determines Kumbh Mela timing?","Positions of Jupiter, the sun and the moon",["The school calendar","Monsoon rainfall only","Government elections"],"Astrological reckoning sets the dates."],
+  ["Which story explains the four Kumbh cities?","Drops of amrita falling at four places",["Rama’s journey","Krishna’s birth","The Mahabharata war"],"An emic explanation of the cycle."],
+  ["When did UNESCO recognize the Kumbh Mela?","2017",["1947","1990","2025"],"As Intangible Cultural Heritage."],
+  ["What are akharas?","Orders of ascetics who lead the royal baths",["Tent hotels","Rivers","Police units"],"Their processions are highlights of the Mela."]],
+ reflect:{hs:"Name one joy and one danger of mass gatherings, and propose one evidence-based way to make them safer."},
+ notes:{l:"Verify any attendance figures with an official source before quoting.",r:"Next: Ayodhya, Mathura, Vrindavan. Site Profile 1 begins."}},
+
+/* ---------- 8 ---------- */
+{cls:"8",date:"2026-12-13",unit:2,title:"Ayodhya, Mathura and Vrindavan",stamp:"BRAJ",sites:["ayodhya","mathura","vrindavan"],
+ wonder:{q:"What happens when a place is sacred because of a story?",sub:"How do people locate stories on real maps?"},
+ learn:[
+  ["Ayodhya","On the Sarayu river. In the Ramayana it is Rama’s capital. Many families connect Diwali lamps with Rama’s return home."],
+  ["Mathura and Vrindavan","On the Yamuna in the Braj region. Many traditions honor Mathura as Krishna’s birthplace and Vrindavan as the setting of his youth with the gopis and cowherds."],
+  ["Mapping a sacred landscape","In the 16th century, followers of Chaitanya and Vallabhacharya identified and revived many Braj sites linked with Krishna stories, shaping pilgrimage routes still used today."],
+  ["Narrative and history","Sacred narrative, archaeology and written records answer different questions. Some sites, including Ayodhya, have also been the focus of major legal and political disputes in modern India."]],
+ vocab:[["Braj","BRUJ","Krishna’s home region"],["parikrama","pa-ri-KRUH-maa","circling pilgrimage route"],["lila","LEE-laa","divine play"],["bhakti","BHUK-tee","devotion"]],
+ explore:{shared:"Place story events on the map of the Braj region and Ayodhya.",
+  task:"Compare a short devotional passage about Vrindavan with a historian’s description of how Braj pilgrimage sites were identified. What does each emphasize, and what does each leave out?",
+  discuss:"How should a classroom discuss sacred sites that are also politically contested, while staying accurate and respectful to everyone?",
+  games:[{t:"match",title:"Place and story",pairs:[["Ayodhya","Rama’s capital and return"],["Mathura","Krishna’s birth"],["Vrindavan","Krishna’s youth with the gopis"],["Govardhan","Krishna lifts a hill to shelter villagers"],["Sarayu","River of Ayodhya"],["Yamuna","River of Braj"]]},
+         {t:"find",title:"Find it on the map",sites:["ayodhya","mathura","vrindavan"]}]},
+ quiz:[["Which 16th-century movements helped revive Braj pilgrimage sites?","Followers of Chaitanya and Vallabhacharya",["The Mughal army","British surveyors","Jain monks"],"They identified sites linked to Krishna stories."],
+  ["Mathura and Vrindavan lie on which river?","Yamuna",["Ganga","Sarayu","Godavari"],"The Braj region follows the Yamuna."],
+  ["What does lila mean in Krishna devotion?","Divine play",["A tax","A temple wall","A procession cart"],"Stories of Krishna’s lila shape the landscape."],
+  ["The best approach to a contested sacred site in class is…","Separate the narrative, the historical evidence and the modern dispute",["Pick a side","Avoid all facts","Repeat social media claims"],"Clear distinctions keep the discussion accurate."]],
+ reflect:{hs:"Start Site Profile 1: choose a site and list three sources of different types you will use."},
+ notes:{l:"Keep the Ayodhya dispute brief and factual; the focus is how narratives map onto places.",r:"Winter break Dec 20 – Jan 3. Site Profile 1 due Jan 10."}},
+
+/* ---------- 9 (Classes 9 + 10) ---------- */
+{cls:"9–10",date:"2027-01-10",unit:2,title:"Himalayan Sacred Landscapes",stamp:"HIMALAYA",
+ sites:["yamunotri","gangotri","kedarnath","badrinath","kailash","manasarovar","pashupatinath"],
+ wonder:{q:"What happens to a pilgrimage when its sacred places sit in fragile mountains across national borders?",sub:"Think about climate, politics and access."},
+ learn:[
+  ["The Chota Char Dham","Yamunotri, Gangotri, Kedarnath and Badrinath in Uttarakhand, traditionally visited west to east. Snow closes them in winter; worship moves to lower winter seats."],
+  ["A fragile landscape","The 2013 Kedarnath flood killed thousands. Road widening, crowds and climate change raise questions about how many pilgrims these valleys can safely hold."],
+  ["Kailash and Manasarovar","In Tibet (China). Sacred to Hindus, Buddhists, Jains and Bon followers. Pilgrims walk the roughly 52 km circuit; access depends on permits and India–China relations."],
+  ["Pashupatinath","A major Shiva temple on the Bagmati river in Kathmandu, Nepal, part of the Kathmandu Valley World Heritage Site."]],
+ vocab:[["dham","DHAAM","abode; holy seat"],["kora / parikrama","KOR-a","circumambulation route"],["carrying capacity","—","how many visitors a place can safely support"]],
+ explore:{shared:"Trace the Chota Char Dham on the relief map, then add the sites across the borders.",
+  task:"Design a low-impact itinerary for the Chota Char Dham using elevation and season. Propose one policy (permits, caps, transport) to protect the valleys, and name who would object.",
+  discuss:"Should governments cap the number of pilgrims at sacred mountain sites? Who should decide?",
+  games:[{t:"order",title:"Chota Char Dham, west to east",items:["Yamunotri","Gangotri","Kedarnath","Badrinath"]},
+         {t:"find",title:"Himalayan map game",sites:["yamunotri","gangotri","kedarnath","badrinath","kailash","pashupatinath"]}]},
+ quiz:[["What disaster in 2013 reshaped debate about Himalayan pilgrimage?","The Kedarnath flood",["An earthquake in Delhi","A drought in Kerala","A cyclone in Gujarat"],"Thousands died in the flash floods."],
+  ["Why can access to Kailash change from year to year?","It depends on permits and India–China relations",["It moves","It is underwater","It is privately owned"],"Borders shape sacred journeys."],
+  ["Which traditions hold Kailash sacred?","Hindu, Buddhist, Jain and Bon",["Only Hindu","Only Bon","None"],"A shared sacred landscape."],
+  ["What is “carrying capacity”?","How many visitors a place can safely support",["The weight a mule can carry","A temple tax","Bus seating"],"A key idea in sustainable tourism."]],
+ reflect:{hs:"Turn in Site Profile 1. Write one paragraph: how do environment and borders shape Himalayan pilgrimage?"},
+ notes:{t:"This session combines curriculum Classes 9 and 10.",m:"Highlight the cluster in Uttarakhand and the border crossings.",r:"Profile 1 due today. No class Jan 17."}},
+
+/* ---------- 10 (Class 11) ---------- */
+{cls:"11",date:"2027-01-24",unit:3,title:"The All-India Char Dham",stamp:"CHAR DHAM",sites:["badrinath","dwarka","puri","rameswaram"],
+ wonder:{q:"Can a pilgrimage route create a sense of one shared land?",sub:"What does it mean to travel to all four edges of a country?"},
+ learn:[
+  ["Four directions","Badrinath (north), Dwarka (west), Puri (east) and Rameswaram (south) mark the edges of the subcontinent."],
+  ["Adi Shankaracharya","Tradition credits this 8th-century philosopher of Advaita Vedanta with founding monasteries (mathas) in four directions, linking the circuit to a pan-Indian network."],
+  ["Diversity within unity","The circuit joins Vaishnava sites (Badrinath, Dwarka, Puri) with a Shaiva one (Rameswaram), linked to Rama. Languages, foods and rituals differ at each."],
+  ["Pilgrimage and nation","Historians argue such circuits helped people imagine India as a connected sacred space long before the modern nation-state."]],
+ vocab:[["matha","MUTT","monastery"],["Advaita","ad-VAI-ta","non-dual philosophy"],["Vaishnava / Shaiva","VAISH-na-va / SHAI-va","devoted to Vishnu / Shiva"]],
+ explore:{shared:"Place the four dhams on a compass map and complete the deity–landscape–food–festival puzzle.",
+  task:"Compare the all-India Char Dham with the Himalayan Chota Char Dham: purpose, geography, deities and who can realistically complete each.",
+  discuss:"Do pilgrimage circuits unify a diverse country, or can they also exclude people? Give examples.",
+  games:[{t:"sort",title:"Which direction?",buckets:["North","West","East","South"],items:[["Badrinath",0],["Dwarka",1],["Puri",2],["Rameswaram",3]]},
+         {t:"match",title:"Site, deity, setting",pairs:[["Badrinath","Vishnu, Himalayan valley"],["Dwarka","Krishna, Arabian Sea coast"],["Puri","Jagannath, Bay of Bengal coast"],["Rameswaram","Shiva, island in the Gulf of Mannar"]]}]},
+ quiz:[["Which philosopher does tradition link with the four dhams?","Adi Shankaracharya",["Kabir","Tulsidas","Ramanuja"],"Associated with four mathas."],
+  ["Which dham honors Shiva?","Rameswaram",["Badrinath","Dwarka","Puri"],"Its deity is Ramanathaswamy."],
+  ["Historians argue such circuits helped people…","Imagine a connected sacred land",["Collect taxes","Build railways","Avoid travel"],"Long before the modern nation-state."],
+  ["How does it differ from the Chota Char Dham?","It spans all four directions of India",["It is all in one state","It has no temples","It is only for priests"],"The Chota Char Dham is in Uttarakhand."]],
+ reflect:{hs:"Explain in one paragraph what connects the four dhams beyond geography."},
+ notes:{r:"Next: the Jyotirlinga network."}},
+
+/* ---------- 11 (Class 12) ---------- */
+{cls:"12",date:"2027-01-31",unit:3,title:"Shiva and the Jyotirlinga Network",stamp:"JYOTI",sites:["somnath","varanasi","ujjain","kedarnath","rameswaram"],
+ wonder:{q:"Why would a tradition count exactly twelve sacred sites, and what happens when communities disagree on the list?",sub:""},
+ learn:[
+  ["Linga of light","A story tells of Shiva appearing as an endless pillar of light; Brahma and Vishnu could not find its ends. Jyotirlinga means “linga of light.”"],
+  ["Twelve sites","Twelve Jyotirlingas span India. A widely recited Sanskrit hymn lists them, and many pilgrims aim to visit all twelve."],
+  ["Somnath","On the Gujarat coast. Raided by Mahmud of Ghazni in 1026 and rebuilt many times; the present temple was completed in 1951 and became a symbol in post-independence India."],
+  ["Contested lists","For a few Jyotirlingas, more than one temple claims the title, e.g. Vaidyanath (Deoghar in Jharkhand or Parli in Maharashtra) and Nageshwar. Local identity and pride are at stake."]],
+ vocab:[["linga","LING-a","aniconic form of Shiva"],["aniconic","an-eye-KON-ik","not shaped like a figure"],["Mahakaleshwar","ma-haa-kaa-LAYSH-war","Shiva as lord of time, Ujjain"]],
+ explore:{shared:"Connect five Jyotirlinga sites with yarn on the map and note the landscapes.",
+  task:"Investigate one contested Jyotirlinga claim. Identify the competing sites, the evidence each community cites, and explain why the dispute matters locally.",
+  discuss:"Somnath has been destroyed and rebuilt many times. Is a rebuilt temple the same sacred place?",
+  games:[{t:"sort",title:"Coast, river or mountain?",buckets:["Seacoast","Riverbank","Mountains"],items:[["Somnath",0],["Ramanathaswamy, Rameswaram",0],["Kashi Vishwanath",1],["Mahakaleshwar (Shipra river)",1],["Kedarnath",2]]},
+         {t:"find",title:"Find the Jyotirlingas",sites:["somnath","varanasi","ujjain","kedarnath","rameswaram"]}]},
+ quiz:[["What does aniconic mean?","Not shaped like a human or animal figure",["Painted gold","Made of wood","Very large"],"The linga is an aniconic form."],
+  ["When was the present Somnath temple completed?","1951",["1026","1780","2001"],"It became a symbol after independence."],
+  ["Which Jyotirlinga has rival claimants in Jharkhand and Maharashtra?","Vaidyanath",["Kedarnath","Somnath","Kashi Vishwanath"],"Deoghar and Parli both claim it."],
+  ["Mahakaleshwar is in which city?","Ujjain",["Pune","Patna","Mysuru"],"On the Shipra river."]],
+ reflect:{hs:"Argue whether a rebuilt temple is the same sacred place. Use Somnath as evidence."},
+ notes:{l:"Mahashivaratri falls in early 2027; confirm the date with a panchang before mentioning it.",r:"Next: Goddess traditions."}},
+
+/* ---------- 12 (Class 13) ---------- */
+{cls:"13",date:"2027-02-07",unit:3,title:"Shakti Peethas and Goddess Traditions",stamp:"SHAKTI",sites:["kamakhya","kalighat","vaishno","kanchipuram"],
+ wonder:{q:"What can goddess traditions tell us about how power and the divine are imagined?",sub:""},
+ learn:[
+  ["Shakti and Devi","Shakti means power or energy. Shakta traditions worship the Goddess (Devi) as supreme, in forms from fierce (Kali, Durga) to nurturing (Lakshmi, Parvati)."],
+  ["The Shakti Peetha story","Sati’s death and Shiva’s grief scatter her body across the land; each place becomes a seat (peetha) of the Goddess. Texts give 4, 18, 51, 52 or 108 sites."],
+  ["Case studies","Kamakhya (Guwahati) is a major Tantric center; Kalighat (Kolkata) honors Kali; Vaishno Devi is a mountain cave shrine in Jammu; Kamakshi Amman is in Kanchipuram."],
+  ["Mapping power","The story turns the whole subcontinent into the Goddess’s body. Scholars read this as a way of uniting distant regional goddesses into one network."]],
+ vocab:[["Shakta","SHAAK-ta","devotee of the Goddess"],["peetha","PEE-tha","seat"],["Tantra","TUN-tra","ritual and esoteric tradition"]],
+ explore:{shared:"Compare images, landscapes and community descriptions of the four shrines.",
+  task:"Compare two Shakti Peetha lists from different texts or traditions. Explain at least two reasons lists differ (region, sect, era, politics of pilgrimage).",
+  discuss:"What does it mean for a land to be imagined as a goddess’s body? Compare with other traditions that sanctify land.",
+  games:[{t:"match",title:"Shrine and setting",pairs:[["Kamakhya","Hilltop above the Brahmaputra, Tantric center"],["Kalighat","Kolkata, beside the old Hooghly channel"],["Vaishno Devi","Cave shrine in the Trikuta mountains"],["Kamakshi Amman","Temple town of Kanchipuram"]]},
+         {t:"find",title:"Find the Goddess shrines",sites:["kamakhya","kalighat","vaishno","kanchipuram"]}]},
+ quiz:[["Shakta traditions treat the Goddess as…","Supreme divine power",["A minor helper","A historical queen","A river only"],"Shakti is the ultimate reality."],
+  ["Why do Shakti Peetha counts vary (4 to 108)?","Different texts, regions and sects list different sites",["Temples move","Typos","They don’t vary"],"Diversity within one tradition."],
+  ["Which shrine is a major Tantric center?","Kamakhya",["Vaishno Devi","Kalighat","Kamakshi Amman"],"On Nilachal Hill in Guwahati."],
+  ["How do scholars read the scattered-body story?","As linking regional goddesses into one network",["As a medical text","As a battle record","As a recipe"],"Geography becomes theology."]],
+ reflect:{hs:"Answer: what does diversity within one tradition look like? Use evidence from today."},
+ notes:{l:"Tell the Sati story briefly and with care.",r:"No class Feb 14. Next class Feb 21."}},
+
+/* ---------- 13 (Class 14) ---------- */
+{cls:"14",date:"2027-02-21",unit:3,title:"Vishnu and Krishna Pilgrimage Centers",stamp:"SEVA",sites:["tirumala","srirangam","dwarka","puri","guruvayur"],
+ wonder:{q:"Is a large temple more like a place of worship, a city government or a business?",sub:""},
+ learn:[
+  ["Tirumala-Tirupati","Hilltop shrine of Venkateswara, among the most visited and wealthiest temples in the world. Run by the Tirumala Tirupati Devasthanams (TTD), which also funds schools and hospitals."],
+  ["Srirangam","Ranganathaswamy temple on an island between the Kaveri and Kollidam rivers, with seven concentric enclosures; a center of the Sri Vaishnava tradition associated with Ramanuja."],
+  ["Puri and Guruvayur","Puri’s kitchen cooks mahaprasad in clay pots over wood fires for thousands daily. Guruvayur in Kerala keeps a herd of temple elephants."],
+  ["Temples as institutions","Many large temples in India are managed by state-appointed boards. Who should control temple funds is an ongoing public debate."]],
+ vocab:[["Devasthanam","day-vu-STHAA-num","temple trust"],["hundi","HOON-dee","offering box"],["Sri Vaishnava","SHREE VAISH-na-va","South Indian Vishnu tradition"]],
+ explore:{shared:"Explore how a temple is a worship space, kitchen, workplace, archive and community center.",
+  task:"Create a systems diagram of a large temple: inputs (donations, food, volunteers), processes and outputs (meals, schools, festivals, records). Identify one point of tension.",
+  discuss:"Should temples be managed by governments, independent trusts or devotee communities? Weigh accountability and autonomy.",
+  games:[{t:"match",title:"Temple roles",pairs:[["Archaka (priest)","Performs daily rituals"],["Kitchen staff","Prepare prasad and free meals"],["Nadaswaram players","Music for rituals and processions"],["Temple board","Manages funds and administration"],["Volunteers","Crowd guidance and food service"],["Mahout","Cares for temple elephants"]]},
+         {t:"find",title:"Find the temples",sites:["tirumala","srirangam","dwarka","puri","guruvayur"]}]},
+ quiz:[["What is the TTD?","The trust that manages the Tirumala temple",["A railway","A political party","A dance school"],"It runs schools and hospitals too."],
+  ["Srirangam is closely associated with which teacher?","Ramanuja",["Adi Shankaracharya","Chaitanya","Kabir"],"A center of Sri Vaishnavism."],
+  ["What is a hundi?","A temple offering box",["A gopuram","A drum","A vow"],"Donations fund temple operations."],
+  ["What debate surrounds many large temples?","Who should control temple funds",["Whether to use electricity","Building height only","None"],"Government vs. community management."]],
+ reflect:{hs:"Begin Site Profile 2. Include a systems diagram for your chosen site."},
+ notes:{r:"Site Profile 2 due Apr 18."}},
+
+/* ---------- 14 (Class 15) ---------- */
+{cls:"15",date:"2027-02-28",unit:3,title:"Festivals that Move the Deity",stamp:"RATH",sites:["puri","madurai","tiruvannamalai","pandharpur"],
+ wonder:{q:"What changes when the sacred leaves the temple and enters public streets?",sub:"Who gains access, and who manages the crowd?"},
+ learn:[
+  ["Rath Yatra, Puri","Jagannath, Balabhadra and Subhadra ride three wooden chariots, rebuilt every year, pulled by crowds to the Gundicha temple. The English word “juggernaut” comes from Jagannath."],
+  ["Chithirai Festival, Madurai","Re-enacts the wedding of Meenakshi and Sundareswarar and joins it with Kallazhagar’s procession to the Vaigai, uniting Shaiva and Vaishnava festivals."],
+  ["Karthigai Deepam","A great lamp is lit atop Arunachala hill at Tiruvannamalai, linked to Shiva as a column of fire."],
+  ["Pandharpur Wari","Warkaris walk about 250 km over roughly three weeks to Pandharpur, carrying palkhis of the saints Dnyaneshwar and Tukaram and singing their abhangs. The Wari is open to all castes."]],
+ vocab:[["rath","RUTH","chariot"],["palkhi","PAAL-khee","palanquin"],["abhang","a-BHUNG","Marathi devotional song"],["Warkari","WAAR-ka-ree","Wari pilgrim"]],
+ explore:{shared:"Storyboard one festival route from start to finish.",
+  task:"Plan crowd management for one festival: route, entry points, medical stations, communications. Then explain the festival’s meaning in two sentences.",
+  discuss:"Why might it matter that the Wari welcomes everyone regardless of caste? What does a procession say about who belongs?",
+  games:[{t:"match",title:"Festival and feature",pairs:[["Rath Yatra","Three wooden chariots rebuilt yearly"],["Chithirai Festival","A divine wedding joined with a river procession"],["Karthigai Deepam","A great lamp on Arunachala hill"],["Pandharpur Wari","A three-week walk singing abhangs"]]},
+         {t:"find",title:"Festival map",sites:["puri","madurai","tiruvannamalai","pandharpur"]}]},
+ quiz:[["Which English word comes from Jagannath?","Juggernaut",["Jungle","Jaguar","Journey"],"Through European accounts of the chariots."],
+  ["Which saints’ palkhis lead the Wari?","Dnyaneshwar and Tukaram",["Tulsidas and Kabir","Mirabai and Surdas","Basava and Allama"],"Marathi bhakti saints."],
+  ["What does the Chithirai Festival unite?","Shaiva and Vaishnava festivals",["Two states","Two languages","Hindu and Christian holidays"],"Meenakshi’s wedding and Kallazhagar’s journey."],
+  ["Why is the Wari socially significant?","It is open to people of all castes",["It is only for priests","It is held online","It excludes women"],"Bhakti emphasized devotion over status."]],
+ reflect:{hs:"Explain why a sacred image might travel outside a temple, and what that reveals about community."},
+ notes:{r:"Next unit: southern and western temple landscapes."}},
+
+/* ---------- 15 (Class 16) ---------- */
+{cls:"16",date:"2027-03-07",unit:4,title:"Madurai Meenakshi and the Temple-City",stamp:"GOPURAM",sites:["madurai"],
+ wonder:{q:"What if a city’s street plan were designed around a temple’s festival calendar?",sub:""},
+ learn:[
+  ["The temple","Meenakshi Amman temple honors Meenakshi (a form of Parvati) and Sundareswarar (Shiva). Much of the present complex dates from the Nayak period (16th–17th c.)."],
+  ["Gopurams","Fourteen gateway towers covered in painted stucco figures; the tallest exceed 50 m. They are repainted during periodic renovations."],
+  ["A mandala city","Old Madurai is laid out in concentric square streets named after Tamil months. Festivals process along the street named for their month."],
+  ["Temple and economy","The Golden Lotus Tank and Thousand Pillar Hall sit inside; flower, cloth and brass markets fill the streets outside. Worship and commerce reinforce each other."]],
+ vocab:[["Nayak","NAA-yuk","dynasty that expanded the temple"],["mandala","MUN-da-la","sacred concentric diagram"],["kulam","KU-lam","temple tank"]],
+ explore:{shared:"Trace walls, gateways, markets and procession streets on the city map.",
+  task:"Explain how Madurai’s plan supports both worship and business. Then compare it with a planned city you know (e.g., Washington, D.C.).",
+  discuss:"What is lost and gained when a living temple-city becomes a major tourist destination?",
+  games:[{t:"gopuram",title:"Gopuram builder"},
+         {t:"sort",title:"Inside the walls or the streets?",buckets:["Inside the temple","City streets around it"],items:[["Golden Lotus Tank",0],["Thousand Pillar Hall",0],["Meenakshi’s shrine",0],["Month-named procession streets",1],["Flower markets",1],["Tailors and brass shops",1]]}]},
+ quiz:[["Which dynasty built much of the present Meenakshi temple?","The Nayaks",["The Mughals","The Mauryas","The British"],"16th–17th centuries."],
+  ["Madurai’s street names come from…","Tamil months",["Kings","Rivers","Numbers"],"Each street hosts that month’s festival."],
+  ["Gopuram figures are made of…","Painted stucco",["Glass","Gold","Wood"],"Repainted during renovations."],
+  ["The city plan resembles a…","Mandala of concentric squares",["Grid of numbered avenues","Spiral","Random maze"],"The temple sits at the center."]],
+ reflect:{hs:"Identify three design features of a gopuram and explain what each communicates to a visitor."},
+ notes:{e:"Students can use the gopuram builder to discuss repetition and proportion.",r:"DST begins Mar 14."}},
+
+/* ---------- 16 (Class 17) ---------- */
+{cls:"17",date:"2027-03-14",unit:4,title:"Thanjavur, Chidambaram and Temple Arts",stamp:"NATARAJA",sites:["thanjavur","chidambaram"],
+ wonder:{q:"How can art be devotion, history and royal propaganda all at once?",sub:""},
+ learn:[
+  ["Brihadisvara, Thanjavur","Completed around 1010 CE by Rajaraja I. Its granite vimana rises about 66 m. Part of the UNESCO Great Living Chola Temples."],
+  ["Inscriptions as archive","Its walls record royal gifts, land grants, hundreds of temple dancers and staff, and their pay: a rare window into an 11th-century institution."],
+  ["Nataraja","At Chidambaram Shiva is worshipped as Nataraja, Lord of the Dance. The cosmic dance (ananda tandava) represents creation, preservation, destruction, concealment and grace."],
+  ["Chola bronzes","Cast by the lost-wax method, Chola bronzes were carried in processions. Many are now in museums worldwide, and some looted pieces have been returned to India."]],
+ vocab:[["lost-wax casting","—","molding metal from a wax model"],["ananda tandava","AA-nun-da TAN-da-va","dance of bliss"],["repatriation","ree-pay-tree-AY-shun","returning objects to their place of origin"]],
+ explore:{shared:"Analyze a Nataraja image and a temple inscription.",
+  task:"Make a claim about how the Brihadisvara temple served Rajaraja’s political power. Support it with two pieces of evidence (scale, inscriptions, location).",
+  discuss:"Should sacred bronzes in foreign museums be returned to India’s temples? Consider ownership, worship and preservation.",
+  games:[{t:"match",title:"Read the Nataraja",pairs:[["Ring of fire","The cosmos and its cycles"],["Damaru drum","Sound of creation"],["Abhaya hand (raised palm)","Protection, “do not fear”"],["Fire in one hand","Destruction and transformation"],["Foot on the dwarf Apasmara","Overcoming ignorance"],["Raised foot","Release and grace"]]}]},
+ quiz:[["Who built Brihadisvara?","Rajaraja Chola I",["Krishnadevaraya","Ashoka","Ahilyabai Holkar"],"Completed around 1010 CE."],
+  ["Why are its inscriptions valuable to historians?","They record gifts, staff and pay",["They are poems only","They predict the future","They list modern visitors"],"An archive in stone."],
+  ["How were Chola bronzes made?","Lost-wax casting",["Carved from wood","Printed","Woven"],"A wax model is replaced by metal."],
+  ["What does repatriation mean?","Returning objects to their place of origin",["Repainting","Rebuilding","Renaming"],"Several looted idols have been returned."]],
+ reflect:{hs:"Make one claim about the Nataraja and support it with two visible details."},
+ notes:{r:"Spring break Mar 21 and 28. Next class Apr 4."}},
+
+/* ---------- 17 (Class 18) ---------- */
+{cls:"18",date:"2027-04-04",unit:4,title:"Rameswaram and the Sea",stamp:"SETU",sites:["rameswaram"],
+ wonder:{q:"How does one place hold an epic story, a geological feature and a modern political debate?",sub:""},
+ learn:[
+  ["An island temple town","On Pamban Island in the Gulf of Mannar, linked to the mainland by road and rail bridges. A new vertical-lift rail bridge opened in 2025."],
+  ["Ramanathaswamy","Famous for its long pillared corridors, often called the longest in India, and its 22 tirthams (wells) in which pilgrims bathe."],
+  ["Ramayana links","In the Ramayana, Rama worships Shiva here. The chain of shoals toward Sri Lanka is called Rama Setu or Adam’s Bridge."],
+  ["Science and debate","Geologists study the shoals as natural formations. A proposed shipping canal (Sethusamudram project) through them met religious and environmental objections."]],
+ vocab:[["tirtham","TEER-tham","sacred water source"],["setu","SAY-too","bridge"],["shoal","SHOLE","shallow sandbank"]],
+ explore:{shared:"Compare a story map with a physical map of Rameswaram and the Palk Strait.",
+  task:"Evaluate the Sethusamudram debate: summarize the economic, environmental and religious positions, and explain which evidence each side relies on.",
+  discuss:"Can scientific and sacred descriptions of the same place coexist? How?",
+  games:[{t:"sort",title:"Story map or physical map?",buckets:["Narrative","Physical / scientific"],items:[["Rama worships Shiva",0],["Bridge built by Hanuman’s army",0],["Hanuman brings a linga from Kailash",0],["Sandbanks across the Palk Strait",1],["Pamban vertical-lift bridge",1],["Coral reefs of the Gulf of Mannar",1]]}]},
+ quiz:[["What is Adam’s Bridge?","A chain of shoals between India and Sri Lanka",["A steel bridge","A temple gate","A mountain pass"],"Also called Rama Setu."],
+  ["What was the Sethusamudram project?","A proposed shipping canal through the shoals",["A temple festival","A railway","A dam"],"It drew religious and environmental objections."],
+  ["How many tirthams are inside Ramanathaswamy?","22",["4","12","108"],"Pilgrims bathe in each."],
+  ["Rameswaram is located on…","Pamban Island",["Elephanta Island","Majuli","Andaman Islands"],"In the Gulf of Mannar."]],
+ reflect:{hs:"Answer: how can one place connect several stories and kinds of knowledge? Use Rameswaram as evidence."},
+ notes:{r:"Next: Hampi, Ellora, Khajuraho, Konark."}},
+
+/* ---------- 18 (Class 19) ---------- */
+{cls:"19",date:"2027-04-11",unit:4,title:"Hampi, Ellora, Khajuraho and Konark",stamp:"CURATOR",sites:["hampi","ellora","khajuraho","konark"],
+ wonder:{q:"When a temple is no longer used for worship, is it still sacred, or is it now a monument?",sub:""},
+ learn:[
+  ["Hampi","Capital of the Vijayanagara Empire (14th–16th c.), sacked after the Battle of Talikota in 1565. The Virupaksha temple has remained in worship."],
+  ["Ellora","34 caves made by Hindu, Buddhist and Jain communities between about 600 and 1000 CE: a model of shared sacred space."],
+  ["Khajuraho","Chandela temples built about 950–1050 CE; roughly 25 of an estimated 85 survive. Their sculpture spans gods, daily life and celestial figures."],
+  ["Konark","13th-century Sun Temple by Narasimhadeva I, shaped as Surya’s chariot with 24 wheels. The main tower has collapsed; worship there ended long ago."]],
+ vocab:[["living temple","—","still used for worship"],["monument","—","protected historic structure"],["ASI","—","Archaeological Survey of India"]],
+ explore:{shared:"Become curators: choose four images for a mini-exhibit.",
+  task:"Organize the exhibit around one claim about art, power or landscape. Write a 50-word wall label for each image.",
+  discuss:"Who should decide whether a protected monument can be used for worship again: archaeologists, devotees or the government?",
+  games:[{t:"match",title:"Site and clue",pairs:[["Hampi","Empire capital sacked in 1565"],["Ellora","Hindu, Buddhist and Jain caves together"],["Khajuraho","Chandela temples, about 25 survive"],["Konark","Sun temple shaped as a chariot"]]},
+         {t:"find",title:"Find the sites",sites:["hampi","ellora","khajuraho","konark"]}]},
+ quiz:[["Which battle led to Hampi’s fall?","Talikota, 1565",["Plassey, 1757","Panipat, 1526","Haldighati, 1576"],"The city was sacked afterward."],
+  ["Ellora is notable for…","Hindu, Buddhist and Jain caves side by side",["Only Jain caves","Wooden temples","Underwater shrines"],"Shared sacred space."],
+  ["Which of these remains a living temple?","Virupaksha, Hampi",["Konark Sun Temple","Ellora Cave 16","All of them"],"Worship continues there."],
+  ["Who built the Konark Sun Temple?","Narasimhadeva I",["Rajaraja I","Ashoka","Krishnadevaraya"],"13th century, Eastern Ganga dynasty."]],
+ reflect:{hs:"State the one-sentence claim of your exhibit and defend your choice of images."},
+ notes:{r:"Site Profile 2 due next week (Apr 18)."}},
+
+/* ---------- 19 (Class 20) ---------- */
+{cls:"20",date:"2027-04-18",unit:4,title:"Beyond India: Bali, Cambodia and the Global Hindu World",stamp:"GLOBAL",sites:[],
+ wonder:{q:"When a tradition travels, what stays the same and what changes?",sub:"Think about your own family’s traditions in the US."},
+ learn:[
+  ["Bali","Most Balinese practice Agama Hindu Dharma, blending Indic and local traditions. Pura Besakih, the “Mother Temple,” sits on Mount Agung; Tanah Lot stands on a sea rock."],
+  ["Angkor Wat","Built in the early 12th century by Suryavarman II, dedicated to Vishnu. Its towers represent Mount Meru. It later became Buddhist and is on Cambodia’s flag."],
+  ["How ideas traveled","Trade, courts, Brahmin advisers and Buddhist monks carried Sanskrit, epics and temple forms across Southeast Asia from the early first millennium CE."],
+  ["The diaspora","Today Hindu temples stand from Trinidad to Toronto to Virginia, adapting architecture, languages and calendars to new homes."]],
+ vocab:[["Agama Hindu Dharma","—","Balinese Hinduism"],["Meru","MAY-roo","cosmic mountain"],["diaspora","dye-AS-po-ra","communities living away from an ancestral homeland"]],
+ explore:{shared:"Photo detective stations: gates, towers, nature and offerings.",
+  task:"Write a comparison of Angkor Wat and a US diaspora temple: identify two continuities and two changes, and explain what caused the changes.",
+  discuss:"Angkor Wat is now a Buddhist site and a national symbol. Who does a sacred place belong to when its religion changes?",
+  games:[{t:"sort",title:"Bali or Angkor Wat?",buckets:["Bali","Angkor Wat"],items:[["Temple on a sea rock",0],["Daily canang sari offerings",0],["Mother Temple on a volcano",0],["Towers representing Mount Meru",1],["Built by Suryavarman II",1],["Appears on a national flag",1]]}]},
+ quiz:[["Angkor Wat was first dedicated to…","Vishnu",["Shiva","Brahma","Ganesha"],"It later became Buddhist."],
+  ["What is Agama Hindu Dharma?","Balinese Hinduism",["A Cambodian dance","An Indian temple","A text"],"It blends Indic and local practice."],
+  ["How did Indic religion reach Southeast Asia?","Trade, royal courts and religious specialists",["Military conquest by India","Colonial missionaries","The internet"],"Over many centuries."],
+  ["Angkor Wat’s towers symbolize…","Mount Meru",["The Ganga","A chariot","A lotus pond only"],"The center of the cosmos."]],
+ reflect:{hs:"Turn in Site Profile 2. Write one example of continuity and one of change in Hindu sacred spaces abroad."},
+ notes:{t:"Show a world map for Bali and Cambodia.",r:"Profile 2 due today."}},
+
+/* ---------- 20 (Class 21) ---------- */
+{cls:"21",date:"2027-04-25",unit:5,title:"Temple Communities, Food and Service",stamp:"SEVA",sites:[],
+ wonder:{q:"Who makes a temple work, and whose labor goes unnoticed?",sub:""},
+ learn:[
+  ["Many roles","Priests, cooks, musicians, artisans, cleaners, guides, vendors, administrators, volunteers and neighbors all sustain temples."],
+  ["Seva","Selfless service is central in many Hindu communities. Diaspora temples in the US often depend almost entirely on volunteers."],
+  ["Annadanam","Many temples serve free meals. Large ones, such as Tirumala, feed tens of thousands daily; shared meals can bring people of different backgrounds together."],
+  ["Hereditary roles and change","Some temple roles have been hereditary. In recent decades, some states have trained and appointed priests from a wider range of backgrounds, sparking debate."]],
+ vocab:[["seva","SAY-vaa","selfless service"],["annadanam","un-na-DAA-nam","gift of food"],["archaka","AR-cha-ka","temple priest"]],
+ explore:{shared:"Build a community web around a temple with role cards and yarn.",
+  task:"Interview plan: draft five respectful questions you could ask a local temple volunteer about how their temple runs. Then map the resources and challenges you expect.",
+  discuss:"Should temple roles be open to anyone trained for them, or follow tradition? Present both perspectives fairly.",
+  games:[{t:"match",title:"Roles and resources",pairs:[["Archaka","Rituals, lamps and bells"],["Cook","Large kitchens and ingredients"],["Musician","Nadaswaram and drums"],["Flower vendor","Garlands and supply chains"],["Administrator","Budgets and records"],["Volunteer","Time and skills"]]}]},
+ quiz:[["What does seva mean?","Selfless service",["Paid labor","A tax","A ritual bath"],"Central to many temple communities."],
+  ["What is annadanam?","Free shared meals",["A dance","A drum","A gate"],"The gift of food."],
+  ["What do US diaspora temples often rely on?","Volunteers",["Government funding","Hereditary kings","Tourism only"],"Community members run classes, kitchens and festivals."],
+  ["What debate surrounds some temple roles?","Whether they should be hereditary or open",["Whether to serve food","Whether to use lamps","None"],"Tradition and equality are both at stake."]],
+ reflect:{hs:"Explain why a sacred place needs many kinds of work, and name one form of labor people often overlook."},
+ notes:{t:"An optional local temple guest is welcome; remind students no one represents all Hindus.",r:"Next: etiquette and stewardship."}},
+
+/* ---------- 21 (Classes 22 + 23) ---------- */
+{cls:"22–23",date:"2027-05-02",unit:5,title:"Etiquette, Heritage and Sustainable Pilgrimage",stamp:"CARE",sites:[],
+ wonder:{q:"What does it mean to be a responsible visitor to someone else’s sacred place?",sub:""},
+ learn:[
+  ["Respectful visits","Common customs: remove shoes, dress modestly, follow photography rules, keep quiet in shrines, and ask before joining rituals. Rules vary; read signs and ask."],
+  ["Who can enter","Entry rules differ: some temples restrict entry to Hindus or have historic gender restrictions, and court cases have challenged some of these. Accessibility for disabled visitors is improving unevenly."],
+  ["Rivers and mountains","India’s Namami Gange program (launched 2014) targets Ganga pollution. Plastic bans and visitor caps have been tried at some sites."],
+  ["Heritage management","The Archaeological Survey of India and UNESCO protect monuments, but living temples also need space for worship, festivals and change."]],
+ vocab:[["stewardship","STOO-erd-ship","responsible care"],["overtourism","—","more visitors than a place can bear"],["intangible heritage","—","living practices, not buildings"]],
+ explore:{shared:"Sort visitor choices, then run the heritage council: balance clean water, safe paths, local jobs, visitor numbers and conservation.",
+  task:"Write a one-page recommendation for one site addressing a sustainability problem. State the trade-off and who bears its costs.",
+  discuss:"Can a site be both a protected monument and a living place of worship? What has to give?",
+  games:[{t:"sort",title:"Visitor choices",buckets:["Respectful","Ask first","Not appropriate"],items:[["Remove shoes where asked",0],["Follow signs on photography",0],["Accept prasad with care",0],["Photograph the inner shrine",1],["Join a ritual",1],["Climb carvings for a selfie",2],["Leave plastic by the river",2],["Touch the murti uninvited",2]]}]},
+ quiz:[["What is the best approach when rules are unclear?","Read signs and ask a volunteer",["Do whatever you like","Copy tourists","Leave immediately"],"Customs vary widely."],
+  ["When was Namami Gange launched?","2014",["1947","1985","2024"],"A national river clean-up program."],
+  ["Which is intangible heritage?","The Kumbh Mela",["The Konark temple","Ellora caves","Hampi ruins"],"A living practice."],
+  ["A key tension in heritage management is…","Protecting monuments while allowing living worship",["Choosing paint colors","Selling tickets","None"],"Living temples change over time."]],
+ reflect:{hs:"State your recommendation in one sentence and name its main trade-off."},
+ notes:{t:"Combines curriculum Classes 22 and 23.",l:"Handle entry-rule disputes factually and present multiple views.",r:"Capstone workshop next week. Exhibition at Annual Day, May 16."}},
+
+/* ---------- 22 (Class 24) ---------- */
+{cls:"24",date:"2027-05-09",unit:5,title:"Capstone Workshop",stamp:"EXHIBIT",sites:[],
+ wonder:{q:"What is the single claim you want a visitor to leave your exhibit believing?",sub:""},
+ learn:[
+  ["The task","Create a museum exhibit on one sacred place, one pilgrimage route or two connected sites."],
+  ["Formats","Poster, model, audio tour, slideshow, map book or illustrated travel guide."],
+  ["Requirements","Location map, timeline, architecture or landscape analysis, one present-day issue, a clear thesis and at least three credible, cited sources."],
+  ["Language and evidence","Use emic and etic framing, avoid generalizing about all Hindus, and credit every image."]],
+ vocab:[["thesis","THEE-sis","main claim"],["citation","sigh-TAY-shun","source credit"],["peer review","—","feedback from classmates"]],
+ explore:{shared:"Peer review in pairs: accuracy, respectful language, evidence and clarity.",
+  task:"Check off each requirement. Then exchange exhibits with a partner and give one strength, one question and one fix.",
+  discuss:"What makes a source credible for this project? Compare a UNESCO page, a temple website and a travel blog.",
+  games:[{t:"check",title:"Exhibit checklist",items:[["Clear thesis",1],["Location map",1],["Timeline",1],["Architecture or landscape analysis",1],["One present-day issue",1],["Three credible sources, cited",1],["Credited images",1],["Respectful, accurate language",1]]}]},
+ quiz:[["Which sentence best fits an exhibit label?","“In this tradition, the river is honored as a goddess.”",["“All Hindus worship rivers.”","“Hindus always do this.”","“Everyone believes this.”"],"Specific and accurate."],
+  ["Which source is most credible for site history?","UNESCO World Heritage Centre",["An anonymous comment","A rumor","A meme"],"Use institutional and scholarly sources."],
+  ["How should a temple’s own website be used?","As an emic source on beliefs and practices",["As neutral history","As useless","As a weather source"],"Know each source’s perspective."],
+  ["A strong thesis is…","A specific, arguable claim",["A list of facts","A question only","A title"],"Every element should support it."]],
+ reflect:{hs:"Write your exhibit thesis and list your three sources."},
+ notes:{r:"Exhibition at Annual Day, Sunday May 16."}},
+
+/* ---------- 23 (Class 25 at Annual Day) ---------- */
+{cls:"25",date:"2027-05-16",unit:5,title:"Exhibition, Reflection and Synthesis",stamp:"SACRED",event:"Annual Day",
+ sites:["varanasi","kedarnath","dwarka","puri","rameswaram","madurai","kamakhya","konark","hampi"],
+ wonder:{q:"What makes a place sacred? Compare your answer to the thesis you wrote in October.",sub:""},
+ learn:[
+  ["Exhibition walk","Visit each exhibit at Annual Day and leave one compliment and one question."],
+  ["Synthesis","Answer “What makes a place sacred?” with examples from at least three regions, one similarity and one difference."],
+  ["Revisit your thesis","Compare your Class 1 thesis with your thinking now. What changed, and why?"],
+  ["Final reflection","Something I learned, something I still wonder, and one principle for studying religion respectfully."]],
+ vocab:[["tirtha","TEER-tha","sacred crossing"],["emic / etic","—","insider / outsider view"],["synthesis","SIN-the-sis","combining ideas into a whole"]],
+ explore:{shared:"Hold the exhibition walk at Annual Day. Families are welcome.",
+  task:"Write your synthesis paragraph using three regions, one similarity and one difference.",
+  discuss:"Which site this year challenged your assumptions the most, and why?",
+  games:[{t:"find",title:"Year in review map challenge",sites:["varanasi","kedarnath","dwarka","puri","rameswaram","madurai","kamakhya","konark","hampi"]}]},
+ quiz:[["What did tirtha originally mean?","A ford or river crossing",["A chariot","A drum","A tower"],"Our first word of the year."],
+  ["Emic describes…","The insider’s perspective",["The outsider’s analysis","A building style","A river"],"Etic is the outsider’s view."],
+  ["Which site was carved from a single cliff?","Kailasa temple, Ellora",["Konark","Meenakshi","Kedarnath"],"Rock-cut architecture."],
+  ["Who built the Brihadisvara temple?","Rajaraja Chola I",["Suryavarman II","Ahilyabai Holkar","Narasimhadeva I"],"Around 1010 CE."],
+  ["Angkor Wat was first dedicated to…","Vishnu",["Shiva","Buddha","Surya"],"It later became Buddhist."]],
+ reflect:{hs:"Final reflection: something I learned, something I still wonder, and one principle for studying religion respectfully."},
+ notes:{t:"Runs as part of Annual Day. Set up exhibits before families arrive.",r:"Congratulate students and stamp the final passport page."}}
+];
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const store = {get(k,d){try{const v=localStorage.getItem("sg-"+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("sg-"+k,JSON.stringify(v))}catch(e){}}};
+function hash(s){let h=2166136261;for(const c of s){h^=c.charCodeAt(0);h=Math.imul(h,16777619)}return h>>>0}
+function shuffle(arr,seed){const a=arr.slice();let x=seed||1;for(let i=a.length-1;i>0;i--){x=(Math.imul(x,1103515245)+12345)>>>0;const j=x%(i+1);[a[i],a[j]]=[a[j],a[i]]}return a}
+const MONTHS=["January","February","March","April","May","June","July","August","September","October","November","December"];
+const DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+function pd(s){const [y,m,d]=s.split("-").map(Number);return new Date(y,m-1,d)}
+function longDate(s){const d=pd(s);return ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][d.getDay()]+", "+MONTHS[d.getMonth()]+" "+d.getDate()+", "+d.getFullYear()}
+function todayStr(){const d=new Date();return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+
+/* ---------- Map ---------- */
+const INDIA=[[68.2,23.7],[69.3,24.3],[70.8,24.3],[71.1,24.7],[70.1,25.9],[70.4,27.1],[71.9,27.9],[73.0,29.3],[74.0,30.4],[74.6,31.1],[74.7,32.5],[74.0,34.3],[74.6,35.0],[76.7,35.6],[77.9,35.5],[78.5,34.0],[78.8,32.6],[79.4,31.0],[80.2,30.6],[81.0,30.2],[80.1,28.8],[81.6,27.9],[83.3,27.4],[84.6,27.3],[85.9,26.6],[88.0,26.4],[88.1,27.9],[88.9,27.3],[89.6,26.8],[92.1,26.9],[91.7,27.8],[92.6,27.9],[94.5,28.9],[95.4,29.3],[96.4,29.0],[97.3,28.2],[96.2,27.3],[95.2,26.6],[94.6,25.2],[94.2,23.9],[93.4,23.8],[93.2,22.1],[92.6,22.0],[92.3,23.2],[91.9,23.4],[91.2,23.0],[91.3,24.1],[91.9,24.2],[92.4,24.9],[91.0,25.2],[89.9,25.3],[89.8,26.0],[89.0,26.3],[88.5,26.4],[88.2,25.8],[88.9,25.2],[88.1,24.6],[88.7,24.2],[88.6,23.2],[89.0,22.0],[88.2,21.6],[87.0,21.5],[86.4,20.0],[85.1,19.3],[84.1,18.3],[82.3,16.5],[81.2,16.0],[80.2,15.2],[80.3,13.4],[79.9,11.8],[79.8,10.3],[79.3,10.2],[78.9,9.0],[77.5,8.1],[76.5,9.0],[76.2,10.1],[75.7,11.7],[74.8,12.9],[74.1,15.0],[73.4,16.5],[72.8,19.0],[72.7,21.0],[72.6,22.3],[72.1,21.3],[71.2,20.7],[70.0,21.0],[69.0,22.3],[70.4,23.0],[68.5,23.4]];
+const LANKA=[[79.9,9.8],[80.3,9.8],[81.0,8.8],[81.8,7.5],[81.6,6.4],[80.6,5.9],[80.0,6.4],[79.8,7.5],[79.7,8.5]];
+const px=lon=>(lon-67.5)*20, py=lat=>(37.5-lat)*20;
+const poly=p=>p.map(([x,y])=>px(x).toFixed(1)+","+py(y).toFixed(1)).join(" ");
+let MAPN=0;
+function mapSVG(keys,{numbered=true,showAll=true}={}){
+  const xs=keys.map(k=>px(SITES[k].lon)),ys=keys.map(k=>py(SITES[k].lat));
+  let x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys);
+  let side=Math.max(x1-x0,y1-y0)+160;side=Math.max(side,240);
+  let vb=[0,0,620,640];
+  if(side<560){const cx=(x0+x1)/2+30,cy=(y0+y1)/2;vb=[cx-side/2,cy-side/2,side,side]}
+  const f=vb[2]/620;
+  let dots="";
+  keys.forEach((k,i)=>{const s=SITES[k];const x=px(s.lon),y=py(s.lat);
+    dots+=`<g class="pin" data-k="${k}" tabindex="0" role="button" aria-label="${esc(numbered?(i+1)+" "+s.n:"map dot")}" style="cursor:pointer">
+      <circle cx="${x}" cy="${y}" r="${16*f}" fill="transparent"/>
+      <circle class="dot" cx="${x}" cy="${y}" r="${(numbered?11:9)*f}" fill="#f2b134" stroke="#1b2238" stroke-width="${2.5*f}"/>
+      ${numbered?`<text x="${x}" y="${y+4.5*f}" text-anchor="middle" font-size="${13*f}" font-weight="700" fill="#1b2238" font-family="Mukta,sans-serif" pointer-events="none">${i+1}</text>`:""}
+      <text class="lab" x="${x+14*f}" y="${y+5*f}" font-size="${15*f}" font-weight="700" fill="#f3eee3" font-family="Mukta,sans-serif" stroke="#1b2238" stroke-width="${4*f}" paint-order="stroke" pointer-events="none" ${showAll?"":'visibility="hidden"'}>${esc(s.n.split(" (")[0])}</text></g>`});
+  const T=(x,y,t,o="")=>`<text x="${x}" y="${y}" font-size="${12*f}" fill="#bdb6a8" font-family="Mukta,sans-serif" ${o}>${t}</text>`;
+  return `<svg viewBox="${vb.map(v=>v.toFixed(1)).join(" ")}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Map of India with sacred sites">
+    <clipPath id="ic${++MAPN}"><path d="${MAP_INDIA}"/></clipPath>
+    <path d="${MAP_INDIA}" fill="#313b5d" stroke="#6fcfc6" stroke-width="${1.2*f}" stroke-linejoin="round"/>
+    <path d="${MAP_LAC}" clip-path="url(#ic${MAPN})" fill="none" stroke="#d9dff0" stroke-width="${1.1*f}" stroke-dasharray="${3*f} ${3*f}" opacity=".8"/>
+    <path d="${MAP_LANKA}" fill="#252e4b" stroke="#6fcfc6" stroke-width="${f}" stroke-dasharray="${3*f} ${3*f}"/>
+    ${T(px(80.6),py(7.4),"SRI LANKA",'text-anchor="middle"')}${T(px(84.5),py(33.2),"TIBET",`letter-spacing="${2*f}"`)}${T(px(84.2),py(28.6),"NEPAL")}
+    ${f>0.9?T(px(70.5),py(13),"Arabian Sea",'font-style="italic"')+T(px(86.5),py(15),"Bay of Bengal",'font-style="italic"'):""}
+    ${dots}</svg>`;
+}
+/* ---------- Diagrams ---------- */
+const DIAGRAMS={
+temple:`<svg viewBox="0 0 420 300" role="img" aria-label="Simple temple plan from gateway to shrine">
+  <rect x="10" y="230" width="400" height="8" fill="#313b5d"/>
+  <rect x="20" y="150" width="70" height="80" fill="#252e4b" stroke="#6fcfc6"/><polygon points="20,150 55,95 90,150" fill="#252e4b" stroke="#6fcfc6"/>
+  <rect x="44" y="190" width="22" height="40" fill="#141a2c"/>
+  <rect x="110" y="200" width="44" height="30" rx="4" fill="none" stroke="#bdb6a8" stroke-dasharray="4 3"/>
+  <rect x="170" y="160" width="120" height="70" fill="#252e4b" stroke="#6fcfc6"/><path d="M170,160 L190,140 L270,140 L290,160" fill="#252e4b" stroke="#6fcfc6"/>
+  <rect x="300" y="150" width="90" height="80" fill="#313b5d" stroke="#f2b134"/>
+  <path d="M300,150 C305,90 325,40 345,25 C365,40 385,90 390,150Z" fill="#313b5d" stroke="#f2b134"/>
+  <circle cx="345" cy="20" r="6" fill="#f2b134"/><rect x="333" y="185" width="24" height="45" rx="10" fill="#f2b134" opacity=".85"/>
+  <g font-family="Mukta,sans-serif" font-size="14" fill="#f3eee3" text-anchor="middle">
+   <text x="55" y="258">Gateway</text><text x="132" y="258">Shoes</text><text x="230" y="258">Gathering hall</text><text x="230" y="276" fill="#bdb6a8" font-size="12">mandapa</text>
+   <text x="345" y="258">Inner shrine</text><text x="345" y="276" fill="#bdb6a8" font-size="12">garbhagriha</text>
+   <text x="345" y="110" fill="#1b2238" font-weight="700" font-size="12">tower</text></g>
+  <path d="M60,286 L380,286" stroke="#f2b134" stroke-width="2" marker-end="url(#ar)"/>
+  <defs><marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10Z" fill="#f2b134"/></marker></defs>
+</svg>`,
+styles:`<svg viewBox="0 0 420 260" role="img" aria-label="Three temple tower shapes: Nagara curved shikhara, Dravida stepped vimana, Dravida gopuram gateway">
+  <g fill="#252e4b" stroke="#6fcfc6" stroke-width="2">
+   <path d="M30,210 L30,150 C35,90 55,50 75,35 C95,50 115,90 120,150 L120,210Z"/>
+   <path d="M160,210 L160,160 L170,160 L170,135 L180,135 L180,110 L190,110 L190,88 L200,88 L200,70 L220,70 L220,88 L230,88 L230,110 L240,110 L240,135 L250,135 L250,160 L260,160 L260,210Z"/>
+   <path d="M300,210 L310,60 L380,60 L390,210Z"/><path d="M308,60 C315,45 375,45 382,60"/></g>
+  <g stroke="#6fcfc6" stroke-width="1" opacity=".6"><path d="M45,120 L105,120 M40,150 L110,150 M55,90 L95,90"/><path d="M304,110 L386,110 M302,150 L388,150 M307,85 L383,85 M300,180 L390,180"/></g>
+  <rect x="333" y="170" width="24" height="40" fill="#141a2c"/><circle cx="75" cy="30" r="6" fill="#f2b134"/><circle cx="210" cy="64" r="6" fill="#f2b134"/>
+  <g font-family="Mukta,sans-serif" text-anchor="middle" fill="#f3eee3" font-size="15" font-weight="700"><text x="75" y="234">Shikhara</text><text x="210" y="234">Vimana</text><text x="345" y="234">Gopuram</text></g>
+  <g font-family="Mukta,sans-serif" text-anchor="middle" fill="#bdb6a8" font-size="12"><text x="75" y="252">Nagara, north</text><text x="210" y="252">Dravida, south</text><text x="345" y="252">gateway, south</text></g>
+</svg>`};
+
+/* ---------- State ---------- */
+let state={view:"home",si:0,slide:0,path:store.get("path","elem"),notes:store.get("notes",true)};
+const TODAY=todayStr();
+function currentIndex(){let i=S.findIndex(s=>s.date>=TODAY);return i<0?S.length-1:i}
+
+function slidesFor(s){
+  const hasMap=s.sites&&s.sites.length;
+  const out=[{k:"title",lab:"Start",min:0},{k:"wonder",lab:"Wonder",min:3},{k:"learn",lab:"Learn",min:hasMap?7:10}];
+  if(hasMap) out.push({k:"map",lab:"Map",min:3});
+  out.push({k:"explore",lab:"Explore",min:9},{k:"quiz",lab:"Quiz",min:5},{k:"reflect",lab:"Reflect",min:3});
+  return out;
+}
+const NOTEKEY={title:"t",wonder:"w",learn:"l",map:"m",explore:"e",quiz:"q",reflect:"r"};
+const DEFAULT_NOTES={title:"Greet students, take attendance, hand out passports.",wonder:"Ask the question, give 30 seconds of think time, then turn-and-talk.",learn:"Read the cards aloud; tap vocabulary chips to reveal pronunciation and meaning.",map:"Tap each numbered site to read its note aloud.",explore:"Run the shared activity, then split into pathway tasks. Use the on-screen game as a whole-class check.",quiz:"Have students show answers with fingers (A=1 … D=4) before you reveal.",reflect:"Students write or draw in their passports. Stamp passports on the way out."};
+
+/* ---------- Timer ---------- */
+let timer={left:0,run:false,id:null,key:""};
+function setTimer(min,key){if(timer.key===key)return;clearInterval(timer.id);timer={left:min*60,run:false,id:null,key}}
+function fmt(t){return Math.floor(t/60)+":"+String(t%60).padStart(2,"0")}
+function clockHTML(){if(!timer.left&&!timer.run&&timer.key.endsWith(":0"))return"";const done=timer.left<=0;return `<div class="clock"><button id="tbtn" class="${done?"done":""}" aria-label="Start or pause segment timer">${done?"Time!":(timer.run?"❚❚ ":"▶ ")+fmt(timer.left)}</button><button id="treset" aria-label="Reset timer">↺</button></div>`}
+function tick(){timer.left=Math.max(0,timer.left-1);const b=$("#tbtn");if(b){b.textContent=timer.left<=0?"Time!":"❚❚ "+fmt(timer.left);if(timer.left<=0)b.classList.add("done")}if(timer.left<=0){clearInterval(timer.id);timer.run=false}}
+
+/* ---------- Render: home ---------- */
+function renderHome(){
+  const ci=currentIndex(),cs=S[ci];
+  const items=S.map((s,i)=>({date:s.date,i})).concat(NO_CLASS.map(([d,t])=>({date:d,off:t}))).sort((a,b)=>a.date.localeCompare(b.date));
+  const byMonth={};items.forEach(it=>{const d=pd(it.date);const k=MONTHS[d.getMonth()]+" "+d.getFullYear();(byMonth[k]=byMonth[k]||[]).push(it)});
+  let months="";
+  for(const [m,list] of Object.entries(byMonth)){
+    months+=`<section class="month"><h3>${m}</h3>`+list.map(it=>{const d=pd(it.date);const dd=`<span class="d">${d.getDate()}<small>${DOW[d.getDay()]}</small></span>`;
+      if(it.off)return `<div class="day off">${dd}<span class="t">${esc(it.off)}</span></div>`;
+      const s=S[it.i];const cls=it.i===ci?"now":(s.date<TODAY?"past":"");
+      return `<button class="day ${cls}" data-go="${it.i}">${dd}<span class="t">Class ${s.cls}${it.i===ci?`<span class="pill">${s.date===TODAY?"Today":"Next"}</span>`:""}${s.event?`<span class="pill">${s.event}</span>`:""}<em>${esc(s.title)}</em></span></button>`}).join("")+`</section>`;
+  }
+  $("#main").innerHTML=`
+  <div class="hero">
+    <div class="today"><span class="eyebrow">${cs.date===TODAY?"Today":"Next class"} · ${longDate(cs.date)}</span>
+      <h1>Class ${cs.cls}: ${esc(cs.title)}</h1>
+      <p>Unit ${cs.unit} — ${esc(UNITS[cs.unit])}. Grades 9–12 · thirty minutes: Wonder, Learn, Explore, Quiz, Reflect.</p>
+      <div class="row"><button class="btn" data-go="${ci}">Start this class</button><button class="btn ghost" data-go="0">Begin from Class 1</button></div></div>
+    <div class="about"><h2>How to use</h2><ul>
+      <li>Open a class, press <b>Fullscreen</b> to project, use ← → keys or the buttons.</li>
+      <li>Written for grades 9–12: analysis tasks, discussion questions and source work in every class.</li>
+      <li>Each segment has a timer; tap it to start.</li>
+      <li>Games and quizzes are tap-to-play on the screen or a tablet.</li></ul>
+      <p class="note-sm">Dates follow the 2026-27 Bal Gokul calendar (Sundays, Alvey Elementary). Curriculum Classes 9–10 and 22–23 are combined so all 25 fit 22 class Sundays plus Annual Day.</p></div>
+  </div>
+  <div class="year"><h2>Year at a glance</h2><div class="months">${months}</div></div>`;
+}
+
+/* ---------- Render: class ---------- */
+function renderClass(){
+  const s=S[state.si],sl=slidesFor(s),cur=sl[state.slide];
+  setTimer(cur.min,state.si+":"+state.slide);
+  const run=sl.map((x,i)=>`<button data-slide="${i}" aria-current="${i===state.slide}"><b>${x.lab}</b><span>${x.min?x.min+" min":"—"}</span></button>`).join("");
+  const nk=NOTEKEY[cur.k];const note=(s.notes&&s.notes[nk])||DEFAULT_NOTES[cur.k];
+  $("#main").innerHTML=`
+   <div class="runbar" role="tablist" aria-label="Lesson segments">${run}</div>
+   <div class="stagewrap" id="sw"><div class="stage" id="stage">${clockHTML()}${slideHTML(s,cur.k)}</div></div>
+   <div class="nav"><button class="btn" id="prev">← Back</button><button class="btn primary" id="next">Next →</button>
+     <span class="sp"></span><button class="btn" id="fs">Fullscreen</button><button class="btn" id="nt">${state.notes?"Hide":"Show"} teacher notes</button><button class="btn" id="home2">All classes</button></div>
+   ${state.notes?`<div class="notes"><h3>Teacher notes · ${cur.lab}</h3><p>${esc(note)}</p>${cur.k==="title"?`<p class="note-sm" style="margin-top:6px">Materials: South Asia map, student passports or notebooks, source cards, index cards.</p>`:""}</div>`:""}`;
+  wireSlide(s,cur.k);
+}
+
+function pathTxt(s){return state.path==="elem"?s.explore.elem:s.explore.mid}
+function slideHTML(s,k){
+  const head=(eb,h)=>`<div><div class="s-eyebrow">${eb}</div><h2 class="s-h">${h}</h2></div>`;
+  if(k==="title"){const sl=slidesFor(s).slice(1);
+    return `<div class="t-grid"><div><div class="t-num">Class ${s.cls}${s.event?" · "+s.event:""}</div><h1 class="t-title">${esc(s.title)}</h1>
+      <div class="t-meta">${longDate(s.date)} · Unit ${s.unit}: ${esc(UNITS[s.unit])}</div></div>
+      <div class="stamp" aria-hidden="true"><small>Passport</small><b>${esc(s.stamp)}</b><small>${pd(s.date).getFullYear()}</small></div></div>
+      <div class="runrow">${sl.map(x=>`<span><b>${x.min}</b> min ${x.lab}</span>`).join("")}</div>`}
+  if(k==="wonder")return `<div class="s-eyebrow">Wonder</div><div class="wonder"><p class="q">${esc(s.wonder.q)}</p><p class="s-sub">${esc(s.wonder.sub)}</p><span class="hint">Think · Pair · Share</span></div>`;
+  if(k==="learn"){
+    const cards=`<div class="cards">${s.learn.map(([h,t])=>`<div class="card"><h3>${esc(h)}</h3><p>${esc(t)}</p></div>`).join("")}</div>`;
+    const vocab=`<div class="vocab"><span class="lbl">Key words · tap</span>${s.vocab.map(([w,p,m],i)=>`<button class="chip" data-v="${i}"><b>${esc(w)}</b><small hidden><i>${esc(p)}</i> — ${esc(m)}</small></button>`).join("")}</div>`;
+    if(s.diagram)return head("Learn",esc(s.title))+`<div class="learnrow"><div class="cards" style="grid-template-columns:1fr">${s.learn.map(([h,t])=>`<div class="card"><h3>${esc(h)}</h3><p>${esc(t)}</p></div>`).join("")}</div><div class="diagram">${DIAGRAMS[s.diagram]}</div></div>`+vocab;
+    return head("Learn",esc(s.title))+cards+vocab}
+  if(k==="map")return head("Map","Where in the world?")+`<div class="maprow"><div class="mapbox">${mapSVG(s.sites)}</div><div class="legend">${s.sites.map((k2,i)=>{const t=SITES[k2];return `<button data-site="${k2}" aria-pressed="false"><span class="n">${i+1}</span><span>${esc(t.n)}<small>${esc(t.r)}</small><span class="blurb" hidden>${esc(t.b)}</span></span></button>`}).join("")}</div></div>`;
+  if(k==="explore"){const g=s.explore.games;
+    return head("Explore",esc(s.title))+`<div class="exrow"><div class="excol"><div class="box"><h4>Whole class</h4><p>${esc(s.explore.shared)}</p></div>
+      <div class="box path"><h4>Your task</h4><p>${esc(s.explore.task||s.explore.mid)}</p></div>${s.explore.discuss?`<div class="box"><h4>Discuss</h4><p>${esc(s.explore.discuss)}</p></div>`:""}</div>
+      <div class="excol">${g.length>1?`<div class="gametabs">${g.map((x,i)=>`<button data-g="${i}" aria-pressed="${i===0}">${esc(x.title)}</button>`).join("")}</div>`:""}<div class="game" id="game"></div></div></div>`}
+  if(k==="quiz")return `<div class="s-eyebrow">Quick quiz</div><div class="quiz" id="quiz"></div>`;
+  if(k==="reflect"){const nx=S[state.si+1];
+    return head("Reflect","Passport time")+`<div class="reflect"><div class="passport"><div class="stamp" aria-hidden="true"><small>Passport</small><b>${esc(s.stamp)}</b><small>${pd(s.date).getFullYear()}</small></div>
+      <h3>Reflection</h3><p style="margin:0;max-width:34ch;font-size:1.05em">${esc(s.reflect.hs||s.reflect.mid)}</p><div class="lines"></div></div>
+      <div class="nextup"><div class="box"><h4>Exit ticket</h4><p>One word that describes today’s place, and one question you still have.</p></div>
+      ${nx?`<div class="box"><h4>Next class · ${longDate(nx.date)}</h4><p><b>Class ${nx.cls}:</b> ${esc(nx.title)}</p></div>`:`<div class="box"><h4>Thank you!</h4><p>Congratulations on completing Sacred Geography.</p></div>`}</div></div>`}
+  return "";
+}
+
+/* ---------- Wiring ---------- */
+function wireSlide(s,k){
+  const tb=$("#tbtn");if(tb)tb.onclick=()=>{if(timer.left<=0)return;if(timer.run){clearInterval(timer.id);timer.run=false;tb.textContent="▶ "+fmt(timer.left)}else{timer.run=true;tb.textContent="❚❚ "+fmt(timer.left);timer.id=setInterval(tick,1000)}};
+  const tr=$("#treset");if(tr)tr.onclick=()=>{clearInterval(timer.id);timer.key="";renderClass()};
+  document.querySelectorAll("[data-slide]").forEach(b=>b.onclick=()=>go(+b.dataset.slide));
+  $("#prev").onclick=()=>go(state.slide-1);$("#next").onclick=()=>go(state.slide+1);
+  $("#home2").onclick=()=>{state.view="home";render()};
+  $("#nt").onclick=()=>{state.notes=!state.notes;store.set("notes",state.notes);renderClass()};
+  $("#fs").onclick=()=>{const el=$("#sw");try{if(document.fullscreenElement)document.exitFullscreen();else el.requestFullscreen&&el.requestFullscreen().catch(()=>{})}catch(e){}};
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{const sm=c.querySelector("small");sm.hidden=!sm.hidden});
+  if(k==="map"){const pick=key=>{document.querySelectorAll(".legend button").forEach(b=>{const on=b.dataset.site===key;b.setAttribute("aria-pressed",on);b.querySelector(".blurb").hidden=!on});document.querySelectorAll(".mapbox .dot").forEach(d=>d.setAttribute("fill",d.parentNode.dataset.k===key?"#6fcfc6":"#f2b134"))};
+    document.querySelectorAll(".legend button").forEach(b=>b.onclick=()=>pick(b.dataset.site));
+    document.querySelectorAll(".mapbox .pin").forEach(p=>{p.onclick=()=>pick(p.dataset.k);p.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();pick(p.dataset.k)}}});
+    pick(s.sites[0])}
+  if(k==="explore"){const show=i=>{document.querySelectorAll(".gametabs button").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.g===i));runGame(s.explore.games[i],$("#game"))};
+    document.querySelectorAll(".gametabs button").forEach(b=>b.onclick=()=>show(+b.dataset.g));show(0)}
+  if(k==="quiz")runQuiz(s,$("#quiz"));
+}
+function go(i){const n=slidesFor(S[state.si]).length;if(i<0){if(state.si>0){state.si--;state.slide=slidesFor(S[state.si]).length-1}else return}else if(i>=n){if(state.si<S.length-1){state.si++;state.slide=0}else return}else state.slide=i;renderClass();window.scrollTo({top:0,behavior:"auto"})}
+
+/* ---------- Games ---------- */
+function runGame(g,el){
+  const head=(extra="")=>`<div class="ghead"><b>${esc(g.title)}</b><span class="status" id="gst"></span>${extra}<button class="gbtn" id="greset">Reset</button></div>`;
+  const reset=()=>runGame(g,el);
+  if(g.t==="match"){const L=shuffle(g.pairs.map((p,i)=>[p[0],i]),hash(g.title)),R=shuffle(g.pairs.map((p,i)=>[p[1],i]),hash(g.title)+7);
+    el.innerHTML=head()+`<div class="match"><div class="col">${L.map(([t,i])=>`<button class="tok" data-side="L" data-i="${i}">${esc(t)}</button>`).join("")}</div><div class="col">${R.map(([t,i])=>`<button class="tok" data-side="R" data-i="${i}">${esc(t)}</button>`).join("")}</div></div>`;
+    let sel=null,done=0;const st=$("#gst",el);st.textContent=`0 / ${g.pairs.length}`;
+    el.querySelectorAll(".tok").forEach(b=>b.onclick=()=>{if(b.classList.contains("ok"))return;
+      if(!sel||sel.dataset.side===b.dataset.side){if(sel)sel.classList.remove("sel");sel=b;b.classList.add("sel");return}
+      if(sel.dataset.i===b.dataset.i){sel.classList.remove("sel");sel.classList.add("ok");b.classList.add("ok");done++;st.textContent=done===g.pairs.length?"All matched!":`${done} / ${g.pairs.length}`}
+      else{const a=sel;[a,b].forEach(x=>{x.classList.remove("sel");x.classList.add("no");setTimeout(()=>x.classList.remove("no"),400)})}sel=null})}
+  if(g.t==="sort"){const items=shuffle(g.items.map((x,i)=>({t:x[0],b:x[1],i})),hash(g.title));
+    el.innerHTML=head()+`<p class="note-sm" style="margin:0;color:var(--smuted)">Tap a card, then tap the group it belongs in.</p><div class="pool" id="pool">${items.map(x=>`<button class="tok" data-i="${x.i}">${esc(x.t)}</button>`).join("")}</div><div class="buckets">${g.buckets.map((b,i)=>`<button class="bucket" data-b="${i}"><b>${esc(b)}</b></button>`).join("")}</div>`;
+    let sel=null,done=0;const st=$("#gst",el);st.textContent=`0 / ${items.length}`;
+    el.querySelectorAll("#pool .tok").forEach(t=>t.onclick=()=>{if(sel)sel.classList.remove("sel");sel=t;t.classList.add("sel");el.querySelectorAll(".bucket").forEach(b=>b.classList.add("armed"))});
+    el.querySelectorAll(".bucket").forEach(b=>b.onclick=()=>{if(!sel)return;const it=g.items[+sel.dataset.i];el.querySelectorAll(".bucket").forEach(x=>x.classList.remove("armed"));
+      if(it[1]===+b.dataset.b){sel.classList.remove("sel");sel.classList.add("ok");sel.onclick=null;b.appendChild(sel);done++;st.textContent=done===items.length?"All sorted!":`${done} / ${items.length}`}
+      else{const x=sel;x.classList.remove("sel");x.classList.add("no");setTimeout(()=>x.classList.remove("no"),400);st.textContent="Try another group"}sel=null})}
+  if(g.t==="order"){let cur=shuffle(g.items.map((t,i)=>i),hash(g.title));if(cur.every((v,i)=>v===i))cur.reverse();
+    const draw=(check)=>{el.innerHTML=head()+`<ol class="order">${cur.map((v,p)=>`<li class="${check?(v===p?"ok":"no"):""}"><span class="i">${p+1}</span><span>${esc(g.items[v])}</span><span><button data-u="${p}" aria-label="Move up">↑</button><button data-d="${p}" aria-label="Move down">↓</button></span></li>`).join("")}</ol><div><button class="gbtn" id="gcheck">Check order</button></div>`;
+      el.querySelector("#greset").onclick=reset;
+      if(check){const n=cur.filter((v,p)=>v===p).length;$("#gst",el).textContent=n===cur.length?"Perfect order!":`${n} of ${cur.length} in place`}
+      el.querySelectorAll("[data-u]").forEach(b=>b.onclick=()=>{const p=+b.dataset.u;if(p>0){[cur[p-1],cur[p]]=[cur[p],cur[p-1]];draw(false)}});
+      el.querySelectorAll("[data-d]").forEach(b=>b.onclick=()=>{const p=+b.dataset.d;if(p<cur.length-1){[cur[p+1],cur[p]]=[cur[p],cur[p+1]];draw(false)}});
+      el.querySelector("#gcheck").onclick=()=>draw(true)};draw(false);return}
+  if(g.t==="find"){const q=shuffle(g.sites,hash(g.title));let n=0,score=0,miss=false;
+    el.innerHTML=head()+`<div class="find"><div>${mapSVG(g.sites,{numbered:false,showAll:false})}</div><div><div class="note-sm" style="color:var(--smuted)">Tap the dot for:</div><div class="prompt" id="fp"></div><p class="why" id="fw"></p></div></div>`;
+    const fp=$("#fp",el),fw=$("#fw",el),st=$("#gst",el);
+    const ask=()=>{if(n>=q.length){fp.textContent="All found!";st.textContent=`${score} / ${q.length} first try`;return}fp.textContent=SITES[q[n]].n;miss=false;st.textContent=`${n} / ${q.length}`};
+    el.querySelectorAll(".pin").forEach(p=>{const act=()=>{if(n>=q.length)return;if(p.dataset.k===q[n]){p.querySelector(".lab").setAttribute("visibility","visible");p.querySelector(".dot").setAttribute("fill","#86d9a1");if(!miss)score++;fw.textContent=SITES[q[n]].b;n++;ask()}else{miss=true;fw.textContent="Not quite. Look again!";const d=p.querySelector(".dot");d.setAttribute("fill","#f0907a");setTimeout(()=>{if(d.getAttribute("fill")==="#f0907a")d.setAttribute("fill","#f2b134")},500)}};p.onclick=act;p.onkeydown=e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();act()}}});ask()}
+  if(g.t==="check"){const its=g.items;
+    el.innerHTML=head()+`<div class="checklist">${its.map((x,i)=>`<label for="ck${i}"><input type="checkbox" id="ck${i}"><span>${esc(x[0])}</span></label>`).join("")}</div>`;
+    const st=$("#gst",el);const up=()=>{const c=el.querySelectorAll("input:checked").length;st.textContent=c===its.length?"Ready to exhibit!":`${c} / ${its.length}`};el.querySelectorAll("input").forEach(i=>i.onchange=up);up()}
+  if(g.t==="gopuram"){let tiers=6,col=0;const PAL=[["#e86a4a","#f2b134","#6fcfc6"],["#7d6bd8","#f2b134","#86d9a1"],["#3e9ad6","#f0907a","#f3eee3"],["#d84f8c","#6fcfc6","#f2b134"]];
+    const draw=()=>{const W=260,base=200,th=Math.min(34,300/tiers);let sv="";const p=PAL[col];
+      for(let i=0;i<tiers;i++){const w=base-(i*(base-70)/tiers),y=360-(i+1)*th,x=(W-w)/2,w2=base-((i+1)*(base-70)/tiers),x2=(W-w2)/2;
+        sv+=`<polygon points="${x},${y+th} ${x+w},${y+th} ${x2+w2},${y} ${x2},${y}" fill="${p[i%3]}" stroke="#1b2238" stroke-width="2"/>`;
+        const n=Math.max(2,Math.floor(w2/26));for(let j=0;j<n;j++){const cx=x2+(j+.5)*(w2/n);sv+=`<rect x="${cx-4}" y="${y+th*.25}" width="8" height="${th*.55}" rx="3" fill="#1b2238" opacity=".55"/>`}}
+      const ty=360-tiers*th,wt=base-(base-70);const tx=(W-wt)/2;
+      sv+=`<path d="M${tx-6},${ty} Q${W/2},${ty-40} ${tx+wt+6},${ty}Z" fill="${p[0]}" stroke="#1b2238" stroke-width="2"/>`;
+      for(let j=0;j<5;j++){const cx=tx+8+j*((wt-16)/4);sv+=`<circle cx="${cx}" cy="${ty-24+Math.abs(j-2)*6}" r="5" fill="#f2b134" stroke="#1b2238"/>`}
+      sv+=`<rect x="${W/2-18}" y="${330}" width="36" height="${30}" rx="14" fill="#141a2c"/>`;
+      el.innerHTML=head()+`<div class="gop"><svg viewBox="0 0 260 370" role="img" aria-label="Gopuram with ${tiers} tiers">${sv}</svg><div class="ctl"><label for="gtiers">Tiers: <b>${tiers}</b></label><input id="gtiers" type="range" min="3" max="11" value="${tiers}"><span>Colors</span><div class="swatches">${PAL.map((x,i)=>`<button data-c="${i}" aria-pressed="${i===col}" aria-label="Palette ${i+1}" style="background:linear-gradient(135deg,${x[0]} 50%,${x[1]} 50%)"></button>`).join("")}</div><span class="note-sm" style="color:var(--smuted)">Count the repeating shapes!</span></div></div>`;
+      el.querySelector("#greset").onclick=()=>{tiers=6;col=0;draw()};
+      el.querySelector("#gtiers").oninput=e=>{tiers=+e.target.value;draw();el.querySelector("#gtiers").focus()};
+      el.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{col=+b.dataset.c;draw()})};draw();return}
+  const r=el.querySelector("#greset");if(r)r.onclick=reset;
+}
+
+/* ---------- Quiz ---------- */
+function runQuiz(s,el){
+  const qs=s.quiz.map(([q,c,w,why])=>{const opts=shuffle([c,...w],hash(q));return{q,opts,ans:opts.indexOf(c),why}});
+  let i=0,score=0,answered=false;const L="ABCD";
+  const draw=()=>{if(i>=qs.length){el.innerHTML=`<p class="qq">You scored ${score} of ${qs.length}!</p><p class="s-sub">${score===qs.length?"Perfect! Stamp those passports.":"Great effort. Let’s review the ones we missed."}</p><div class="qnav"><button class="gbtn" id="qagain">Play again</button></div>`;$("#qagain",el).onclick=()=>{i=0;score=0;draw()};return}
+    const q=qs[i];answered=false;
+    el.innerHTML=`<div class="qn">Question ${i+1} of ${qs.length}</div><p class="qq">${esc(q.q)}</p><div class="opts">${q.opts.map((o,j)=>`<button class="opt" data-j="${j}"><span class="k">${L[j]}</span><span>${esc(o)}</span></button>`).join("")}</div><p class="why" id="why" aria-live="polite"></p><div class="qnav"><button class="gbtn" id="qnext" hidden>${i===qs.length-1?"See score":"Next question →"}</button><span class="score">Score ${score}</span></div>`;
+    el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(answered)return;answered=true;const j=+b.dataset.j;
+      el.querySelectorAll(".opt")[q.ans].classList.add("ok");if(j!==q.ans)b.classList.add("no");else score++;
+      $("#why",el).textContent=(j===q.ans?"Correct! ":"Answer: "+q.opts[q.ans]+". ")+q.why;
+      $(".score",el).textContent="Score "+score;const n=$("#qnext",el);n.hidden=false;n.focus();n.onclick=()=>{i++;draw()}})};
+  draw();
+}
+
+/* ---------- Shell ---------- */
+function render(){
+  const sel=$("#clsSel");sel.value=state.view==="class"?String(state.si):"";
+  if(state.view==="home")renderHome();else renderClass();
+  document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>{state.view="class";state.si=+b.dataset.go;state.slide=0;render();window.scrollTo({top:0})});
+}
+function init(){
+  $("#clsSel").innerHTML=`<option value="">All classes · calendar</option>`+S.map((s,i)=>`<option value="${i}">${pd(s.date).toLocaleDateString("en-US",{month:"short",day:"numeric"})} · Class ${s.cls}: ${esc(s.title)}</option>`).join("");
+  $("#clsSel").onchange=e=>{if(e.target.value===""){state.view="home"}else{state.view="class";state.si=+e.target.value;state.slide=0}render()};
+  $("#brand").onclick=()=>{state.view="home";render()};
+  document.addEventListener("keydown",e=>{if(state.view!=="class")return;const t=e.target.tagName;if(t==="INPUT"||t==="SELECT")return;if(e.key==="ArrowRight"||e.key==="PageDown"){e.preventDefault();go(state.slide+1)}if(e.key==="ArrowLeft"||e.key==="PageUp"){e.preventDefault();go(state.slide-1)}});
+  render();
+}
+init();
+</script>
+</body></html>
